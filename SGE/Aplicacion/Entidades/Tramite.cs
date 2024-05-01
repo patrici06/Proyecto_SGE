@@ -98,7 +98,7 @@ public class Tramite:IDisposable
         {
             if(string.IsNullOrWhiteSpace(contenido))
             {
-            throw new ValidacionException("Error : Contenido El campo no puede estar vacio");
+                throw new ValidacionException("Error : Contenido El campo no puede estar vacio");
             }
             this.contenido = contenido;
             UltimaModificacion(idUsuario);

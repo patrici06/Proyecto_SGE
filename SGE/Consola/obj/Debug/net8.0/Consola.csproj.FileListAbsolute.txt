@@ -39,3 +39,4 @@
 /home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Consola/obj/Debug/net8.0/Consola.pdb
 /home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Consola/obj/Debug/net8.0/Consola.genruntimeconfig.cache
 /home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Consola/obj/Debug/net8.0/ref/Consola.dll
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Consola/obj/Debug/net8.0/Consola.sourcelink.json

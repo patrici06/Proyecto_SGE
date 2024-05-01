@@ -29,3 +29,4 @@
 /home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Repositorios/obj/Debug/net8.0/refint/Repositorios.dll
 /home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Repositorios/obj/Debug/net8.0/Repositorios.pdb
 /home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Repositorios/obj/Debug/net8.0/ref/Repositorios.dll
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Repositorios/obj/Debug/net8.0/Repositorios.sourcelink.json

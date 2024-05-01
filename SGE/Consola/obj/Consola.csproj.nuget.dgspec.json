@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Consola/Consola.csproj": {}
+    "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Consola/Consola.csproj": {}
   },
   "projects": {
-    "/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/Aplicacion.csproj": {
+    "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/Aplicacion.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/Aplicacion.csproj",
+        "projectUniqueName": "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/Aplicacion.csproj",
         "projectName": "Aplicacion",
-        "projectPath": "/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/Aplicacion.csproj",
-        "packagesPath": "/home/joaco/.nuget/packages/",
-        "outputPath": "/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/obj/",
+        "projectPath": "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/Aplicacion.csproj",
+        "packagesPath": "/home/pato/.nuget/packages/",
+        "outputPath": "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/joaco/.nuget/NuGet/NuGet.Config"
+          "/home/pato/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -53,21 +53,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.103/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Consola/Consola.csproj": {
+    "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Consola/Consola.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Consola/Consola.csproj",
+        "projectUniqueName": "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Consola/Consola.csproj",
         "projectName": "Consola",
-        "projectPath": "/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Consola/Consola.csproj",
-        "packagesPath": "/home/joaco/.nuget/packages/",
-        "outputPath": "/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Consola/obj/",
+        "projectPath": "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Consola/Consola.csproj",
+        "packagesPath": "/home/pato/.nuget/packages/",
+        "outputPath": "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Consola/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/joaco/.nuget/NuGet/NuGet.Config"
+          "/home/pato/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -79,11 +79,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/Aplicacion.csproj": {
-                "projectPath": "/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/Aplicacion.csproj"
+              "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/Aplicacion.csproj": {
+                "projectPath": "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/Aplicacion.csproj"
               },
-              "/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Repositorios/Repositorios.csproj": {
-                "projectPath": "/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Repositorios/Repositorios.csproj"
+              "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Repositorios/Repositorios.csproj": {
+                "projectPath": "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Repositorios/Repositorios.csproj"
               }
             }
           }
@@ -113,21 +113,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.103/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Repositorios/Repositorios.csproj": {
+    "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Repositorios/Repositorios.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Repositorios/Repositorios.csproj",
+        "projectUniqueName": "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Repositorios/Repositorios.csproj",
         "projectName": "Repositorios",
-        "projectPath": "/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Repositorios/Repositorios.csproj",
-        "packagesPath": "/home/joaco/.nuget/packages/",
-        "outputPath": "/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Repositorios/obj/",
+        "projectPath": "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Repositorios/Repositorios.csproj",
+        "packagesPath": "/home/pato/.nuget/packages/",
+        "outputPath": "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Repositorios/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/joaco/.nuget/NuGet/NuGet.Config"
+          "/home/pato/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -139,8 +139,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/Aplicacion.csproj": {
-                "projectPath": "/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/Aplicacion.csproj"
+              "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/Aplicacion.csproj": {
+                "projectPath": "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/Aplicacion.csproj"
               }
             }
           }
@@ -170,7 +170,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.103/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -17,19 +17,19 @@ public class Expediente
     }
     public string Caratula
     {
-        get { return caratula; }
+        get => caratula != null ? caratula : "NULL"; 
         //Revisar Usar el manejo de excepciones visto en la clase 6 para una correcta 
         set {   try
                 {
                     if(string.IsNullOrWhiteSpace(value))
                     {
-                        throw new ContenidoException("Error : Contenido no valido","El campo Esta Incompleto");
+                        throw new ValidacionException("Error : Contenido no valido El campo Esta Incompleto");
                     }
                     this.caratula = value;
                 }
-                catch (ContenidoException e)
+                catch (ValidacionException e)
                 {
-                    Console.WriteLine($"{e.Message},{e.contenidoException}");
+                    Console.WriteLine($"{e.Message}");
                 }
              }
     }
@@ -54,7 +54,7 @@ public class Expediente
 
     public Expediente()
     {
-        caratula = " ";
+        caratula = "";
         id = s_id;
         s_id++;
         fechaCreacion = DateTime.Now;
@@ -67,7 +67,7 @@ public class Expediente
         {
             if (string.IsNullOrWhiteSpace(Caratula))
             {
-                throw new ContenidoException("Error : Contenido no valido", "La carátula del expediente no puede estar vacía.");
+                throw new ValidacionException("Error : Contenido no valido La carátula del expediente no puede estar vacía.");
             }
             id = s_id;
             s_id++;
@@ -77,9 +77,9 @@ public class Expediente
             this.estado = Estado;
             idUsuarioModificacion = Usuario;
         }
-        catch(ContenidoException e)
+        catch(ValidacionException e)
         {
-            Console.WriteLine($"{e.Message}, {e.contenidoException}");
+            Console.WriteLine($"{e.Message}");
         }
     }
 
@@ -95,14 +95,14 @@ public class Expediente
         {
             if(string.IsNullOrWhiteSpace(contenido))
             {
-                throw new ContenidoException("Error : Contenido no valido", "El campo Esta Incompleto");
+                throw new ValidacionException("Error : Contenido no valido El campo Esta Incompleto");
             }
             this.Caratula = contenido;
             ActualizarFechaModificacion(idUsuario);
         }
-        catch (ContenidoException e)
+        catch (ValidacionException e)
         {
-            Console.WriteLine($"{e.Message}, {e.contenidoException}");
+            Console.WriteLine($"{e.Message}");
         }
     }
 

@@ -112,6 +112,6 @@ public class Expediente
     }
     public override string ToString()
     {
-        return $"{id}\t{id}\t{caratula}\t{fechaCreacion}\t{fechaModificacion}\t{idUsuarioModificacion}\t{estado}";
+        return $"{id}\t{caratula}\t{fechaCreacion}\t{fechaModificacion}\t{idUsuarioModificacion}\t{estado}";
     }
 }

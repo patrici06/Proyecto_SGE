@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "/home/joaco/.nuget/packages/": {}
+    "/home/pato/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/Aplicacion.csproj",
+      "projectUniqueName": "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/Aplicacion.csproj",
       "projectName": "Aplicacion",
-      "projectPath": "/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/Aplicacion.csproj",
-      "packagesPath": "/home/joaco/.nuget/packages/",
-      "outputPath": "/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/obj/",
+      "projectPath": "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/Aplicacion.csproj",
+      "packagesPath": "/home/pato/.nuget/packages/",
+      "outputPath": "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/joaco/.nuget/NuGet/NuGet.Config"
+        "/home/pato/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -59,7 +59,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.103/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

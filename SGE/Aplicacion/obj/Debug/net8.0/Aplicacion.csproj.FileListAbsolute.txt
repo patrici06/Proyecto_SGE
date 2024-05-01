@@ -21,3 +21,4 @@
 /home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/obj/Debug/net8.0/refint/Aplicacion.dll
 /home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/obj/Debug/net8.0/Aplicacion.pdb
 /home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/obj/Debug/net8.0/ref/Aplicacion.dll
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/obj/Debug/net8.0/Aplicacion.sourcelink.json

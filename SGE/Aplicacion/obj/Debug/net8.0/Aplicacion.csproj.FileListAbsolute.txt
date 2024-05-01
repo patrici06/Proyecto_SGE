@@ -1,0 +1,11 @@
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/obj/Debug/net8.0/Aplicacion.GeneratedMSBuildEditorConfig.editorconfig
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/obj/Debug/net8.0/Aplicacion.AssemblyInfoInputs.cache
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/obj/Debug/net8.0/Aplicacion.AssemblyInfo.cs
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/obj/Debug/net8.0/Aplicacion.csproj.CoreCompileInputs.cache
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/bin/Debug/net8.0/Aplicacion.deps.json
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/bin/Debug/net8.0/Aplicacion.dll
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/bin/Debug/net8.0/Aplicacion.pdb
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/obj/Debug/net8.0/Aplicacion.dll
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/obj/Debug/net8.0/refint/Aplicacion.dll
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/obj/Debug/net8.0/Aplicacion.pdb
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/obj/Debug/net8.0/ref/Aplicacion.dll

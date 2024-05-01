@@ -1,0 +1,15 @@
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Repositorios/bin/Debug/net8.0/Repositorios.deps.json
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Repositorios/bin/Debug/net8.0/Repositorios.dll
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Repositorios/bin/Debug/net8.0/Repositorios.pdb
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Repositorios/obj/Debug/net8.0/Repositorios.GeneratedMSBuildEditorConfig.editorconfig
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Repositorios/obj/Debug/net8.0/Repositorios.AssemblyInfoInputs.cache
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Repositorios/obj/Debug/net8.0/Repositorios.AssemblyInfo.cs
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Repositorios/obj/Debug/net8.0/Repositorios.csproj.CoreCompileInputs.cache
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Repositorios/obj/Debug/net8.0/Repositorios.dll
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Repositorios/obj/Debug/net8.0/refint/Repositorios.dll
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Repositorios/obj/Debug/net8.0/Repositorios.pdb
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Repositorios/obj/Debug/net8.0/ref/Repositorios.dll
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Repositorios/bin/Debug/net8.0/Aplicacion.dll
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Repositorios/bin/Debug/net8.0/Aplicacion.pdb
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Repositorios/obj/Debug/net8.0/Repositorios.csproj.AssemblyReference.cache
+/home/pato/Escritorio/Proyecto-.NET-main/SGE/Repositorios/obj/Debug/net8.0/Repositorios.csproj.CopyComplete

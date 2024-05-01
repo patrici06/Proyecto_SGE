@@ -9,3 +9,15 @@
 /home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/obj/Debug/net8.0/refint/Aplicacion.dll
 /home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/obj/Debug/net8.0/Aplicacion.pdb
 /home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/obj/Debug/net8.0/ref/Aplicacion.dll
+/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/bin/Debug/net8.0/Aplicacion.deps.json
+/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/bin/Debug/net8.0/Aplicacion.dll
+/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/bin/Debug/net8.0/Aplicacion.pdb
+/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/obj/Debug/net8.0/Aplicacion.GeneratedMSBuildEditorConfig.editorconfig
+/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/obj/Debug/net8.0/Aplicacion.AssemblyInfoInputs.cache
+/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/obj/Debug/net8.0/Aplicacion.AssemblyInfo.cs
+/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/obj/Debug/net8.0/Aplicacion.csproj.CoreCompileInputs.cache
+/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/obj/Debug/net8.0/Aplicacion.sourcelink.json
+/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/obj/Debug/net8.0/Aplicacion.dll
+/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/obj/Debug/net8.0/refint/Aplicacion.dll
+/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/obj/Debug/net8.0/Aplicacion.pdb
+/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/obj/Debug/net8.0/ref/Aplicacion.dll

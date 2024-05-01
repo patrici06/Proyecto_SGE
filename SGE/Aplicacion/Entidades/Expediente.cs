@@ -4,7 +4,7 @@ public class Expediente
 {
     private static int s_id = 1;
     private int id;
-    private string caratula;
+    private string? caratula;
     private DateTime fechaCreacion;
     private DateTime fechaModificacion;
     private int idUsuarioModificacion;
@@ -54,6 +54,7 @@ public class Expediente
 
     public Expediente()
     {
+        caratula = " ";
         id = s_id;
         s_id++;
         fechaCreacion = DateTime.Now;
@@ -103,5 +104,14 @@ public class Expediente
         {
             Console.WriteLine($"{e.Message}, {e.contenidoException}");
         }
+    }
+
+    public void Dispose()
+    {
+        throw new NotImplementedException();
+    }
+    public override string ToString()
+    {
+        return $"{id}\t{id}\t{caratula}\t{fechaCreacion}\t{fechaModificacion}\t{idUsuarioModificacion}\t{estado}";
     }
 }

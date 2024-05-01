@@ -25,7 +25,7 @@ public class ControlRepositorios
     }
     // Crea Archivo Y carga el primer elemento.
     public static void Crear(Object elem)
-{
+    {
     try
     {
          File.Create(RutaOrigen).Close(); // Debes cerrar el archivo después de crearlo para que pueda ser usado por otros procesos
@@ -95,7 +95,6 @@ public class ControlRepositorios
             }  
             writer.Close();
         }
-        
     }
     //Retorna una linkedList Con Todos los elementos del archivo
     public static LinkedList<string> Safe()

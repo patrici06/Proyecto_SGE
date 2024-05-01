@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eI6saGrA0cXtFaDfIi1mRFhnOWQu+fnIjR9hELvnau+IezduF6OphVJVmGdGcPNJJAqI1ZuF/SFlwl/EjB9GNw==",
+  "dgSpecHash": "MI70rWivzW0wK00kw4ZC6es5LwmXzisa9srPjTJ1Y72ANyctTUXL1X+WNmL7lr/6/wtdfG9JBVPFNDKpxD8MUA==",
   "success": true,
-  "projectFilePath": "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/Aplicacion.csproj",
+  "projectFilePath": "/home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/Aplicacion.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

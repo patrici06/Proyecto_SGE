@@ -103,7 +103,8 @@ public class ControlRepositorios
         LinkedList<string> temp = new LinkedList<string>();
         while(!reader.EndOfStream)
         {
-            temp.AddLast(reader.ReadLine());
+            string add = reader.ReadLine()?? "Error Imposible";
+            temp.AddLast(add);
         }
         reader.Close();
         return temp;

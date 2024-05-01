@@ -60,6 +60,21 @@ public class Expediente
         fechaCreacion = DateTime.Now;
         fechaModificacion = DateTime.Now;
     }
+    //$"{id}\t{caratula}\t{fechaCreacion}\t{fechaModificacion}\t{idUsuarioModificacion}\t{estado}"
+    private Expediente (string id, string caratula,string fechaCreacion, string fechaModificacion, string idUsuario,string estado)
+    {
+        this.id = int.Parse(id); 
+        this.caratula = caratula; 
+        this.fechaCreacion = DateTime.Parse(fechaCreacion); 
+        this.fechaModificacion = DateTime.Parse(fechaModificacion); 
+        this.idUsuarioModificacion = int.Parse(idUsuario);
+        this.estado = (EstadoExpediente)Enum.Parse(typeof(EstadoExpediente), estado);
+    }
+    public static Expediente Ensamblado(string cadena)
+    {
+       string[] partes = cadena.Split("\t");
+        return new Expediente(partes[0], partes[1], partes[2], partes[3], partes[4],partes[5]);
+    }
 
     public Expediente(string Caratula, EstadoExpediente Estado, int Usuario)
     {

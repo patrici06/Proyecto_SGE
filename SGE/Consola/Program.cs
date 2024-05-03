@@ -6,12 +6,12 @@ using Repositorios;
 File.Create("Expedientes.txt").Close(); 
 Expediente expediente = new Expediente();
 Expediente expediente2 = new Expediente();
-
+Tramite tramite = new Tramite(expediente.Id,$"UN tramite de {expediente.Id}", 1, EstadoTramite.Escrito_Presentado);
+CasosDeUsoTramiteAlta.Uso(tramite, "tramites.txt");
 CasosDeUsoExpedienteAlta.Uso(expediente, "Expedientes.txt");
 CasosDeUsoExpedienteAlta.Uso(expediente2, "Expedientes.txt");
-CasosDeUsoExpedienteAlta.Uso(expediente, "Expedientes.txt");
-CasosDeUsoExpedienteAlta.Uso(expediente2, "Expedientes.txt");
-CasosDeUsoExpedienteBaja.Uso(expediente, "Expedientes.txt");
+Console.WriteLine(CasosDeUsoTramiteConsultaPorEtiqueta.Uso(EstadoTramite.Escrito_Presentado,"tramites.txt"));
+//CasosDeUsoExpedienteBaja.Uso(expediente, "Expedientes.txt","tramites.txt");
 // ControlRepositorios.RutaOrigen = "tramites.txt";
 // //ControlRepositorios.ElimiarRegistro(tramite2);
 

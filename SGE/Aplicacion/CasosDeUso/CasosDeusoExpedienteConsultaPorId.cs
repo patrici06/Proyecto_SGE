@@ -1,7 +1,8 @@
 namespace Aplicacion; 
 public class CasosDeUsoExpedienteConsultaId
 {
-   public static Expediente? Uso(int id, string dir)
+    
+   public static Expediente? UsoSoloExpediente(int id, string dir)
    {
         Expediente? Retorno = null; 
         using(StreamReader reader =  new StreamReader (dir))
@@ -19,7 +20,30 @@ public class CasosDeUsoExpedienteConsultaId
         }
         return Retorno;
    }
-   public static LinkedList<string> Safe(string dir)
+    //  Requiere implementacion para Retornar el Expediente Y la Lista De tramites del mismo
+     public static LinkedList<Tramite> GetExpedienteYTramites(out Expediente? expediente,int id, string dirExpediente, string dirTramites)
+     {
+        LinkedList<Tramite> retorno =  new LinkedList<Tramite>(); 
+        expediente = UsoSoloExpediente(id, dirExpediente); 
+        if(expediente!= null){
+            using (StreamReader reader = new StreamReader(dirTramites))
+            {
+             while(!reader.EndOfStream)
+             {
+             string linea = reader.ReadLine() ?? "";
+             string[] elems = linea.Split("\t");
+             if(elems[1] == id.ToString())
+                {
+                    retorno.AddLast(Tramite.Ensamblador(linea));
+                }
+             }
+             reader.Close();
+            }
+        }
+        return retorno;
+     }
+
+   private static LinkedList<string> Safe(string dir)
     {
         using(StreamReader reader = new StreamReader(dir)){
         LinkedList<string> temp = new LinkedList<string>();

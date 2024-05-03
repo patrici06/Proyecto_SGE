@@ -1,5 +1,5 @@
 namespace Aplicacion;
 public interface IServicioAutorizacion
 {
-    bool PoseeElPermiso(int IdUsuario, int permiso);
+    bool PoseeElPermiso(int IdUsuario);
 }

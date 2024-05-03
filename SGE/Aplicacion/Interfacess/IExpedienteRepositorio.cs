@@ -2,8 +2,11 @@ namespace Aplicacion;
 
 public interface IExpedienteRepositorios
 {
-    static void Crear(Expediente expediente){}
-    static void AgregarRegistro(Expediente expediente){} 
-    static void ModificarRegistro(Expediente expediente){}
-    static void ElimiarRegistro(Expediente expediente){}
+    
+    public void Crear(int idUsuario);
+    public void AltaExpediente(Expediente expediente, int idUsuario);
+    public void ModificarExpediente(Expediente expediente, int idUsuario);
+    public void BajaExpediente(int idExpediente, int idUsuario);
+    public LinkedList<Expediente> ConsultarTodos();
+    public LinkedList<Tramite> ConsultarExpedienteYTramites(out Expediente? retorno, int idExpediente);
 }

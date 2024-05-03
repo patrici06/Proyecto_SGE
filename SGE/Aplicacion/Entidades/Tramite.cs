@@ -1,31 +1,17 @@
 namespace Aplicacion;
-public class Tramite:IDisposable
+public class Tramite
 {
     private static int s_id = 0;
-    //LLevo un conteo estatico en el constructor para generar ids unicos de forma ascendente
     public int id {get; private set; } 
-    
-    private int _idExpediente;
+    public int ExpedienteId{get; set;}
     //Delego Responsabilidad a la propiedad ExpedienteId.
-    public int ExpedienteId
-    {
-        get
-        {
-            return _idExpediente;
-        }
-        set{
-            _idExpediente = value;
-        }
-    }
     public string? contenido {get; private set; }   
     public DateTime fecha_hora_creacion{get;} = DateTime.Now;
-    //Opte por que sea una propiedad de unica lectura ya 
-    //que toma la hora del momento en que se crea una instancia Tramite
     public DateTime fecha_hora_ultimaModificacion{get; private set; }
     public int idUsuario{get; private set; }
     public EstadoTramite estadoTramite{ get; private set;}
-    /*Todas son propiedades de Lectura Publica, mas su modificacion de los campos 
-    sera privada por instancia Esto para llevar una correcta actualizacion */
+    
+    
     public Tramite()
     {
         id  = s_id;
@@ -33,7 +19,6 @@ public class Tramite:IDisposable
         contenido = "";
         //Constructor Vacio;
     }
-    //IMPLEMENTAR VALIDADORES TRY CATCH PATOOO, Constructor Completo.
     private Tramite(string id,string idExpediente,string contenido,string creacion,string modificacion,string idUsuario,string estadoTramite)
     {
         this.id = int.Parse(id);
@@ -42,24 +27,8 @@ public class Tramite:IDisposable
         this.contenido = contenido;
         this.fecha_hora_creacion = DateTime.Parse(creacion);
         this.fecha_hora_ultimaModificacion = DateTime.Parse(modificacion);
-        EstadoTramite recibido = EstadoTramite.Escrito_Presentado;
         //ValorPredeterminado
-        switch (estadoTramite)
-        { 
-          case "Escrito_Presentado": recibido = EstadoTramite.Escrito_Presentado;
-            break;
-          case "Pase_a_Estudio": recibido = EstadoTramite.Pase_a_Estudio;
-            break;
-          case "Despacho" : recibido = EstadoTramite.Despacho;
-            break;
-          case "Resolución": recibido = EstadoTramite.Resolución;
-            break;
-          case "" : recibido = EstadoTramite.Notificación;
-              break;
-          case "Pase_al_Archivo": recibido = EstadoTramite.Pase_al_Archivo;
-            break;
-        }
-        this.estadoTramite = recibido;
+        this.estadoTramite = (EstadoTramite)Enum.Parse(typeof(EstadoTramite), estadoTramite);;
     }
     public static Tramite Ensamblador(string cadena)
     {
@@ -82,8 +51,6 @@ public class Tramite:IDisposable
             
             Console.WriteLine($"{e.Message}");
         }
-
-        //Desconosco si debemos llamar a un destructor si hay cagada.
     }
     //Metodo Privado Para Actualizacion UltimaModificacion
     private void UltimaModificacion(int idUsuario)
@@ -114,25 +81,8 @@ public class Tramite:IDisposable
         this.estadoTramite = estadoTramite;
         UltimaModificacion(idUsuario);
     }
-
-
-    public void Dispose()
-    {
-        throw new NotImplementedException();
-    }
     public override string ToString()
     {
         return $"{id}\t{ExpedienteId}\t{contenido}\t{fecha_hora_creacion}\t{fecha_hora_ultimaModificacion}\t{idUsuario}\t{estadoTramite}";
     }
-    /*
-    Usaremos mas Adelante
-    ~Tramite()
-    {
-        Console.WriteLine("Unussed");
-        using(Tramite tramite = this)
-        {
-            tramite.Dispose();
-        }
-    }
-    */
 }

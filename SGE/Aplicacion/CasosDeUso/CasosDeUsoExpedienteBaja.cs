@@ -2,10 +2,10 @@ namespace Aplicacion;
 
 public class CasosDeUsoExpedienteBaja
 {
-    public static void Uso(Expediente expediente, string dir)
+    public static void Uso(Expediente expediente, string dirExp, string dirTram)
     {
-        LinkedList<string> temp = Safe(dir);
-        using(StreamWriter writer = new StreamWriter(dir))
+        LinkedList<string> temp = Safe(dirExp);
+        using(StreamWriter writer = new StreamWriter(dirExp))
         {
         LinkedList<string> modificada = new LinkedList<string>();
         
@@ -16,6 +16,11 @@ public class CasosDeUsoExpedienteBaja
             if (resumen[0] != Elem[0])
             {
               modificada.AddLast(act);
+            }
+            else
+            {
+                CasosDeUsoTramiteBaja.UsoIdExpediente(resumen[0],dirTram);
+                //Requiere plan de accion para eliminar Los tramites asociados
             }
         }
         foreach(string act in modificada)

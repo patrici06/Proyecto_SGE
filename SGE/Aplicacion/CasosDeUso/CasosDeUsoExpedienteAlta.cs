@@ -2,12 +2,12 @@ namespace Aplicacion;
 
 public class CasosDeUsoExpedienteAlta
 {
-    public static void Uso(Expediente expediente, string dir)
+    public CasosDeUsoExpedienteAlta(IExpedienteRepositorio expedienteRepositorio, Expediente e, int idUsuario)
     {
-    using (StreamWriter writer = new StreamWriter(dir, true))
-    {
-      writer.WriteLine(expediente);
-      writer.Close();
+      expedienteRepositorio.AltaExpediente(e, idUsuario);
     }
+    public static void Ejecutar(IExpedienteRepositorio expedienteRepositorio, Expediente e, int idUsuario)
+    {
+      expedienteRepositorio.AltaExpediente(e, idUsuario);
     }
 }

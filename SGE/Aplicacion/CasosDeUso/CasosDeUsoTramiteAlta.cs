@@ -2,12 +2,12 @@ namespace Aplicacion;
 
 public class CasosDeUsoTramiteAlta
 {
-    public static void Uso(Tramite tramite, string dir)
+    public CasosDeUsoTramiteAlta(ITramiteRepositorio tramiteRepositorio, Tramite t, int idUsuario)
     {
-    using (StreamWriter writer = new StreamWriter(dir, true))
-    {
-      writer.WriteLine(tramite);
-      writer.Close();
+      tramiteRepositorio.AgregarRegistro(t, idUsuario);
     }
+    public static void Ejecutar(ITramiteRepositorio tramiteRepositorio, Tramite t, int idUsuario)
+    {
+      tramiteRepositorio.AgregarRegistro(t, idUsuario);
     }
 }

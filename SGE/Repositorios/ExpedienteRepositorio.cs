@@ -3,7 +3,7 @@ namespace Repositorios;
 using System.Collections;
 using Aplicacion;
 
-public class ExpedienteRepositorios(ServicioAutorizacionProvisorio SA, ExpedienteValidador EV, TramitesRepositorio TR): IExpedienteRepositorios
+public class ExpedienteRepositorio(ServicioAutorizacionProvisorio SA, ExpedienteValidador EV, TramitesRepositorio TR): IExpedienteRepositorio
 {
     readonly string _archivo = "Expedientes.txt";
     public void AltaExpediente(Expediente expediente, int idUsuario)
@@ -47,6 +47,7 @@ public class ExpedienteRepositorios(ServicioAutorizacionProvisorio SA, Expedient
                     }
                     else
                     {
+                        TR.EliminarPorIdRegistro(scrap[0]);
                         //LLamar Metodo Para eliminar Sus Tramites;
                     }
                 }
@@ -68,6 +69,32 @@ public class ExpedienteRepositorios(ServicioAutorizacionProvisorio SA, Expedient
         }
     }
 
+    public Expediente? ConsultaPorId(int idExpediente)
+    {
+        try
+        {
+            chequeo();
+            using(StreamReader reader = new StreamReader(_archivo))
+            {
+                while(!reader.EndOfStream)
+                {
+                    string line = reader.ReadLine()??"";
+                    if(line.Split("\t")[0] == idExpediente.ToString())
+                    {
+                        Expediente e = Expediente.Ensamblado(line);
+                        return e;
+                    }
+                }
+                throw new Exception("No se encontro un Expediente con ese ID");
+            }
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine($"{e.Data}, {e.Message}");
+            return null;
+        }
+    }
+
     public LinkedList<Tramite> ConsultarExpedienteYTramites (out Expediente? retorno, int idExpediente)
     {
         retorno = null; 
@@ -83,7 +110,7 @@ public class ExpedienteRepositorios(ServicioAutorizacionProvisorio SA, Expedient
                 if(line.Split("\t")[0] == idExpediente.ToString())
                 {
                     retorno  = Expediente.Ensamblado(line);
-                  //tramites = TR.ConsultarTramitesExpedientes(idExpediente);
+                    tramites = TR.ConsultarTramitesExpedientes(idExpediente);
                 }
             }
             reader.Close();

@@ -1,13 +1,10 @@
 namespace Aplicacion;
 
-public class CasosDeUsoTramiteAlta
+public class CasosDeUsoTramiteAlta(ITramiteRepositorio tramiteRepositorio, ServicioActualizacionEstado servicio)
 {
-    public CasosDeUsoTramiteAlta(ITramiteRepositorio tramiteRepositorio, Tramite t, int idUsuario)
+    public void Ejecutar(Tramite t, int idUsuario)
     {
       tramiteRepositorio.AgregarRegistro(t, idUsuario);
-    }
-    public static void Ejecutar(ITramiteRepositorio tramiteRepositorio, Tramite t, int idUsuario)
-    {
-      tramiteRepositorio.AgregarRegistro(t, idUsuario);
+      servicio.Actualizacion(t.ExpedienteId);
     }
 }

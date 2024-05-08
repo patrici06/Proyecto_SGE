@@ -121,12 +121,19 @@ public class Expediente
         }
     }
 
-    public void Dispose()
-    {
-        throw new NotImplementedException();
-    }
+    
     public override string ToString()
     {
-        return $"{id}\t{caratula}\t{fechaCreacion}\t{fechaModificacion}\t{idUsuarioModificacion}\t{estado}";
+        try 
+        {
+            if(string.IsNullOrWhiteSpace(caratula))
+                throw new ValidacionException("Error: No se puede escribir el Expediente porque la caratula esta vacia");
+            return $"{id}\t{caratula}\t{fechaCreacion}\t{fechaModificacion}\t{idUsuarioModificacion}\t{estado}";
+        }
+        catch(ValidacionException e)
+        {
+            Console.WriteLine($"{e.Message}");
+            return "ERROR";
+        }
     }
 }

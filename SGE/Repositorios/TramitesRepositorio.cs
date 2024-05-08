@@ -1,24 +1,24 @@
-namespace Repositorios; 
+namespace Repositorios;
+
+using System.Runtime.CompilerServices;
 using Aplicacion;
 
-public class TramitesRepositorio(ServicioAutorizacionProvisorio SA, TramiteValidador TV): ITramiteRepositorio
+public class TramitesRepositorio(string arch): ITramiteRepositorio
 {
-    readonly string _archivo = "tramites.txt";
+    readonly string _archivo = arch;
 
     public void AgregarRegistro(Tramite tramite, int idUsuario)
     {
         try
-        {
-            chequeo();
-            if (!SA.PoseeElPermiso(idUsuario)){
-                throw new AutorizacionException("No Posee los permisos necesarios");
+        {   
+            if(!File.Exists(_archivo))
+            {
+                throw new RepositorioException($"NO Existe {_archivo}");
             }
-            TV.ValidarTramite(tramite);
             using (StreamWriter writer = new StreamWriter(_archivo, true))
             {
                  writer.WriteLine(tramite);
-                 writer.Close();
-             }
+            }
         }
         catch (Exception e)
         {
@@ -30,9 +30,8 @@ public class TramitesRepositorio(ServicioAutorizacionProvisorio SA, TramiteValid
     {
         try
         {
-            if(!SA.PoseeElPermiso(idUsuario))
-            {
-                throw new AutorizacionException("No posee Permisos");
+            if(File.Exists(_archivo)){
+
             }
             File.Create(_archivo);
         }
@@ -45,13 +44,7 @@ public class TramitesRepositorio(ServicioAutorizacionProvisorio SA, TramiteValid
     public void ElimiarRegistro(int idTramite, int idUsuario)
     {
         try
-        {
-            chequeo();
-            if(!SA.PoseeElPermiso(idUsuario))
-            {
-                throw new ValidacionException("No Posee Permisos");
-            }
-            
+        {            
             LinkedList<string> tramites = new LinkedList<string>(); 
             using(StreamReader reader = new StreamReader(_archivo))
             {
@@ -86,7 +79,10 @@ public class TramitesRepositorio(ServicioAutorizacionProvisorio SA, TramiteValid
     {
         try
         {
-          chequeo();
+          if(!File.Exists(_archivo))
+          {
+            throw new RepositorioException($" No existe {_archivo}"); 
+          }
           LinkedList<string> tramites = new LinkedList<string>();
           using(StreamReader reader = new StreamReader(_archivo))
           {
@@ -127,7 +123,10 @@ public class TramitesRepositorio(ServicioAutorizacionProvisorio SA, TramiteValid
     LinkedList<Tramite> retorno = new LinkedList<Tramite>();
      try
      {
-        chequeo();
+        if(!File.Exists(_archivo))
+          {
+            throw new RepositorioException($" No existe {_archivo}"); 
+          }
         using(StreamReader reader =  new StreamReader(_archivo))
         {
             while(!reader.EndOfStream){
@@ -151,7 +150,10 @@ public class TramitesRepositorio(ServicioAutorizacionProvisorio SA, TramiteValid
     {
         try
         {   
-            chequeo();
+            if(!File.Exists(_archivo))
+            {
+            throw new RepositorioException($" No existe {_archivo}"); 
+            }
             LinkedList<string> salvado = new LinkedList<string>();
             using(StreamReader reader = new StreamReader(_archivo))
             {
@@ -179,19 +181,37 @@ public class TramitesRepositorio(ServicioAutorizacionProvisorio SA, TramiteValid
             Console.WriteLine($"{e.Data}{e.Message}");
         }
     }
-     private  void chequeo(){
-        if(!File.Exists(_archivo))
+    public Tramite? ConsultaPorId(int idTramite)
+    {
+        try
         {
-            throw new RepositorioException("No Se encuentra Tramite.txt");
+            if(!File.Exists(_archivo)){ throw new RepositorioException("no se encontro el archivo");}
+            Tramite? tramite = null;
+            using (StreamReader reader = new StreamReader(_archivo))
+            {
+                string linea =  reader.ReadLine()??""; 
+                if(idTramite.ToString() == linea.Split("\t")[0])
+                {
+                    tramite = Tramite.Ensamblador(linea);
+                }
+            }
+            return tramite;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"ERROR:{e.Data} {e.Message}");
+            return null; 
         }
     }
-
     public LinkedList<Tramite> ConsultaPorEtiqueta(EstadoTramite estado)
     {
         LinkedList<Tramite> tramites = new LinkedList<Tramite>();
         try
         {
-            chequeo();
+            if(!File.Exists(_archivo))
+            {
+            throw new RepositorioException($" No existe {_archivo}"); 
+            }
             using(StreamReader reader = new StreamReader(_archivo))
             {
                 while(!reader.EndOfStream)

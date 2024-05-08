@@ -1,8 +1,8 @@
 namespace Aplicacion;
 
-public class CasosDeUsoExpedienteModificacion
+public class CasosDeUsoExpedienteModificacion(IExpedienteRepositorio expedienteRepositorio)
 {
-    public CasosDeUsoExpedienteModificacion(IExpedienteRepositorio expedienteRepositorio, Expediente e, int idUsuario)
+    public void Ejecutar(Expediente e, int idUsuario)
     {
         expedienteRepositorio.ModificarExpediente(e,idUsuario);
     }

@@ -1,10 +1,14 @@
 namespace Aplicacion;
 
-public class CasosDeUsoTramiteBaja
+public class CasosDeUsoTramiteBaja(ITramiteRepositorio tramiteRepositorio, ServicioActualizacionEstado servicio)
 {
-        public static void Ejecutar(ITramiteRepositorio tramiteRepositorio,int idTramite, int idUsuario)
+        public void Ejecutar(int idTramite, int idUsuario)
         {
-            tramiteRepositorio.ElimiarRegistro(idTramite, idUsuario);
+            Tramite? tramite  = tramiteRepositorio.ConsultaPorId(idTramite); 
+            if(tramite != null) {
+                tramiteRepositorio.ElimiarRegistro(idTramite, idUsuario);
+                servicio.Actualizacion(tramite.ExpedienteId);
+            }
         }
 
 }

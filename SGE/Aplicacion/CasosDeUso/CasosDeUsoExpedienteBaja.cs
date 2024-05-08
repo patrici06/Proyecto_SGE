@@ -1,10 +1,10 @@
 namespace Aplicacion; 
 
-public class CasosDeUsoExpedienteBaja
+public class CasosDeUsoExpedienteBaja(IExpedienteRepositorio repositorio)
 {
-    public static void Ejecutar(IExpedienteRepositorio expedienteRepositorio, int idExpediente, int idUsuario)
+    public void Ejecutar(int idExpediente, int idUsuario)
     {
-        expedienteRepositorio.BajaExpediente(idExpediente, idUsuario);
+        repositorio.BajaExpediente(idExpediente, idUsuario);
     }
 }
 

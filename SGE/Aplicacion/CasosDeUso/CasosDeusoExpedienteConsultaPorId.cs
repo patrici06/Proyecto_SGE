@@ -1,7 +1,7 @@
 namespace Aplicacion; 
-public class CasosDeUsoExpedienteConsultaId
+public class CasosDeUsoExpedienteConsultaId(IExpedienteRepositorio expedienteRepositorio)
 {
-    public CasosDeUsoExpedienteConsultaId(IExpedienteRepositorio expedienteRepositorio, int id, out Expediente? e)
+    public void Ejecutar(int id, out Expediente? e)
     {
         e = expedienteRepositorio.ConsultaPorId(id);
     }

@@ -1,7 +1,7 @@
 namespace Aplicacion;
 public class Tramite
 {
-    private static int s_id = 0;
+    private static int s_id = 1;
     public int id {get; private set; } 
     public int ExpedienteId{get; set;}
     //Delego Responsabilidad a la propiedad ExpedienteId.
@@ -17,7 +17,6 @@ public class Tramite
         id  = s_id;
         s_id++;
         contenido = "";
-        //Constructor Vacio;
     }
     private Tramite(string id,string idExpediente,string contenido,string creacion,string modificacion,string idUsuario,string estadoTramite)
     {
@@ -52,6 +51,7 @@ public class Tramite
             Console.WriteLine($"{e.Message}");
         }
     }
+
     //Metodo Privado Para Actualizacion UltimaModificacion
     private void UltimaModificacion(int idUsuario)
     {
@@ -83,6 +83,16 @@ public class Tramite
     }
     public override string ToString()
     {
-        return $"{id}\t{ExpedienteId}\t{contenido}\t{fecha_hora_creacion}\t{fecha_hora_ultimaModificacion}\t{idUsuario}\t{estadoTramite}";
+        try 
+        {
+            if(string.IsNullOrWhiteSpace(this.contenido))
+                throw new ValidacionException("Error: No se puede escribir el Tramite porque la caratula esta vacia");
+            return $"{id}\t{ExpedienteId}\t{contenido}\t{fecha_hora_creacion}\t{fecha_hora_ultimaModificacion}\t{idUsuario}\t{estadoTramite}";
+        }
+        catch(ValidacionException e)
+        {
+            Console.WriteLine($"{e.Message}");
+            return "ERROR";
+        }
     }
 }

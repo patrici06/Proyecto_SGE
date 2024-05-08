@@ -1,10 +1,10 @@
 namespace Aplicacion;
 
 public enum EstadoTramite
-{   Escrito_Presentado,
-    Pase_a_Estudio,
+{   EscritoPresentado,
+    PaseAEstudio,
     Despacho,
-    Resolución,
-    Notificación,
-    Pase_al_Archivo
+    Resolucion,
+    Notificacion,
+    PaseAlArchivo
 }

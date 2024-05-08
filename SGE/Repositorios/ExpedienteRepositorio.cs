@@ -3,23 +3,18 @@ namespace Repositorios;
 using System.Collections;
 using Aplicacion;
 
-public class ExpedienteRepositorio(ServicioAutorizacionProvisorio SA, ExpedienteValidador EV, TramitesRepositorio TR): IExpedienteRepositorio
+public class ExpedienteRepositorio(TramitesRepositorio TR, string arch): IExpedienteRepositorio
 {
-    readonly string _archivo = "Expedientes.txt";
+    readonly string _archivo = arch;
     public void AltaExpediente(Expediente expediente, int idUsuario)
     {
         try
         {
             chequeo();
-            if (!SA.PoseeElPermiso(idUsuario)){
-                throw new AutorizacionException("No Posee los permisos necesarios");
-            }
-            EV.ValidarExpediente(expediente);
-             using (StreamWriter writer = new StreamWriter(_archivo, true))
+            using (StreamWriter writer = new StreamWriter(_archivo, true))
             {
-                 writer.WriteLine(expediente);
-                 writer.Close();
-             }
+                writer.WriteLine(expediente);
+            }
         }
         catch (Exception e)
         {
@@ -31,10 +26,6 @@ public class ExpedienteRepositorio(ServicioAutorizacionProvisorio SA, Expediente
        try
         {
             chequeo();
-            if(!SA.PoseeElPermiso(idUsuario))
-            {
-                throw new ValidacionException("No Posee Permisos");
-            }
             LinkedList<string> expedientes = new LinkedList<string>(); 
             using(StreamReader reader = new StreamReader(_archivo))
             {
@@ -58,7 +49,6 @@ public class ExpedienteRepositorio(ServicioAutorizacionProvisorio SA, Expediente
                 {    
                         writer.WriteLine(expediente);
                 }
-            writer.Close();
             }
 
 
@@ -113,7 +103,6 @@ public class ExpedienteRepositorio(ServicioAutorizacionProvisorio SA, Expediente
                     tramites = TR.ConsultarTramitesExpedientes(idExpediente);
                 }
             }
-            reader.Close();
         }
         return tramites;
         } 
@@ -136,7 +125,6 @@ public class ExpedienteRepositorio(ServicioAutorizacionProvisorio SA, Expediente
                 {
                     expedientes.AddLast(Expediente.Ensamblado(reader.ReadLine()?? ""));
                 }
-            reader.Close();
             }
             return expedientes;
         }
@@ -151,13 +139,9 @@ public class ExpedienteRepositorio(ServicioAutorizacionProvisorio SA, Expediente
     {
         try
         {
-            if(!SA.PoseeElPermiso(idUsuario))
-            {
-                throw new AutorizacionException("No posee Permisos");
-            }
             File.Create(_archivo);
         }
-        catch ( AutorizacionException e)
+        catch ( RepositorioException e)
         {
             Console.WriteLine(e.Message);
         }
@@ -184,7 +168,6 @@ public class ExpedienteRepositorio(ServicioAutorizacionProvisorio SA, Expediente
                     elementos.AddLast(linea);
                 }
             }
-            reader.Close();
           }
           using(StreamWriter writer = new StreamWriter(_archivo))
           {
@@ -192,7 +175,6 @@ public class ExpedienteRepositorio(ServicioAutorizacionProvisorio SA, Expediente
             {
                 writer.WriteLine(elem); 
             }
-            writer.Close();
           }
 
         }

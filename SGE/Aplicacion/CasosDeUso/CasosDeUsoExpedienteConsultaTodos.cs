@@ -1,8 +1,8 @@
 namespace Aplicacion;
 
-public class CasosDeUsoExpedienteConsultaTodos
+public class CasosDeUsoExpedienteConsultaTodos(IExpedienteRepositorio expedienteRepositorio)
 {
-    public CasosDeUsoExpedienteConsultaTodos(IExpedienteRepositorio expedienteRepositorio, out LinkedList<Expediente> lista)
+    public void Ejecutar(out LinkedList<Expediente> lista)
     {
         lista = expedienteRepositorio.ConsultarTodos();
     }

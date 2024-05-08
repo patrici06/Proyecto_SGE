@@ -1,10 +1,11 @@
 using Aplicacion;
 
-public class CasosDeUsoTramiteModificacion
+public class CasosDeUsoTramiteModificacion(ITramiteRepositorio tramiteRepositorio, ServicioActualizacionEstado servicio)
 {
 // Requiere Modificacion Previa de el Tramite
-    public CasosDeUsoTramiteModificacion(ITramiteRepositorio tramiteRepositorio, Tramite tramite, int idUsuario)
+    public void Ejecutar(Tramite tramite, int idUsuario)
     {
         tramiteRepositorio.ModificarRegistro(tramite, idUsuario);
+        servicio.Actualizacion(tramite.ExpedienteId);
     }
 }

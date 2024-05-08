@@ -1,23 +1,10 @@
 namespace Aplicacion; 
 
-public class CasosDeUsoTramiteConsultaPorEtiqueta
+public class CasosDeUsoTramiteConsultaPorEtiqueta (ITramiteRepositorio tramiteRepositorio)
 {
-    public static LinkedList<Tramite> Uso(EstadoTramite estado, string dir)
+
+    public LinkedList<Tramite> Uso(EstadoTramite estadoTramite)
     {
-        LinkedList<Tramite>? retorno = new LinkedList<Tramite>();
-        using (StreamReader reader = new StreamReader(dir))
-        {
-            while (!reader.EndOfStream)
-            {
-                string linea = reader.ReadLine() ?? "";
-                string[] parts = linea.Split("\t"); 
-                if((EstadoTramite)Enum.Parse(typeof(EstadoTramite), parts[6]) == estado)
-                {
-                    retorno.AddLast(Tramite.Ensamblador(linea));
-                }
-            }
-            reader.Close();
-        }
-        return retorno;
+        return tramiteRepositorio.ConsultaPorEtiqueta(estadoTramite);
     }
 }

@@ -1,0 +1,109 @@
+Clase Expediente: 
+
+Cuenta con 7 variables de instancia:
+-s_id, es para llevar cuenta de cuantos expedientes hay y poder asignar un ID 
+unico a cada uno. Campo Estatico. No cuenta con setters o getters
+-id, es el ID unico de cada expediente. Cuenta con getter y setter
+-caratula, es un string que contiene la caratula de cada expediente. Cuenta con getter
+y setter.
+-FechaCreacion, es la fecha en la que se crea el expediente, solo tiene un getter. 
+-FechaModificacion, es la ultima fecha en la que se modifico el expediente, solo 
+tiene un getter. 
+-IdUsuarioModificacion, es el id del usuario que realizo la ultima modificacion, cuenta
+solo con un getter. 
+-Estado, contiene el estado de la clase enumerativa EstadoExpediente, tiene un getter y un
+setter. 
+
+Constructor Expediente(): este constructor sin parametros, crea un Expediente sin caratula
+
+Constructor Privado: Este constructor lo utilizamos para el Ensamblador(Pasar de texto a Objeto)
+
+Ensamblado: Construye un Expediente con el constructor privado, recibe una cadena.
+
+Constructor Expediente(Caratula, Estado, IdUsuario), construye un Expendiente
+con los parametros indicados. 
+
+ActualizarFechaModificacion: Es un metodo privado que actualiza la fecha de la modificacion
+y el id del usuario que realizo el cambio, este recibe como parametro solo el id
+
+ActualizarContenido: Actualiza la caratula del expediente, recibe un string y un id de
+usuario, para poder llamar al metodo ActualizarFechaModificacion. 
+
+ToString: En caso de que la caratula sea null o vacia, lanza una ValidacionException, para
+impedir posibles fallos. Si la caratula no esta vacia ni es null, devuelve los campos
+separados por una tabulacion
+
+
+
+Clase Tramite: 
+
+Cuenta con 8 variables de instancia:
+-s_id, es para llevar cuenta de cuantos tramites hay y poder asignar un ID 
+unico a cada uno. Campo Estatico. No cuenta con setters o getters
+-id, es el ID unico de cada tramite. Cuenta con getter y un setter privado autoimplementado.
+-ExpedienteId, es el ID del expediente al que pertenece el tramite. Getter y setter
+autoimplementado.
+-contenido, es un string que contiene la contenido de cada expediente. Cuenta con getter
+y un setter privado autoimplementados.
+-FechaCreacion, es la fecha en la que se crea el tramite, solo tiene un getter autoimplementado. 
+-FechaModificacion, es la ultima fecha en la que se modifico el expediente, tiene un 
+getter y un setter privado autoimplementados. 
+-IdUsuario, es el id del usuario que realizo la ultima modificacion, cuenta con 
+un getter y un setter privado autoimplementado. 
+-estadoTramite, contiene el estado de la clase enumerativa EstadoTramite, tiene un getter y un
+setter privado autoimplementados. 
+
+Constructor Tramite(): este constructor sin parametros, crea un Tramite sin contenido
+
+Constructor Privado: Este constructor lo utilizamos para el Ensamblador(Pasar de texto a Objeto)
+
+Ensamblador: Construye un Tramite con el constructor privado, recibe una cadena.
+
+Constructor Tramite(Contenido, EstadoTramite, IdUsuario, idExpediente), construye un tramite
+con los parametros indicados. 
+
+UltimaModificacion: Es un metodo privado que actualiza la fecha de la modificacion
+y el id del usuario que realizo el cambio, este recibe como parametro solo el id
+
+ActualizarContenido: Actualiza el contenido del tramite, recibe un string y un id de
+usuario, para poder llamar al metodo UltimaModificacion.
+
+ActualizarEstado: Actualiza el estado del tramite recibiendo por parametro el estado y el id de usuario
+para actualizar la UltimaModificacion
+
+ToString: En caso de que el contenido sea null o vacio, lanza una ValidacionException, para
+impedir posibles fallos. Si el contenido no esta vacio ni es null, devuelve los campos
+separados por una tabulacion
+
+
+EstadoExpediente: Clase Enumerativa que contiene todos los posibles estados de los expedientes.
+EstadoTramite: Clase Enumerativa que contiene todos los posibles estados de los tramites.
+Permiso: aun no tiene implementacion
+
+AutorizacionException, ValidacionException y RepositorioException son excepciones que son heredadas de Exception,
+reciben un mensaje y llaman al constructor de la base. 
+
+Interfaces:
+IExpedienteRepositorio: Es la interfaz del repositorio de expediente, este contiene metodos para crear, dar de alta,
+modificar, dar de baja, consultar por id, consultar todos y consultar todos los tramites del expediente.
+ITramiteRepositorio: Es la interfaz del repositorio de expediente, este contiene metodos para crear, agregar,
+modificar, dar de baja, consultar por id y consultar por etiquetas (estado). 
+IServicioAutorizacion: Es la interfaz de las autorizaciones, solo tiene un metodo que retorna si posee permiso.
+
+Servicios: 
+ServicioAutorizacionProvisorio: Devuelve true si el id del usuario es 1.
+ServicioActualizacionEstado: Hace uso de la interfaz de expedienteRepositorio y EspecificacionCambioEstado por
+inyeccion de dependencias. Crea una lista con todos los tramites utilizando ConsultarExpedienteYTramites,
+devolviendo el expediente con un out. Si el retorno no es null, se hace uso de EspecificacionCambioEstado
+para cambiar el estado del expediente devuelto con out, con el estado del ultimo tramite de la lista.
+EspecificacionCambioEstado: Hace uso de un Switch para determinar que etiquetas vamos a intercambiar en 
+cada caso.
+
+Validadores: 
+ExpedienteValidador: ValidarExpediente verifica que la caratula del expediente sea distinta de null o vacio,
+si esto no se cumple, lanza una excepcion ValidacionException. En el caso de que idUsuario sea menor a 0, lo mismo
+TramiteValidador: ValidarTramite funciona de la misma manera.
+
+Repositorios: 
+
+

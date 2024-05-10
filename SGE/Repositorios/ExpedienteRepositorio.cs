@@ -1,6 +1,4 @@
 namespace Repositorios;
-
-using System.Collections;
 using Aplicacion;
 
 public class ExpedienteRepositorio(TramitesRepositorio TR, string arch): IExpedienteRepositorio

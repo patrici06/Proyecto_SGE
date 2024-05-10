@@ -1,6 +1,6 @@
 namespace Aplicacion;
 
-public class ServicioActualizacionEstado(IExpedienteRepositorio expediente)
+public class ServicioActualizacionEstado(IExpedienteRepositorio expediente, EspecificacionCambioEstado cambioEstado)
 {
     public void Actualizacion(int idExpediente)
     {
@@ -8,15 +8,7 @@ public class ServicioActualizacionEstado(IExpedienteRepositorio expediente)
         LinkedList<Tramite> tramites = expediente.ConsultarExpedienteYTramites(out retorno,idExpediente);
         if(retorno != null)
         {
-            switch(tramites.Last().estadoTramite)
-            {
-                case EstadoTramite.Resolucion: retorno.Estado = EstadoExpediente.ConResolucion;
-                break;
-                case EstadoTramite.PaseAEstudio: retorno.Estado = EstadoExpediente.ParaResolver;
-                break; 
-                case EstadoTramite.PaseAlArchivo: retorno.Estado = EstadoExpediente.Finalizado;
-                break;
-            }
+            cambioEstado.CambioEstado(retorno, tramites.Last());
             expediente.ModificarExpediente(retorno, retorno.IdUsuarioModificacion);
         }
     } 

@@ -22,7 +22,7 @@ public class TramitesRepositorio(string arch): ITramiteRepositorio
         }
         catch (Exception e)
         {
-            Console.WriteLine($"{e.Data}, {e.Message}");
+            Console.WriteLine($"{e.Message}");
         }
     }
 
@@ -33,7 +33,7 @@ public class TramitesRepositorio(string arch): ITramiteRepositorio
             if(File.Exists(_archivo)){
 
             }
-            File.Create(_archivo);
+            File.Create(_archivo).Close();
         }
         catch ( AutorizacionException e)
         {
@@ -70,7 +70,7 @@ public class TramitesRepositorio(string arch): ITramiteRepositorio
         }
         catch (Exception e)
         {
-            Console.WriteLine($"{e.Data}{e.Message}");
+            Console.WriteLine($"{e.Message}");
         }
     }
 
@@ -112,7 +112,7 @@ public class TramitesRepositorio(string arch): ITramiteRepositorio
         }
         catch(Exception e)
         {
-            Console.WriteLine($"{e.Data},{e.Message}");
+            Console.WriteLine($"{e.Message}");
         }
     }
 
@@ -142,7 +142,7 @@ public class TramitesRepositorio(string arch): ITramiteRepositorio
      } 
      catch(Exception e )
      {
-        Console.WriteLine($"{e.Data},{e.Message}");
+        Console.WriteLine($"{e.Message}");
         return retorno;
      }
     }
@@ -178,7 +178,7 @@ public class TramitesRepositorio(string arch): ITramiteRepositorio
         }
         catch(Exception e)
         {
-            Console.WriteLine($"{e.Data}{e.Message}");
+            Console.WriteLine($"{e.Message}");
         }
     }
     public Tramite? ConsultaPorId(int idTramite)
@@ -199,7 +199,7 @@ public class TramitesRepositorio(string arch): ITramiteRepositorio
         }
         catch (Exception e)
         {
-            Console.WriteLine($"ERROR:{e.Data} {e.Message}");
+            Console.WriteLine($"ERROR: {e.Message}");
             return null; 
         }
     }
@@ -230,7 +230,7 @@ public class TramitesRepositorio(string arch): ITramiteRepositorio
         }
         catch(Exception e)
         {
-            Console.WriteLine($"{e.Data}{e.Message}");
+            Console.WriteLine($"{e.Message}");
             return tramites;
         }
     }

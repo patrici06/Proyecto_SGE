@@ -16,7 +16,7 @@ public class ExpedienteRepositorio(TramitesRepositorio TR, string arch): IExpedi
         }
         catch (Exception e)
         {
-            Console.WriteLine($"{e.Data}, {e.Message}");
+            Console.WriteLine($"{e.Message}");
         }
     }
     public void BajaExpediente(int idExpediente, int idUsuario)
@@ -53,7 +53,7 @@ public class ExpedienteRepositorio(TramitesRepositorio TR, string arch): IExpedi
         }
         catch (Exception e)
         {
-            Console.WriteLine($"{e.Data}{e.Message}");
+            Console.WriteLine($"{e.Message}");
         }
     }
 
@@ -78,7 +78,7 @@ public class ExpedienteRepositorio(TramitesRepositorio TR, string arch): IExpedi
         }
         catch(Exception e)
         {
-            Console.WriteLine($"{e.Data}, {e.Message}");
+            Console.WriteLine($"{e.Message}");
             return null;
         }
     }
@@ -106,7 +106,7 @@ public class ExpedienteRepositorio(TramitesRepositorio TR, string arch): IExpedi
         } 
         catch (Exception e)
         {
-            Console.WriteLine($"{e.Data}, {e.Message}");
+            Console.WriteLine($"{e.Message}");
             return tramites;
         }
     }
@@ -128,7 +128,7 @@ public class ExpedienteRepositorio(TramitesRepositorio TR, string arch): IExpedi
         }
         catch(Exception e)
         {
-            Console.WriteLine($"{e.Data}{e.Message}");
+            Console.WriteLine($"{e.Message}");
             return expedientes;
         }
     }
@@ -137,7 +137,7 @@ public class ExpedienteRepositorio(TramitesRepositorio TR, string arch): IExpedi
     {
         try
         {
-            File.Create(_archivo);
+            File.Create(_archivo).Close();
         }
         catch ( RepositorioException e)
         {
@@ -178,7 +178,7 @@ public class ExpedienteRepositorio(TramitesRepositorio TR, string arch): IExpedi
         }
         catch(Exception e)
         {
-            Console.WriteLine($"{e.Data},{e.Message}");
+            Console.WriteLine($"{e.Message}");
         }
     }
     private void chequeo(){

@@ -126,14 +126,15 @@ public class Expediente
     {
         try 
         {
-            if(string.IsNullOrWhiteSpace(caratula))
+            if(string.IsNullOrWhiteSpace(caratula)){
                 throw new ValidacionException("Error: No se puede escribir el Expediente porque la caratula esta vacia");
+            }  
             return $"{id}\t{caratula}\t{fechaCreacion}\t{fechaModificacion}\t{idUsuarioModificacion}\t{estado}";
         }
         catch(ValidacionException e)
         {
             Console.WriteLine($"{e.Message}");
-            return "ERROR";
+            return "";
         }
     }
 }

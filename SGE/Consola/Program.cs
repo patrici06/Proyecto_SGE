@@ -69,6 +69,7 @@ while(ok)
                      Console.WriteLine("Ingrese Nuevo Contenido");
                      contenido = Console.ReadLine()??"";
                      tramite.ActualizarContenido(contenido, usuario);
+                     TramiteAlta.Ejecutar(tramite,usuario);
                      break;
                 }
                 case 2: 
@@ -83,7 +84,9 @@ while(ok)
                     case 4: estadoTramite = EstadoTramite.PaseAEstudio; break; 
                     case 5: estadoTramite = EstadoTramite.PaseAlArchivo; break; 
                     case 6: estadoTramite = EstadoTramite.Resolucion; break;
+                    
                  }
+                 TramiteAlta.Ejecutar(tramite,usuario);
                  break;
                 }
                 case 3:

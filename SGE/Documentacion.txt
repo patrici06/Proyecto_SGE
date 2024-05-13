@@ -1,5 +1,64 @@
-Clase Expediente: 
+Program.cs Explicacion:
 
+Opción 1: Crear un Trámite
+Esta opción permite al usuario crear un nuevo trámite asociado a un expediente existente. 
+El usuario debe ingresar el ID del expediente al que pertenece el trámite, el contenido del 
+trámite y seleccionar el estado del trámite. Luego, puede elegir entre tres subopciones:
+
+    Modificar Contenido: Permite al usuario modificar el contenido del trámite.
+    Cambiar Estado del Trámite: Permite al usuario cambiar el estado del trámite.
+    Alta de Trámite: Confirma la creación del trámite.
+
+Opción 2: Consultar Trámites por Etiqueta
+Esta opción permite al usuario consultar los trámites que tienen un estado específico seleccionado. El 
+usuario elige el estado del trámite y se muestran todos los trámites asociados a ese estado.
+
+Opción 3: Modificar un Trámite por uno Nuevo
+Esta opción permite al usuario modificar un trámite existente. Primero, ingresa el ID del 
+expediente al que pertenece el trámite que desea modificar. Luego, ingresa el contenido y 
+el nuevo estado del trámite. El sistema actualiza la información del trámite con los nuevos datos.
+
+Opción 4: Dar de Baja un Trámite por ID
+Esta opción permite al usuario eliminar un trámite específico ingresando su ID. 
+El sistema elimina el trámite seleccionado.
+
+Opción 5: Crear un Expediente
+Esta opción permite al usuario crear un nuevo expediente. El usuario ingresa el contenido 
+del expediente y selecciona el estado del mismo. El sistema crea el expediente con la información 
+proporcionada.
+
+Opción 6: Consultar un Expediente por ID y sus Trámites
+Esta opción permite al usuario consultar un expediente específico ingresando su ID. El sistema 
+muestra la información del expediente y todos los trámites asociados a él.
+
+Opción 7: Consultar Todos los Expedientes
+Esta opción permite al usuario consultar todos los expedientes almacenados en el sistema. 
+El sistema muestra una lista de todos los expedientes y su información asociada.
+
+Opción 8: Modificar un Expediente por uno Nuevo con su Mismo ID
+Esta opción permite al usuario modificar un expediente existente ingresando su ID. El usuario 
+puede actualizar el contenido del expediente. El sistema realiza la modificación y actualiza 
+la información del expediente.
+
+Opción 9: Eliminar un Expediente
+Esta opción permite al usuario eliminar un expediente específico ingresando su ID. 
+El sistema elimina el expediente seleccionado.
+
+Opción 10: Salir del Programa
+Esta opción permite al usuario salir del programa, finalizando la ejecución del mismo.
+
+
+
+
+
+
+
+
+
+
+Explicacion de cada archivo
+
+Clase Expediente: 
 Cuenta con 7 variables de instancia:
 -s_id, es para llevar cuenta de cuantos expedientes hay y poder asignar un ID 
 unico a cada uno. Campo Estatico. No cuenta con setters o getters
@@ -32,6 +91,7 @@ usuario, para poder llamar al metodo ActualizarFechaModificacion.
 ToString: En caso de que la caratula sea null o vacia, lanza una ValidacionException, para
 impedir posibles fallos. Si la caratula no esta vacia ni es null, devuelve los campos
 separados por una tabulacion
+
 
 
 
@@ -105,5 +165,41 @@ si esto no se cumple, lanza una excepcion ValidacionException. En el caso de que
 TramiteValidador: ValidarTramite funciona de la misma manera.
 
 Repositorios: 
+TramitesRepositorio.cs:
+Este archivo contiene la implementación de la interfaz ITramiteRepositorio y gestiona los trámites 
+en un archivo de texto. Proporciona métodos para agregar, eliminar, modificar y consultar trámites, 
+así como para operaciones adicionales como la consulta por etiqueta.
+Variables de Instancia
+    _archivo: Ruta del archivo de texto donde se almacenan los trámites.
+Constructores
+    TramitesRepositorio(string arch): Constructor que recibe la ruta del archivo como parámetro.
+Métodos
+    AgregarRegistro(Tramite tramite, int idUsuario): Agrega un nuevo trámite al archivo.
+    Crear(int idUsuario): Crea el archivo si no existe.
+    EliminarRegistro(int idTramite, int idUsuario): Elimina un trámite del archivo.
+    ModificarRegistro(Tramite tramite, int idUsuario): Modifica un trámite existente en el archivo.
+    ConsultarTramitesExpedientes(int idExpediente): Consulta los trámites asociados a un expediente específico.
+    EliminarPorIdRegistro(string idExpediente): Elimina trámites asociados a un expediente específico.
+    ConsultaPorId(int idTramite): Consulta un trámite por su ID.
+    ConsultaPorEtiqueta(EstadoTramite estado): Consulta trámites por etiqueta de estado.
 
+ExpedienteRepositorio.cs
+Variables de Instancia
 
+    _archivo: Ruta del archivo de texto donde se almacenan los expedientes.
+Constructores
+    ExpedienteRepositorio(TramitesRepositorio tramitesRepositorio, string arch): Constructor que 
+    recibe el repositorio de trámites y la ruta del archivo como parámetros.
+Métodos
+    Crear(int idUsuario): Crea el archivo si no existe.
+    AgregarRegistro(Expediente expediente, int idUsuario): Agrega un nuevo expediente al archivo.
+    ModificarRegistro(Expediente expediente, int idUsuario): Modifica un expediente existente en 
+    el archivo.
+    EliminarPorIdRegistro(int idExpediente, int idUsuario): Elimina un expediente del archivo por 
+    su ID.
+    ConsultaPorId(int idExpediente): Consulta un expediente por su ID.
+    ConsultaTodos(): Consulta todos los expedientes del archivo.
+    ConsultaExpedienteYTramites(int idExpediente): Consulta un expediente por su ID y sus 
+    trámites asociados.
+    EliminarTramitesPorIdExpediente(int idExpediente): Elimina los trámites asociados a un 
+    expediente específico del archivo.

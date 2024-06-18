@@ -2,5 +2,5 @@ namespace Aplicacion;
 
 public enum Permiso
 {
-    Usuario
+    ExpedienteAlta, ExpedienteBaja, ExpedienteModificacion, TramiteAlta, TramiteBaja, TramiteModificacion
 }

@@ -1,5 +1,7 @@
+using System.Collections;
+
 namespace Aplicacion;
-public class Tramite
+public class Tramite:IEnumerable
 {
     private static int s_id = 1;
     public int id {get; private set; } 
@@ -45,10 +47,7 @@ public class Tramite
         this.idUsuario = idUsuario;
         this.estadoTramite = estadoTramite;
         }
-        catch(ValidacionException e)
-        {
-            
-            Console.WriteLine($"{e.Message}");
+        catch        {
         }
     }
 
@@ -61,19 +60,8 @@ public class Tramite
     //MetodoParaActualizacion del contenido;
     public void ActualizarContenido(string contenido, int idUsuario)
     {   
-        try
-        {
-            if(string.IsNullOrWhiteSpace(contenido))
-            {
-                throw new ValidacionException("Error : Contenido El campo no puede estar vacio");
-            }
             this.contenido = contenido;
             UltimaModificacion(idUsuario);
-        }
-        catch (ValidacionException e)
-        {
-            Console.WriteLine($"{e.Message}");
-        }
     }
     //Metodo para Actualizacion del estado Del tramite
     public void ActualizarEstado(EstadoTramite estadoTramite, int idUsuario)
@@ -83,16 +71,20 @@ public class Tramite
     }
     public override string ToString()
     {
-        try 
-        {
-            if(string.IsNullOrWhiteSpace(this.contenido))
-                throw new ValidacionException("Error: No se puede escribir el Tramite porque la caratula esta vacia");
             return $"{id}\t{ExpedienteId}\t{contenido}\t{fecha_hora_creacion}\t{fecha_hora_ultimaModificacion}\t{idUsuario}\t{estadoTramite}";
-        }
-        catch(ValidacionException e)
-        {
-            Console.WriteLine($"{e.Message}");
-            return "ERROR";
-        }
     }
+    //Completar
+  public IEnumerator<Tramite> GetEnumerator()
+        {
+            if (this == null)
+            {
+                return new Tramite().GetEnumerator();
+            }
+            return this.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
+        }
 }

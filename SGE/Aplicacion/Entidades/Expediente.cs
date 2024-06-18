@@ -1,6 +1,8 @@
+using System.Collections;
+
 namespace Aplicacion;
 
-public class Expediente
+public class Expediente:IEnumerable<Tramite>
 {
     private static int s_id = 1;
     private int id;
@@ -8,6 +10,7 @@ public class Expediente
     private DateTime fechaCreacion;
     private DateTime fechaModificacion;
     private int idUsuarioModificacion;
+    private List<Tramite>? tramites = null;
     private EstadoExpediente estado;
 
     public int Id
@@ -18,20 +21,8 @@ public class Expediente
     public string Caratula
     {
         get => caratula != null ? caratula : "NULL"; 
-        //Revisar Usar el manejo de excepciones visto en la clase 6 para una correcta 
-        set {   try
-                {
-                    if(string.IsNullOrWhiteSpace(value))
-                    {
-                        throw new ValidacionException("Error : Contenido no valido El campo Esta Incompleto");
-                    }
-                    this.caratula = value;
-                }
-                catch (ValidacionException e)
-                {
-                    Console.WriteLine($"{e.Message}");
-                }
-             }
+        //Todo el manejo de excepciones corresponde al programa principal, y la implementacion de estas al caso de uso 
+        set => this.caratula = value;
     }
 
     public DateTime FechaCreacion
@@ -51,7 +42,17 @@ public class Expediente
         get{ return estado; }
         set { estado = value; }
     }
-
+    public List<Tramite>? Tramites
+    {
+        get
+        {
+            return tramites;
+        }
+        set
+        {
+            this.tramites = value;
+        }
+    }
     public Expediente()
     {
         caratula = "";
@@ -59,6 +60,7 @@ public class Expediente
         s_id++;
         fechaCreacion = DateTime.Now;
         fechaModificacion = DateTime.Now;
+        tramites = new List<Tramite>();
     }
     //$"{id}\t{caratula}\t{fechaCreacion}\t{fechaModificacion}\t{idUsuarioModificacion}\t{estado}"
     private Expediente (string id, string caratula,string fechaCreacion, string fechaModificacion, string idUsuario,string estado)
@@ -69,6 +71,7 @@ public class Expediente
         this.fechaModificacion = DateTime.Parse(fechaModificacion); 
         this.idUsuarioModificacion = int.Parse(idUsuario);
         this.estado = (EstadoExpediente)Enum.Parse(typeof(EstadoExpediente), estado);
+
     }
     public static Expediente Ensamblado(string cadena)
     {
@@ -76,14 +79,8 @@ public class Expediente
         return new Expediente(partes[0], partes[1], partes[2], partes[3], partes[4],partes[5]);
     }
 
-    public Expediente(string Caratula, EstadoExpediente Estado, int Usuario)
+    public Expediente(string Caratula, EstadoExpediente Estado,List<Tramite>? tramites ,int Usuario)
     {
-        try
-        {
-            if (string.IsNullOrWhiteSpace(Caratula))
-            {
-                throw new ValidacionException("Error : Contenido no valido La carátula del expediente no puede estar vacía.");
-            }
             id = s_id;
             s_id++;
             fechaCreacion = DateTime.Now;
@@ -91,11 +88,7 @@ public class Expediente
             this.caratula = Caratula;
             this.estado = Estado;
             idUsuarioModificacion = Usuario;
-        }
-        catch(ValidacionException e)
-        {
-            Console.WriteLine($"{e.Message}");
-        }
+            this.tramites = tramites;
     }
 
     private void ActualizarFechaModificacion(int idUsuario)
@@ -106,35 +99,27 @@ public class Expediente
 
     public void ActualizarContenido(string contenido, int idUsuario)
     {
-        try
-        {
-            if(string.IsNullOrWhiteSpace(contenido))
-            {
-                throw new ValidacionException("Error : Contenido no valido El campo Esta Incompleto");
-            }
             this.Caratula = contenido;
             ActualizarFechaModificacion(idUsuario);
-        }
-        catch (ValidacionException e)
-        {
-            Console.WriteLine($"{e.Message}");
-        }
     }
 
     
     public override string ToString()
     {
-        try 
-        {
-            if(string.IsNullOrWhiteSpace(caratula)){
-                throw new ValidacionException("Error: No se puede escribir el Expediente porque la caratula esta vacia");
-            }  
             return $"{id}\t{caratula}\t{fechaCreacion}\t{fechaModificacion}\t{idUsuarioModificacion}\t{estado}";
-        }
-        catch(ValidacionException e)
-        {
-            Console.WriteLine($"{e.Message}");
-            return "";
-        }
     }
+    //Completar
+    public IEnumerator<Tramite> GetEnumerator()
+        {
+            if (tramites == null)
+            {
+                return new List<Tramite>().GetEnumerator();
+            }
+            return tramites.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
 }

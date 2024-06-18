@@ -1,10 +1,15 @@
 namespace Aplicacion;
 
-public class CasosDeUsoExpedienteAlta(IExpedienteRepositorio repositorio)
+public class CasosDeUsoExpedienteAlta(IExpedienteRepositorio repositorio, ExpedienteValidador validador)
 {
     public void Ejecutar(Expediente e, int idUsuario)
     {
-      repositorio.AltaExpediente(e, idUsuario);
-      
+      try 
+      {
+        validador.ValidarExpediente(e,idUsuario);
+        repositorio.AltaExpediente(e, idUsuario);
+      }
+      finally{
+      }
     }
 }

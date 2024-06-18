@@ -83,13 +83,13 @@ public class ExpedienteRepositorio(TramitesRepositorio TR, string arch): IExpedi
         }
     }
 
-    public LinkedList<Tramite> ConsultarExpedienteYTramites (out Expediente? retorno, int idExpediente)
+    public Expediente? ConsultarExpedienteYTramites (int idExpediente)
     {
-        retorno = null; 
-        LinkedList<Tramite> tramites = new LinkedList<Tramite>();
+        Expediente? retorno = null;
         try
         {
         chequeo();
+        //Debe actualizarse con dataBase
         using(StreamReader reader = new StreamReader(_archivo))
         {
             while(!reader.EndOfStream)
@@ -98,16 +98,15 @@ public class ExpedienteRepositorio(TramitesRepositorio TR, string arch): IExpedi
                 if(line.Split("\t")[0] == idExpediente.ToString())
                 {
                     retorno  = Expediente.Ensamblado(line);
-                    tramites = TR.ConsultarTramitesExpedientes(idExpediente);
+                    //Llamado a la base de datos
                 }
             }
         }
-        return tramites;
+        return retorno;
         } 
-        catch (Exception e)
+        catch
         {
-            Console.WriteLine($"{e.Message}");
-            return tramites;
+            return retorno;
         }
     }
 

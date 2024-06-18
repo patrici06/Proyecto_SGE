@@ -1226,11 +1226,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\UI.csproj",
+      "projectUniqueName": "c:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\UI.csproj",
       "projectName": "UI",
-      "projectPath": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\UI.csproj",
+      "projectPath": "c:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\UI.csproj",
       "packagesPath": "C:\\Users\\patricio rivero\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\obj\\",
+      "outputPath": "c:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\patricio rivero\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -1245,8 +1245,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\Aplicacion\\Aplicacion.csproj": {
-              "projectPath": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\Aplicacion\\Aplicacion.csproj"
+            "c:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\Aplicacion\\Aplicacion.csproj": {
+              "projectPath": "c:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\Aplicacion\\Aplicacion.csproj"
             },
             "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\Repositorios\\Repositorios.csproj": {
               "projectPath": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\Repositorios\\Repositorios.csproj"

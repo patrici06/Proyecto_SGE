@@ -2,8 +2,15 @@ namespace Aplicacion;
 
 public class CasoDeUsoExpedienteYTramites(IExpedienteRepositorio expedienteRepositorio)
 {
-    public LinkedList<Tramite> Ejecutar(out Expediente? expediente, int id)
+    public Expediente? Ejecutar(int id)
     {
-        return expedienteRepositorio.ConsultarExpedienteYTramites(out expediente, id);
+        try 
+        {   
+            return expedienteRepositorio.ConsultarExpedienteYTramites(id);
+        }
+        catch
+        {
+            return null;
+        }
     }
 }

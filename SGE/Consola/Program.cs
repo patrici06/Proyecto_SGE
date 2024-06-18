@@ -184,7 +184,7 @@ while(ok)
                 case 4: estadoExpediente = EstadoExpediente.ParaResolver;break; 
                 case 5: estadoExpediente = EstadoExpediente.RecienIniciado;break;
             }
-            Expediente expediente =  new Expediente(contenido, estadoExpediente, usuario);
+            Expediente expediente =  new Expediente(contenido, estadoExpediente,null, usuario);
             ExpedienteAlta.Ejecutar(expediente, usuario);
           break;  
         }
@@ -192,10 +192,9 @@ while(ok)
         {
             Console.WriteLine("Ingrese Id del expediente para consultar por el mismo y sus tramites"); 
             int id = int.Parse(Console.ReadLine()??"-1");
-            Expediente? expediente; 
-            LinkedList<Tramite> tramites = casosDeUsoExpedienteYTramites.Ejecutar(out expediente,id);
+            Expediente? expediente = casosDeUsoExpedienteYTramites.Ejecutar(id);
             Console.WriteLine(expediente); 
-            foreach(Tramite tramite in tramites)
+            foreach(Tramite tramite in expediente.Tramites)
             {
                 Console.WriteLine(tramite);
             }

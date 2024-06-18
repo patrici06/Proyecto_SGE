@@ -9,5 +9,5 @@ public interface IExpedienteRepositorio
     public void BajaExpediente(int idExpediente, int idUsuario);
     public Expediente? ConsultaPorId(int id);
     public LinkedList<Expediente> ConsultarTodos();
-    public LinkedList<Tramite> ConsultarExpedienteYTramites(out Expediente? retorno, int idExpediente);
+    public Expediente? ConsultarExpedienteYTramites(int idExpediente);
 }

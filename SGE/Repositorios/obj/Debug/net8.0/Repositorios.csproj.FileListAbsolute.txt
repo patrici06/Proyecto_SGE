@@ -30,3 +30,19 @@
 /home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Repositorios/obj/Debug/net8.0/Repositorios.pdb
 /home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Repositorios/obj/Debug/net8.0/ref/Repositorios.dll
 /home/pato/Escritorio/Proyecto-.NET-main/SGE/Repositorios/obj/Debug/net8.0/Repositorios.sourcelink.json
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Repositorios\bin\Debug\net8.0\Repositorios.deps.json
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Repositorios\bin\Debug\net8.0\Repositorios.dll
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Repositorios\bin\Debug\net8.0\Repositorios.pdb
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Repositorios\bin\Debug\net8.0\Aplicacion.dll
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Repositorios\bin\Debug\net8.0\Aplicacion.pdb
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Repositorios\obj\Debug\net8.0\Repositorios.csproj.AssemblyReference.cache
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Repositorios\obj\Debug\net8.0\Repositorios.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Repositorios\obj\Debug\net8.0\Repositorios.AssemblyInfoInputs.cache
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Repositorios\obj\Debug\net8.0\Repositorios.AssemblyInfo.cs
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Repositorios\obj\Debug\net8.0\Repositorios.csproj.CoreCompileInputs.cache
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Repositorios\obj\Debug\net8.0\Repositorios.sourcelink.json
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Repositorios\obj\Debug\net8.0\Reposito.39D5CB08.Up2Date
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Repositorios\obj\Debug\net8.0\Repositorios.dll
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Repositorios\obj\Debug\net8.0\refint\Repositorios.dll
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Repositorios\obj\Debug\net8.0\Repositorios.pdb
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Repositorios\obj\Debug\net8.0\ref\Repositorios.dll

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/Aplicacion.csproj": {}
+    "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\Aplicacion\\Aplicacion.csproj": {}
   },
   "projects": {
-    "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/Aplicacion.csproj": {
+    "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\Aplicacion\\Aplicacion.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/Aplicacion.csproj",
+        "projectUniqueName": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\Aplicacion\\Aplicacion.csproj",
         "projectName": "Aplicacion",
-        "projectPath": "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/Aplicacion.csproj",
-        "packagesPath": "/home/pato/.nuget/packages/",
-        "outputPath": "/home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/obj/",
+        "projectPath": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\Aplicacion\\Aplicacion.csproj",
+        "packagesPath": "C:\\Users\\patricio rivero\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\Aplicacion\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/pato/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\patricio rivero\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -32,6 +32,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -53,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

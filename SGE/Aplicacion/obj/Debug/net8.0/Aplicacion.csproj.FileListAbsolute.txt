@@ -22,3 +22,15 @@
 /home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/obj/Debug/net8.0/Aplicacion.pdb
 /home/joaco/Escritorio/proyecto-net/SGE1.1/Proyecto_SGE/SGE/Aplicacion/obj/Debug/net8.0/ref/Aplicacion.dll
 /home/pato/Escritorio/Proyecto-.NET-main/SGE/Aplicacion/obj/Debug/net8.0/Aplicacion.sourcelink.json
+C:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Aplicacion\bin\Debug\net8.0\Aplicacion.deps.json
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Aplicacion\bin\Debug\net8.0\Aplicacion.dll
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Aplicacion\bin\Debug\net8.0\Aplicacion.pdb
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Aplicacion\obj\Debug\net8.0\Aplicacion.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Aplicacion\obj\Debug\net8.0\Aplicacion.AssemblyInfoInputs.cache
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Aplicacion\obj\Debug\net8.0\Aplicacion.AssemblyInfo.cs
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Aplicacion\obj\Debug\net8.0\Aplicacion.csproj.CoreCompileInputs.cache
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Aplicacion\obj\Debug\net8.0\Aplicacion.sourcelink.json
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Aplicacion\obj\Debug\net8.0\Aplicacion.dll
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Aplicacion\obj\Debug\net8.0\refint\Aplicacion.dll
+c:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Aplicacion\obj\Debug\net8.0\Aplicacion.pdb
+C:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\Aplicacion\obj\Debug\net8.0\ref\Aplicacion.dll

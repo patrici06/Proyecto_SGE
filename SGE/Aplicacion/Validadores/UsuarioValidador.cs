@@ -4,19 +4,12 @@ namespace Aplicacion;
 
 public class UsuarioValidador : IServicioAutorizacion
 {
-    public bool PoseeElPermiso(Usuario usuario, List<Permiso> permisos)
+    public bool TienePermiso(Usuario? usuario, Permiso permiso)
     {
-        try{
-
-            if (usuario.permisos != null)
-             return  permisos.All(n => usuario.permisos.Exists(p => p.Equals(n))); 
-            else
-                return false;
-             //cheque que en la lista de permisos de la instancia usuario tenga todos los permisos 
-             //detallados en la lista.
-        }
-        catch{
-            return false;
-        }
+        if(usuario != null)
+        //permisos.All(n => usuario.permisos.Exists(p => p.Equals(n)))
+            return  usuario.permisos.Contains(permiso);
+        else
+            throw new RepositorioException("Error de Usuario: No hay un Usuario con ese ID");
     }
 }

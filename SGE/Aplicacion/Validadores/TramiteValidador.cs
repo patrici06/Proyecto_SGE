@@ -8,10 +8,5 @@ public class TramiteValidador
         {
             throw new ValidacionException("El contenido del trámite no puede estar vacío.");
         }
-
-        if (tramite.IdUsuario <= 0)
-        {
-            throw new ValidacionException("El ID de usuario de la última modificación del trámite no es válido.");
-        }
     }
 } 

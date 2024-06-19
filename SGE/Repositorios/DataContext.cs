@@ -19,7 +19,7 @@ namespace Repositorios
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            // Configuración adicional del modelo si es necesario
+
             modelBuilder.Entity<Tramite>(entity =>
             {
                 entity.HasKey(t => t.Id);
@@ -27,10 +27,6 @@ namespace Repositorios
                 entity.Property(t => t.FechaHoraCreacion).IsRequired();
                 entity.Property(t => t.FechaHoraUltimaModificacion).IsRequired();
                 entity.Property(t => t.ExpedienteId).IsRequired();
-
-                entity.HasOne(t => t.Expediente)
-                       .WithMany(e => e.Tramites)
-                       .HasForeignKey(t => t.ExpedienteId);
             });
 
             modelBuilder.Entity<Expediente>(entity =>
@@ -42,18 +38,18 @@ namespace Repositorios
                 entity.Property(e => e.IdUsuarioModificacion).IsRequired(false);
                 entity.Property(e => e.Estado).IsRequired(false);
 
-                entity.HasMany(e => e.Tramites)
-                       .WithOne(t => t.Expediente)
-                       .HasForeignKey(t => t.ExpedienteId);
-             });
+                entity.HasMany<Tramite>()
+                      .WithOne()
+                      .HasForeignKey(t => t.ExpedienteId);
+            });
 
             modelBuilder.Entity<Usuario>(entity =>
             {
-                entity.HasKey(u => u.id);
+                entity.HasKey(u => u.Id);
                 entity.Property(u => u.nombre).IsRequired();
                 entity.Property(u => u.apellido).IsRequired();
                 entity.Property(u => u.correo).IsRequired();
-                entity.Property(u => u.contraseñia).IsRequired();
+                entity.Property(u => u.contrasena).IsRequired();
                 entity.Property(u => u.permisos).IsRequired();
             });
         }

@@ -1,5 +1,5 @@
 namespace Aplicacion;
-
+/*
 public class ServicioActualizacionEstado(IExpedienteRepositorio expediente, EspecificacionCambioEstado cambioEstado)
 {
     public void Actualizacion(int idExpediente)
@@ -12,3 +12,4 @@ public class ServicioActualizacionEstado(IExpedienteRepositorio expediente, Espe
         }
     } 
 }
+*/

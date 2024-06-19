@@ -42,13 +42,6 @@ namespace Aplicacion
             FechaModificacion = DateTime.Now;
             IdUsuarioModificacion = idUsuario;
         }
-
-        public void ActualizarContenido(string contenido, int idUsuario)
-        {
-            Caratula = contenido;
-            ActualizarFechaModificacion(idUsuario);
-        }
-
         public override string ToString()
         {
             return $"{Id}\t{Caratula}\t{FechaCreacion}\t{FechaModificacion}\t{IdUsuarioModificacion}\t{Estado}";

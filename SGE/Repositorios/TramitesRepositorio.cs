@@ -1,237 +1,103 @@
 namespace Repositorios;
 
-using System.Runtime.CompilerServices;
+using System.Collections.Generic;
 using Aplicacion;
 
-public class TramitesRepositorio(string arch): ITramiteRepositorio
+public class TramitesRepositorio(ExpedienteRepositorio e, EspecificacionCambioEstado cambio) : ITramiteRepositorio
 {
-    readonly string _archivo = arch;
-
-    public void AgregarRegistro(Tramite tramite, int idUsuario)
+    public void AgregarRegistro(Tramite tramite)
     {
-        try
-        {   
-            if(!File.Exists(_archivo))
-            {
-                throw new RepositorioException($"NO Existe {_archivo}");
-            }
-            using (StreamWriter writer = new StreamWriter(_archivo, true))
-            {
-                 writer.WriteLine(tramite);
-            }
-        }
-        catch (Exception e)
+       using (var db  = new DataContext()){
+        db.Tramites.Add(tramite); 
+        db.SaveChanges();
+        Expediente? ex = e.ConsultaPorId(tramite.ExpedienteId); 
+        if (ex != null)
         {
-            Console.WriteLine($"{e.Message}");
+           ex = cambio.CambioEstado(ex, tramite);
+           e.ModificarExpediente(ex, tramite.IdUsuario);
         }
+       }
     }
 
-    public void Crear(int idUsuario)
+    public List<Tramite> ConsultaPorEtiqueta(EstadoTramite estado)
     {
-        try
-        {
-            if(File.Exists(_archivo)){
+       using (var db = new DataContext()){ 
+       List<Tramite> tramites = db.Tramites.Where(t => t.EstadoTramite == estado).ToList();
+       if(tramites == null) throw new RepositorioException($"No se encontro tramites con la Etiqueda{estado}");
+       return tramites;
+    }
+    }
 
-            }
-            File.Create(_archivo).Close();
-        }
-        catch ( AutorizacionException e)
-        {
-            Console.WriteLine(e.Message);
+    public Tramite? ConsultaPorId(int idTramite)
+    {
+        using (var db = new DataContext()){ 
+        return db.Tramites.Where(t => t.Id == idTramite).SingleOrDefault();
         }
     }
 
     public void ElimiarRegistro(int idTramite, int idUsuario)
     {
-        try
-        {            
-            LinkedList<string> tramites = new LinkedList<string>(); 
-            using(StreamReader reader = new StreamReader(_archivo))
-            {
-                while(!reader.EndOfStream)
-                {
-                    string linea = reader.ReadLine()??"";
-                    string[] scrap = linea.Split("\t"); 
-                    if(scrap[0] != idTramite.ToString()){
-                        tramites.AddLast(linea);
-                    }
-                }
-            }
-            using(StreamWriter writer = new StreamWriter(_archivo))
-            {
-                foreach(string tramite in tramites)
-                {    
-                        writer.WriteLine(tramite);
-                }
-            writer.Close();
-            }
-
-
-        }
-        catch (Exception e)
+        using (var db = new DataContext()){ 
+        Tramite? tramite = db.Tramites.Where(t => t.Id == idTramite).SingleOrDefault();
+        if(tramite == null) throw new RepositorioException($"No se encontro Tramite id{idTramite}"); 
+        List<Tramite> tramitesDelExpediente = db.Tramites.Where(t=> t.ExpedienteId == tramite.ExpedienteId)
+                                                .OrderByDescending(t => t.FechaHoraUltimaModificacion)
+                                                .ToList();
+        if (tramitesDelExpediente.Count >= 1 && tramitesDelExpediente.First().Id == tramite.Id)
         {
-            Console.WriteLine($"{e.Message}");
+            db.Tramites.Remove(tramite);
+            db.SaveChanges();
+
+            if (tramitesDelExpediente.Count > 1)
+            {
+                var ultimoTramite = tramitesDelExpediente[1];
+                var modificaremos = db.Expedientes.SingleOrDefault(e => e.Id == ultimoTramite.ExpedienteId);
+                
+                if (modificaremos != null)
+                {
+                    modificaremos = cambio.CambioEstado(modificaremos, ultimoTramite);
+                    db.SaveChanges();
+                }
+            }
+            else
+            {
+                var modificaremos = db.Expedientes.SingleOrDefault(e => e.Id == tramite.ExpedienteId); 
+                
+                if (modificaremos != null)
+                {
+                    var aux = new Tramite { EstadoTramite = EstadoTramite.PaseAlArchivo };
+                    modificaremos = cambio.CambioEstado(modificaremos, aux);
+                    db.SaveChanges();
+                }
+            }
+        }
+        else
+        {
+            db.Tramites.Remove(tramite);
+            db.SaveChanges();
+        }
         }
     }
-
-    // EL METODO RECIBE EL TRAMITE MODIFICADO Y LO SOBREESCRIBE
     public void ModificarRegistro(Tramite tramite, int idUsuario)
     {
-        try
+        using (var db = new DataContext())
         {
-          if(!File.Exists(_archivo))
-          {
-            throw new RepositorioException($" No existe {_archivo}"); 
-          }
-          LinkedList<string> tramites = new LinkedList<string>();
-          using(StreamReader reader = new StreamReader(_archivo))
-          {
-            while(!reader.EndOfStream)
+            Tramite? aux = db.Tramites.Where(t => t.Id == tramite.Id).SingleOrDefault();
+            if(aux == null) throw new RepositorioException($" no se encontro Tramite {tramite.Id}"); 
+            aux.IdUsuario = idUsuario;
+            aux.FechaHoraUltimaModificacion = DateTime.Now; 
+            aux.ExpedienteId = tramite.ExpedienteId;
+            aux.EstadoTramite = tramite.EstadoTramite; 
+            aux.Contenido =  tramite.Contenido;
+            db.Tramites.Update(aux); 
+            db.SaveChanges();
+            Expediente? padre = e.ConsultaPorId(aux.Id); 
+            if(padre!= null)
             {
-                string linea = reader.ReadLine()??""; 
-                if(linea.Split("\t")[0] == tramite.ToString().Split("\t")[0])
-                {
-                    tramites.AddLast(tramite.ToString());
-                }
-                else
-                {
-                    tramites.AddLast(linea);
-                }
-            }
-            reader.Close();
-          }
-          using(StreamWriter writer = new StreamWriter(_archivo))
-          {
-            foreach(string elem in tramites)
-            {
-                writer.WriteLine(elem); 
-            }
-            writer.Close();
-          }
-
-        }
-        catch(Exception e)
-        {
-            Console.WriteLine($"{e.Message}");
-        }
-    }
-
-
-    //Metodos extra a la interfaz 
-    public LinkedList<Tramite> ConsultarTramitesExpedientes(int idExpediente)
-    {
-    LinkedList<Tramite> retorno = new LinkedList<Tramite>();
-     try
-     {
-        if(!File.Exists(_archivo))
-          {
-            throw new RepositorioException($" No existe {_archivo}"); 
-          }
-        using(StreamReader reader =  new StreamReader(_archivo))
-        {
-            while(!reader.EndOfStream){
-                string line =reader.ReadLine()??"";
-             if(idExpediente.ToString() == line.Split("\t")[1])
-             {
-                retorno.AddLast(Tramite.Ensamblador(line));
-             }
-            }
-            reader.Close();
-        }
-        return retorno;
-     } 
-     catch(Exception e )
-     {
-        Console.WriteLine($"{e.Message}");
-        return retorno;
-     }
-    }
-    public void EliminarPorIdRegistro(string idExpediente)
-    {
-        try
-        {   
-            if(!File.Exists(_archivo))
-            {
-            throw new RepositorioException($" No existe {_archivo}"); 
-            }
-            LinkedList<string> salvado = new LinkedList<string>();
-            using(StreamReader reader = new StreamReader(_archivo))
-            {
-                while(!reader.EndOfStream)
-                {
-                    string line = reader.ReadLine()??"";
-                    if(idExpediente != line.Split("\t")[1])
-                    {
-                       salvado.AddLast(line); 
-                    }
-                }
-            reader.Close();
-            }
-            using(StreamWriter writer = new StreamWriter(_archivo))
-            {
-                foreach(string dato in salvado)
-                {
-                    writer.WriteLine(dato);
-                }
-            writer.Close();
-            }
-        }
-        catch(Exception e)
-        {
-            Console.WriteLine($"{e.Message}");
-        }
-    }
-    public Tramite? ConsultaPorId(int idTramite)
-    {
-        try
-        {
-            if(!File.Exists(_archivo)){ throw new RepositorioException("no se encontro el archivo");}
-            Tramite? tramite = null;
-            using (StreamReader reader = new StreamReader(_archivo))
-            {
-                string linea =  reader.ReadLine()??""; 
-                if(idTramite.ToString() == linea.Split("\t")[0])
-                {
-                    tramite = Tramite.Ensamblador(linea);
-                }
-            }
-            return tramite;
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine($"ERROR: {e.Message}");
-            return null; 
-        }
-    }
-    public LinkedList<Tramite> ConsultaPorEtiqueta(EstadoTramite estado)
-    {
-        LinkedList<Tramite> tramites = new LinkedList<Tramite>();
-        try
-        {
-            if(!File.Exists(_archivo))
-            {
-            throw new RepositorioException($" No existe {_archivo}"); 
-            }
-            using(StreamReader reader = new StreamReader(_archivo))
-            {
-                while(!reader.EndOfStream)
-                {
-                    string line = reader.ReadLine() ?? "";
-                    string[] partes = line.Split("\t");
-
-                    if(partes[6] == estado.ToString())
-                    {
-                        tramites.AddLast(Tramite.Ensamblador(line));
-                    }
-                }
-
-                return tramites;
-            }
-        }
-        catch(Exception e)
-        {
-            Console.WriteLine($"{e.Message}");
-            return tramites;
-        }
+                e.ModificarExpediente(cambio.CambioEstado(padre, aux), idUsuario);
+                db.SaveChanges();
+            } 
+        } 
+        
     }
 }

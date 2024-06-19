@@ -63,3 +63,10 @@ C:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\UI\obj\Debug\net8.0\refint\UI.
 C:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\UI\obj\Debug\net8.0\UI.pdb
 C:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\UI\obj\Debug\net8.0\UI.genruntimeconfig.cache
 C:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\UI\obj\Debug\net8.0\ref\UI.dll
+C:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\UI\bin\Debug\net8.0\Microsoft.AspNetCore.Authorization.dll
+C:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\UI\bin\Debug\net8.0\Microsoft.AspNetCore.Components.dll
+C:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\UI\bin\Debug\net8.0\Microsoft.AspNetCore.Components.Forms.dll
+C:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\UI\bin\Debug\net8.0\Microsoft.AspNetCore.Metadata.dll
+C:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\UI\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\UI\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\patricio rivero\Desktop\Proyecto_SGE\SGE\UI\bin\Debug\net8.0\Microsoft.Extensions.Options.dll

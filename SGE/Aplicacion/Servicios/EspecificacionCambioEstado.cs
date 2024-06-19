@@ -2,7 +2,7 @@ namespace Aplicacion;
 
 public class EspecificacionCambioEstado()
 {
-    public void CambioEstado (Expediente retorno, in Tramite ultimoTramite)
+    public Expediente CambioEstado (Expediente retorno, Tramite ultimoTramite)
     {
         switch(ultimoTramite.EstadoTramite)
             {
@@ -13,5 +13,6 @@ public class EspecificacionCambioEstado()
                 case EstadoTramite.PaseAlArchivo: retorno.Estado = EstadoExpediente.Finalizado;
                 break;
             }
+        return retorno;
     }
 }

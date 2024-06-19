@@ -1,10 +1,16 @@
 using Aplicacion;
 using Microsoft.EntityFrameworkCore;
 
-namespace Repositorios
-{
+namespace Repositorios;
+
     public class DataContext : DbContext
-    {
+{
+
+        public DataContext(){}
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        {
+        }
+
         public DbSet<Expediente> Expedientes { get; set; }
         public DbSet<Tramite> Tramites { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
@@ -54,4 +60,3 @@ namespace Repositorios
             });
         }
     }
-}

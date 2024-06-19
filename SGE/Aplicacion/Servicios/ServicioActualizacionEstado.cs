@@ -4,12 +4,11 @@ public class ServicioActualizacionEstado(IExpedienteRepositorio expediente, Espe
 {
     public void Actualizacion(int idExpediente)
     {
-        Expediente? retorno = null;
-        LinkedList<Tramite> tramites = expediente.ConsultarExpedienteYTramites(out retorno,idExpediente);
+        Expediente? retorno = expediente.ConsultarExpedienteYTramites(idExpediente);
         if(retorno != null)
         {
-            cambioEstado.CambioEstado(retorno, tramites.Last());
-            expediente.ModificarExpediente(retorno, retorno.IdUsuarioModificacion);
+            cambioEstado.CambioEstado(retorno, retorno.Tramites.Last());
+            expediente.ModificarExpediente(retorno, idUsuario: retorno.IdUsuarioModificacion);
         }
     } 
 }

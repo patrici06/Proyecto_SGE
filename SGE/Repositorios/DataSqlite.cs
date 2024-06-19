@@ -1,12 +1,29 @@
+using System;
+using Microsoft.EntityFrameworkCore;
 
-namespace Repositorios; 
-
-public class DataSqlite
+namespace Repositorios
 {
-    public static void Incializar()//Encargado de Crear la Base de Datos Con el modelo definido  
-    {                              //por las clases en DataContext.cs  
-        using var context = new DataContext();
-        if(context.Database.EnsureCreated()){ Console.WriteLine("Se creo base de datos");}
-
+    public class DataSqlite
+    {
+        public static void Inicializar()
+        {
+            using var context = new DataContext();
+            if (context.Database.EnsureCreated())
+            {
+                context.Database.EnsureCreated();
+                var connection = context.Database.GetDbConnection();
+                connection.Open();
+                using (var command = connection.CreateCommand())
+                {
+                command.CommandText = "PRAGMA journal_mode=DELETE;";
+                command.ExecuteNonQuery();
+                }
+                Console.WriteLine("Se creó la base de datos");
+            }
+            else
+            {
+                Console.WriteLine("La base de datos ya existe");
+            }
+        }
     }
 }

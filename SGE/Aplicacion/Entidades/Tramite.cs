@@ -1,90 +1,72 @@
-using System.Collections;
+using System;
+using System.Collections.Generic;
 
 namespace Aplicacion;
-public class Tramite:IEnumerable
-{
-    private static int s_id = 1;
-    public int id {get; private set; } 
-    public int ExpedienteId{get; set;}
-    //Delego Responsabilidad a la propiedad ExpedienteId.
-    public string? contenido {get; private set; }   
-    public DateTime fecha_hora_creacion{get;} = DateTime.Now;
-    public DateTime fecha_hora_ultimaModificacion{get; private set; }
-    public int idUsuario{get; private set; }
-    public EstadoTramite estadoTramite{ get; private set;}
-    
-    
-    public Tramite()
+    public class Tramite
     {
-        id  = s_id;
-        s_id++;
-        contenido = "";
-    }
-    private Tramite(string id,string idExpediente,string contenido,string creacion,string modificacion,string idUsuario,string estadoTramite)
-    {
-        this.id = int.Parse(id);
-        this.ExpedienteId = int.Parse(idExpediente);
-        this.idUsuario = int.Parse(idUsuario);
-        this.contenido = contenido;
-        this.fecha_hora_creacion = DateTime.Parse(creacion);
-        this.fecha_hora_ultimaModificacion = DateTime.Parse(modificacion);
-        //ValorPredeterminado
-        this.estadoTramite = (EstadoTramite)Enum.Parse(typeof(EstadoTramite), estadoTramite);;
-    }
-    public static Tramite Ensamblador(string cadena)
-    {
-        string[] temp = cadena.Split("\t");
-        return new Tramite(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5],temp[6]);
-    }
-    public Tramite (int idExpediente, string contenido, int idUsuario, EstadoTramite estadoTramite)
-    {
-        try
-        {
-        id  = s_id;
-        s_id++;
-        ExpedienteId = idExpediente;
-        ActualizarContenido(contenido, idUsuario); 
-        this.idUsuario = idUsuario;
-        this.estadoTramite = estadoTramite;
-        }
-        catch        {
-        }
-    }
+        private static int s_id = 1; // Esto debe estar inicializado
 
-    //Metodo Privado Para Actualizacion UltimaModificacion
-    private void UltimaModificacion(int idUsuario)
-    {
-        this.idUsuario = idUsuario;
-        this.fecha_hora_ultimaModificacion = DateTime.Now; 
-    }
-    //MetodoParaActualizacion del contenido;
-    public void ActualizarContenido(string contenido, int idUsuario)
-    {   
-            this.contenido = contenido;
+        public int Id { get; set; }
+        public string Contenido { get; set; }
+        public DateTime FechaHoraCreacion { get; set; }
+        public DateTime FechaHoraUltimaModificacion { get; set; }
+        public int ExpedienteId { get; set; }
+        public Expediente Expediente { get; set; }
+        public int IdUsuario { get; set; }
+        public EstadoTramite EstadoTramite { get; set; }
+
+        public Tramite()
+        {
+        }
+
+        private Tramite(string id, string idExpediente, string contenido, string creacion, string modificacion, string idUsuario, string estadoTramite)
+        {
+            Id = int.Parse(id);
+            ExpedienteId = int.Parse(idExpediente);
+            IdUsuario = int.Parse(idUsuario);
+            Contenido = contenido;
+            FechaHoraCreacion = DateTime.Parse(creacion);
+            FechaHoraUltimaModificacion = DateTime.Parse(modificacion);
+            EstadoTramite = (EstadoTramite)Enum.Parse(typeof(EstadoTramite), estadoTramite);
+        }
+
+        public static Tramite Ensamblador(string cadena)
+        {
+            string[] temp = cadena.Split("\t");
+            return new Tramite(temp[0], temp[1], temp[2], temp[3], temp[4], temp[5], temp[6]);
+        }
+
+        public Tramite(int idExpediente, string contenido, int idUsuario, EstadoTramite estadoTramite)
+        {
+            Id = s_id;
+            s_id++;
+            ExpedienteId = idExpediente;
+            ActualizarContenido(contenido, idUsuario);
+            IdUsuario = idUsuario;
+            EstadoTramite = estadoTramite;
+            FechaHoraCreacion = DateTime.Now;
+        }
+
+        private void UltimaModificacion(int idUsuario)
+        {
+            IdUsuario = idUsuario;
+            FechaHoraUltimaModificacion = DateTime.Now;
+        }
+
+        public void ActualizarContenido(string contenido, int idUsuario)
+        {
+            Contenido = contenido;
             UltimaModificacion(idUsuario);
-    }
-    //Metodo para Actualizacion del estado Del tramite
-    public void ActualizarEstado(EstadoTramite estadoTramite, int idUsuario)
-    {
-        this.estadoTramite = estadoTramite;
-        UltimaModificacion(idUsuario);
-    }
-    public override string ToString()
-    {
-            return $"{id}\t{ExpedienteId}\t{contenido}\t{fecha_hora_creacion}\t{fecha_hora_ultimaModificacion}\t{idUsuario}\t{estadoTramite}";
-    }
-    //Completar
-  public IEnumerator<Tramite> GetEnumerator()
-        {
-            if (this == null)
-            {
-                return new Tramite().GetEnumerator();
-            }
-            return this.GetEnumerator();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public void ActualizarEstado(EstadoTramite estadoTramite, int idUsuario)
         {
-            return this.GetEnumerator();
+            EstadoTramite = estadoTramite;
+            UltimaModificacion(idUsuario);
         }
-}
+
+        public override string ToString()
+        {
+            return $"{Id}\t{ExpedienteId}\t{Contenido}\t{FechaHoraCreacion}\t{FechaHoraUltimaModificacion}\t{IdUsuario}\t{EstadoTramite}";
+        }
+    }

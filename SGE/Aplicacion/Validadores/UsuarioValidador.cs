@@ -8,10 +8,12 @@ public class UsuarioValidador : IServicioAutorizacion
     {
         try{
 
+            if (usuario.permisos != null)
              return  permisos.All(n => usuario.permisos.Exists(p => p.Equals(n))); 
+            else
+                return false;
              //cheque que en la lista de permisos de la instancia usuario tenga todos los permisos 
              //detallados en la lista.
-
         }
         catch{
             return false;

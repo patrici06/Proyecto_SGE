@@ -5,6 +5,6 @@ public class CasosDeUsoTramiteAlta(ITramiteRepositorio tramiteRepositorio, Servi
     public void Ejecutar(Tramite t, int idUsuario)
     {
       tramiteRepositorio.AgregarRegistro(t, idUsuario);
-      servicio.Actualizacion(t.ExpedienteId);
+      //servicio.Actualizacion(t.ExpedienteId);
     }
 }

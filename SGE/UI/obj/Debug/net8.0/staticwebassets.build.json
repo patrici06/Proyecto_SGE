@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "YnRlS/txmw/lRaADqdJAE0jEma+wyisCOSsYf5GzGhw=",
+  "Hash": "E1RMv+Q6GxrwYF24usyxYKV/jdZQZNQ6AX0A74pFSm4=",
   "Source": "UI",
   "BasePath": "_content/UI",
   "Mode": "Default",
@@ -17,10 +17,10 @@
   ],
   "Assets": [
     {
-      "Identity": "c:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\obj\\Debug\\net8.0\\scopedcss\\bundle\\UI.styles.css",
+      "Identity": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\obj\\Debug\\net8.0\\scopedcss\\bundle\\UI.styles.css",
       "SourceId": "UI",
       "SourceType": "Computed",
-      "ContentRoot": "c:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/UI",
       "RelativePath": "UI.styles.css",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "c:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\obj\\Debug\\net8.0\\scopedcss\\bundle\\UI.styles.css"
+      "OriginalItemSpec": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\obj\\Debug\\net8.0\\scopedcss\\bundle\\UI.styles.css"
     },
     {
-      "Identity": "c:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\UI.bundle.scp.css",
+      "Identity": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\UI.bundle.scp.css",
       "SourceId": "UI",
       "SourceType": "Computed",
-      "ContentRoot": "c:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/UI",
       "RelativePath": "UI.bundle.scp.css",
       "AssetKind": "All",
@@ -52,10 +52,10 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "c:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\UI.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\UI.bundle.scp.css"
     },
     {
-      "Identity": "c:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\wwwroot\\app.css",
+      "Identity": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\wwwroot\\app.css",
       "SourceId": "UI",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\wwwroot\\",
@@ -74,7 +74,7 @@
       "OriginalItemSpec": "wwwroot\\app.css"
     },
     {
-      "Identity": "c:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Identity": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\wwwroot\\bootstrap\\bootstrap.min.css",
       "SourceId": "UI",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\wwwroot\\",
@@ -93,7 +93,7 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "c:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "UI",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\wwwroot\\",
@@ -112,7 +112,7 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "c:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\wwwroot\\favicon.png",
+      "Identity": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\wwwroot\\favicon.png",
       "SourceId": "UI",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\UI\\wwwroot\\",

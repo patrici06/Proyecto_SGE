@@ -1,125 +1,67 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 
-namespace Aplicacion;
-
-public class Expediente:IEnumerable<Tramite>
+namespace Aplicacion
 {
-    private static int s_id = 1;
-    private int id;
-    private string? caratula;
-    private DateTime fechaCreacion;
-    private DateTime fechaModificacion;
-    private int idUsuarioModificacion;
-    private List<Tramite>? tramites = null;
-    private EstadoExpediente estado;
+    public class Expediente : IEnumerable<Tramite>
+    {
+        public int Id { get; set; }
+        public string? Caratula { get; set; } = "";
+        public DateTime? FechaCreacion { get; set; }
+        public DateTime? FechaModificacion { get; set; }
+        public int? IdUsuarioModificacion { get; set; }
+        public List<Tramite>? Tramites { get; set; }
+        public EstadoExpediente? Estado { get; set; }
 
-    public int Id
-    {
-        get { return id; }
-        set { id = value; }
-    }
-    public string Caratula
-    {
-        get => caratula != null ? caratula : "NULL"; 
-        //Todo el manejo de excepciones corresponde al programa principal, y la implementacion de estas al caso de uso 
-        set => this.caratula = value;
-    }
-
-    public DateTime FechaCreacion
-    {
-        get { return fechaCreacion;}
-    }
-    public DateTime FechaModificacion
-    {
-        get { return fechaModificacion;}
-    }
-    public int IdUsuarioModificacion
-    {
-        get { return idUsuarioModificacion;}
-    }
-    public EstadoExpediente Estado
-    {
-        get{ return estado; }
-        set { estado = value; }
-    }
-    public List<Tramite>? Tramites
-    {
-        get
+        public Expediente()
         {
-            return tramites;
+            FechaCreacion = DateTime.Now;
+            FechaModificacion = DateTime.Now;
+            Tramites = new List<Tramite>();
         }
-        set
+
+        public Expediente(string caratula, EstadoExpediente estado, List<Tramite>? tramites, int usuario)
         {
-            this.tramites = value;
+            FechaCreacion = DateTime.Now;
+            FechaModificacion = DateTime.Now;
+            Caratula = caratula;
+            Estado = estado;
+            IdUsuarioModificacion = usuario;
+            Tramites = tramites;
         }
-    }
-    public Expediente()
-    {
-        caratula = "";
-        id = s_id;
-        s_id++;
-        fechaCreacion = DateTime.Now;
-        fechaModificacion = DateTime.Now;
-        tramites = new List<Tramite>();
-    }
-    //$"{id}\t{caratula}\t{fechaCreacion}\t{fechaModificacion}\t{idUsuarioModificacion}\t{estado}"
-    private Expediente (string id, string caratula,string fechaCreacion, string fechaModificacion, string idUsuario,string estado)
-    {
-        this.id = int.Parse(id); 
-        this.caratula = caratula; 
-        this.fechaCreacion = DateTime.Parse(fechaCreacion); 
-        this.fechaModificacion = DateTime.Parse(fechaModificacion); 
-        this.idUsuarioModificacion = int.Parse(idUsuario);
-        this.estado = (EstadoExpediente)Enum.Parse(typeof(EstadoExpediente), estado);
 
-    }
-    public static Expediente Ensamblado(string cadena)
-    {
-       string[] partes = cadena.Split("\t");
-        return new Expediente(partes[0], partes[1], partes[2], partes[3], partes[4],partes[5]);
-    }
+        // public static Expediente Ensamblado(string cadena)
+        // {
+        //     string[] partes = cadena.Split("\t");
+        //     return new Expediente(partes[0], partes[1], partes[2], partes[3], partes[4], partes[5]);
+        // }
 
-    public Expediente(string Caratula, EstadoExpediente Estado,List<Tramite>? tramites ,int Usuario)
-    {
-            id = s_id;
-            s_id++;
-            fechaCreacion = DateTime.Now;
-            fechaModificacion = DateTime.Now;
-            this.caratula = Caratula;
-            this.estado = Estado;
-            idUsuarioModificacion = Usuario;
-            this.tramites = tramites;
-    }
+        private void ActualizarFechaModificacion(int idUsuario)
+        {
+            FechaModificacion = DateTime.Now;
+            IdUsuarioModificacion = idUsuario;
+        }
 
-    private void ActualizarFechaModificacion(int idUsuario)
-    {
-        fechaModificacion = DateTime.Now;
-        idUsuarioModificacion = idUsuario;
-    } 
-
-    public void ActualizarContenido(string contenido, int idUsuario)
-    {
-            this.Caratula = contenido;
+        public void ActualizarContenido(string contenido, int idUsuario)
+        {
+            Caratula = contenido;
             ActualizarFechaModificacion(idUsuario);
-    }
+        }
 
-    
-    public override string ToString()
-    {
-            return $"{id}\t{caratula}\t{fechaCreacion}\t{fechaModificacion}\t{idUsuarioModificacion}\t{estado}";
-    }
-    //Completar
-    public IEnumerator<Tramite> GetEnumerator()
+        public override string ToString()
         {
-            if (tramites == null)
-            {
-                return new List<Tramite>().GetEnumerator();
-            }
-            return tramites.GetEnumerator();
+            return $"{Id}\t{Caratula}\t{FechaCreacion}\t{FechaModificacion}\t{IdUsuarioModificacion}\t{Estado}";
+        }
+
+        public IEnumerator<Tramite> GetEnumerator()
+        {
+            return Tramites?.GetEnumerator() ?? new List<Tramite>().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
+    }
 }

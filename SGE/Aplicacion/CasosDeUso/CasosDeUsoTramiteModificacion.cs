@@ -6,6 +6,6 @@ public class CasosDeUsoTramiteModificacion(ITramiteRepositorio tramiteRepositori
     public void Ejecutar(Tramite tramite, int idUsuario)
     {
         tramiteRepositorio.ModificarRegistro(tramite, idUsuario);
-        servicio.Actualizacion(tramite.ExpedienteId);
+        //servicio.Actualizacion(tramite.ExpedienteId);
     }
 }

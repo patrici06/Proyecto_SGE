@@ -7,7 +7,7 @@ public class CasosDeUsoTramiteBaja(ITramiteRepositorio tramiteRepositorio, Servi
             Tramite? tramite  = tramiteRepositorio.ConsultaPorId(idTramite); 
             if(tramite != null) {
                 tramiteRepositorio.ElimiarRegistro(idTramite, idUsuario);
-                servicio.Actualizacion(tramite.ExpedienteId);
+           //     servicio.Actualizacion(tramite.ExpedienteId);
             }
         }
 

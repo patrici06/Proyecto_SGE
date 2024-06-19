@@ -4,7 +4,7 @@ public class EspecificacionCambioEstado()
 {
     public void CambioEstado (Expediente retorno, in Tramite ultimoTramite)
     {
-        switch(ultimoTramite.estadoTramite)
+        switch(ultimoTramite.EstadoTramite)
             {
                 case EstadoTramite.Resolucion: retorno.Estado = EstadoExpediente.ConResolucion;
                 break;

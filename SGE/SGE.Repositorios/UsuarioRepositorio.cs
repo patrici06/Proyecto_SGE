@@ -13,13 +13,6 @@ public class UsuarioRepositorio : IUsuariosRepositorios
     public UsuarioRepositorio(DataContext context)
     {
         _context = context;
-        // Crear el primer usuario como Administrador
-         if (!_context.Usuarios.Any())
-        {
-            var admin = new Usuario("Admin", "Admin", "admin@admin.com", "admin123", new List<Permiso> { Permiso.ExpedienteAlta, Permiso.ExpedienteBaja, Permiso.ExpedienteModificacion, Permiso.TramiteAlta, Permiso.TramiteBaja, Permiso.TramiteModificacion, Permiso.adminPermiso });
-            _context.Usuarios.Add(admin);
-            _context.SaveChanges();
-        }
     }
 
     public void Crear(Usuario nuevo)

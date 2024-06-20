@@ -2,6 +2,7 @@
 @page "/Registro"
 @rendermode InteractiveServer
 @inject SGE.Aplicacion.ServicioUsuarios UsuarioService
+@inject ServicioUsuarioEstado UsuarioLogged
 @inject NavigationManager Navigation
 
 <PageTitle>Registro</PageTitle>
@@ -45,13 +46,20 @@
             bool esPrimerUsuario = !UsuarioService.ListarUsuarios().Any();
 
             // Asignar permisos básicos o permisos de administrador si es el primer usuario
-            _usuario.permisos = esPrimerUsuario ? new List<Permiso> { Permiso.adminPermiso } : new List<Permiso> {};
-
+            _usuario.permisos = esPrimerUsuario ? new List<Permiso> { 
+                Permiso.ExpedienteAlta, 
+                Permiso.ExpedienteBaja, 
+                Permiso.ExpedienteModificacion, 
+                Permiso.TramiteAlta, 
+                Permiso.TramiteBaja, 
+                Permiso.TramiteModificacion, 
+                Permiso.adminPermiso } : new List<Permiso> {};
+    
             // Obtener hash
             _usuario.contrasena = SGE.Aplicacion.ServicioHash.generarHashContrasena(_usuario.contrasena);
-                // Registrar el usuario
+            // Registrar el usuario
             UsuarioService.Crear(_usuario);
-
+            UsuarioLogged.SetUsuario(_usuario);
              // Redirigir a la página de inicio de sesión o a otra página adecuada
             Navigation.NavigateTo("/general");
         }

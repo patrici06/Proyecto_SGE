@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\SGE.UserI.props" />
+</Project>

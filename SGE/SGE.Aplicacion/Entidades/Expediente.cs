@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Aplicacion
+namespace SGE.Aplicacion
 {
     public class Expediente : IEnumerable<Tramite>
     {

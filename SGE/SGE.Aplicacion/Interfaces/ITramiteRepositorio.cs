@@ -1,4 +1,4 @@
-namespace Aplicacion;
+namespace SGE.Aplicacion;
 public interface ITramiteRepositorio
 {
     public void AgregarRegistro(Tramite tramite);

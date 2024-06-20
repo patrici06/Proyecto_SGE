@@ -1,4 +1,4 @@
-namespace Aplicacion; 
+namespace SGE.Aplicacion; 
 
 public class Usuario
 {
@@ -17,7 +17,7 @@ public class Usuario
         this.nombre= nombre;
         this.apellido=apellido;     
         this.correo=correo;
-        this.contrasena= ServicioHash.generarHashContrasena(contrase);
+        this.contrasena= contrase;
         this.permisos = Permisos ?? new List<Permiso>();
     }
 

@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SGE.UserI.bundle.scp.css",
+      "PackagePath": "staticwebassets\\SGE.UserI.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.SGE.UserI.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.SGE.UserI.props",
+      "PackagePath": "build\\SGE.UserI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.SGE.UserI.props",
+      "PackagePath": "buildMultiTargeting\\SGE.UserI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.SGE.UserI.props",
+      "PackagePath": "buildTransitive\\SGE.UserI.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

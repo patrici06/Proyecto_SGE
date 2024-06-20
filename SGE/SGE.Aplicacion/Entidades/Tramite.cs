@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Aplicacion;
+namespace SGE.Aplicacion;
     public class Tramite
     {
         public int Id { get; set; }

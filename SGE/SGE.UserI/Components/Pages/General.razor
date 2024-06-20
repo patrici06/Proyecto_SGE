@@ -7,7 +7,7 @@
 @inject SGE.Aplicacion.ServicioUsuarios ServiceUsuarios
 
 <h3>AGREGAR TRAMITE</h3>
-<DialogoAlerta @ref="dialogo" Mensaje=@msj></DialogoAlerta>
+<DialogoAlerta @ref="dialogo" Mensaje="@msj"></DialogoAlerta>
 <AltaTramite @ref="altaTramite" ServicioT= "ServiceTramites" ServicioE= "ServiceExpediente" IdUsuario="1"></AltaTramite>
 <button class="btn btn-primary" @onclick ="AT">AltaTramite</button>
 

@@ -10,6 +10,6 @@ public class UsuarioValidador : IServicioAutorizacion
         //permisos.All(n => usuario.permisos.Exists(p => p.Equals(n)))
             return  usuario.permisos.Contains(permiso);
         else
-            throw new RepositorioException("Error de Usuario: No hay un Usuario con ese ID");
+            throw new RepositorioException("Error No Posee Permisos");
     }
 }

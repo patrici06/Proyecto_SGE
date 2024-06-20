@@ -1,7 +1,6 @@
-@using SGE.UserI.Components.Pages;
+@using SGE.UserI.Components.Pages
 @page "/Registro"
 @rendermode InteractiveServer
-@using Microsoft.AspNetCore.Components
 @inject SGE.Aplicacion.ServicioUsuarios UsuarioService
 @inject NavigationManager Navigation
 
@@ -23,16 +22,21 @@
         <label for="contrasena">Contraseña</label>
         <InputText id="contrasena" type="password" class="form-control" @bind-Value="_usuario.contrasena" />
     </div>
-    <DialogoAlerta @ref= "dialogoAlerta" Mensaje = @msj></DialogoAlerta>
+    <DialogoAlerta @ref="dialogo" Mensaje="@msj"></DialogoAlerta>
     <button type="submit" class="btn btn-success" @onclick="RegistrarUsuario">Registrarse</button>
 
 @code {
     private Usuario _usuario = new Usuario();
-    private DialogoAlerta dialogoAlerta = null!;
+    private DialogoAlerta dialogo = null!;
     private string msj = ""; 
     private void RegistrarUsuario()
     {
         try{
+            if((string.IsNullOrEmpty(_usuario.apellido))
+                ||string.IsNullOrEmpty(_usuario.correo)
+                ||string.IsNullOrEmpty(_usuario.nombre)
+                ||string.IsNullOrEmpty(_usuario.contrasena))
+                throw new ValidacionException("Error: Ingrese Los campos");
         var user = UsuarioService.ListarUsuarios().FirstOrDefault(u => u.correo == _usuario.correo);
         if(user != null)
             throw new ValidacionException("Error: Ese correo ya fue utilizado");
@@ -49,12 +53,12 @@
             UsuarioService.Crear(_usuario);
 
              // Redirigir a la página de inicio de sesión o a otra página adecuada
-            Navigation.NavigateTo("/");
+            Navigation.NavigateTo("/general");
         }
         }catch(Exception e)
         {
             msj = e.Message.ToString(); 
-            dialogoAlerta.Mostrar();
+            dialogo.Mostrar();
         }
     }
 }

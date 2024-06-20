@@ -1,0 +1,94 @@
+@code {
+    [Parameter]
+    public List<Tramite> tramites { get; set; } = new List<Tramite>();
+
+    [Parameter]
+    public ServicioTramite STramite { get; set; } = null!;
+
+    [Parameter]
+    public int IdUsuario { get; set; }
+
+    [Parameter]
+    public bool permisoElim { get; set; }
+
+    [Parameter]
+    public bool permisoMod { get; set; }
+
+    private bool visible { get; set; }
+
+    public void Mostrar()
+    {
+        visible = true;
+        StateHasChanged();
+    }
+
+    public void Ocultar()
+    {
+        visible = false;
+        StateHasChanged();
+    }
+
+    private void EliminarTramite(Tramite tramite)
+    {
+        tramites.Remove(tramite);
+        STramite.ElimiarRegistro(tramite.Id, IdUsuario);
+        StateHasChanged();
+        Ocultar();
+        Mostrar();
+         // Oculta el componente después de eliminar el trámite
+    }
+
+    private void ModificarTramite(Tramite tramite)
+    {
+
+        // Lógica para mostrar un formulario de modificación
+        // Ejemplo: Utilizando un componente FormularioTramite
+        // Asumiendo que FormularioTramite es otro componente Razor
+
+        // Puedes crear un método para abrir un modal o mostrar otro componente
+        // para editar el trámite seleccionado.
+    }
+}
+
+@if (visible)
+{
+    <div>
+        <h3>Lista de Trámites</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Contenido</th>
+                    <th>Fecha de Creación</th>
+                    <th>Fecha de Última Modificación</th>
+                    <th>Expediente</th>
+                    <th>Usuario que Modificó</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var tramite in tramites)
+                {
+                    <tr>
+                        <td>@tramite.Id</td>
+                        <td>@tramite.Contenido</td>
+                        <td>@tramite.FechaHoraCreacion.ToShortDateString()</td>
+                        <td>@tramite.FechaHoraUltimaModificacion.ToShortDateString()</td>
+                        <td>@tramite.ExpedienteId</td>
+                        <td>@tramite.IdUsuario</td>
+                        <td>
+                            @if (permisoElim)
+                            {
+                                <button class="btn btn-danger btn-sm" @onclick="() => EliminarTramite(tramite)">Eliminar</button>
+                            }
+                            @if (permisoMod)
+                            {
+                                <button class="btn btn-primary btn-sm" @onclick="() => ModificarTramite(tramite)">Modificar</button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

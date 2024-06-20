@@ -1,6 +1,7 @@
  namespace SGE.Repositorios;
 
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using SGE.Aplicacion;
 
 public class ExpedienteRepositorio: IExpedienteRepositorio
@@ -50,6 +51,10 @@ public class ExpedienteRepositorio: IExpedienteRepositorio
         return  list;
     }
 
+    public bool ExisteId(int Id)
+{
+    return _context.Expedientes.Any(e => e.Id == Id);
+}
 
     public void ModificarExpediente(Expediente expediente, int idUsuario)
     {

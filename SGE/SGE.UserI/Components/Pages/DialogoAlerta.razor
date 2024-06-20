@@ -1,0 +1,22 @@
+@code{
+    [Parameter]
+    public string Mensaje{get; set;} = "Mensaje de Alerta"; 
+    private bool visible; 
+    public void Mostrar ()
+    {
+        visible = true; 
+        StateHasChanged();
+    }
+    private void Ocultar()
+    {
+        visible = false;
+        StateHasChanged();
+    }
+}
+@if(visible)
+{
+    <div class="alert alert-danger" role="alert">
+    @Mensaje
+    <button class="btn btn-secondary" @onclick="Ocultar">Cerrar</button>
+    </div>
+}

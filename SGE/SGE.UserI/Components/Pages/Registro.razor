@@ -1,0 +1,60 @@
+@using SGE.UserI.Components.Pages;
+@page "/Registro"
+@rendermode InteractiveServer
+@using Microsoft.AspNetCore.Components
+@inject SGE.Aplicacion.ServicioUsuarios UsuarioService
+@inject NavigationManager Navigation
+
+<PageTitle>Registro</PageTitle>
+    <h1>Registro de Usuario</h1>
+    <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <InputText id="nombre" class="form-control" @bind-Value="_usuario.nombre" />
+    </div>
+    <div class="form-group">
+        <label for="apellido">Apellido</label>
+        <InputText id="apellido" class="form-control" @bind-Value="_usuario.apellido" />
+    </div>
+    <div class="form-group">
+        <label for="correo">Correo</label>
+        <InputText id="correo" class="form-control" @bind-Value="_usuario.correo" />
+    </div>
+    <div class="form-group">
+        <label for="contrasena">Contraseña</label>
+        <InputText id="contrasena" type="password" class="form-control" @bind-Value="_usuario.contrasena" />
+    </div>
+    <DialogoAlerta @ref= "dialogoAlerta" Mensaje = @msj></DialogoAlerta>
+    <button type="submit" class="btn btn-success" @onclick="RegistrarUsuario">Registrarse</button>
+
+@code {
+    private Usuario _usuario = new Usuario();
+    private DialogoAlerta dialogoAlerta = null!;
+    private string msj = ""; 
+    private void RegistrarUsuario()
+    {
+        try{
+        var user = UsuarioService.ListarUsuarios().FirstOrDefault(u => u.correo == _usuario.correo);
+        if(user != null)
+            throw new ValidacionException("Error: Ese correo ya fue utilizado");
+        else {
+            // Comprobar si es el primer usuario en registrarse
+            bool esPrimerUsuario = !UsuarioService.ListarUsuarios().Any();
+
+            // Asignar permisos básicos o permisos de administrador si es el primer usuario
+            _usuario.permisos = esPrimerUsuario ? new List<Permiso> { Permiso.adminPermiso } : new List<Permiso> {};
+
+            // Obtener hash
+            _usuario.contrasena = SGE.Aplicacion.ServicioHash.generarHashContrasena(_usuario.contrasena);
+                // Registrar el usuario
+            UsuarioService.Crear(_usuario);
+
+             // Redirigir a la página de inicio de sesión o a otra página adecuada
+            Navigation.NavigateTo("/");
+        }
+        }catch(Exception e)
+        {
+            msj = e.Message.ToString(); 
+            dialogoAlerta.Mostrar();
+        }
+    }
+}

@@ -14,7 +14,7 @@ builder.Services.AddRazorComponents()
 //Agregamos el contexto de Base de Datos y la creamos de no existir
 DataContext dataContext = new DataContext();
 DataSqlite.Inicializar();
-
+//servicios
 builder.Services.AddScoped<IUsuariosRepositorios, UsuarioRepositorio>( UR => new UsuarioRepositorio(dataContext));
 builder.Services.AddTransient<ServicioUsuarios>();
 
@@ -31,6 +31,8 @@ builder.Services.AddTransient<ServicioTramite>();
 
 builder.Services.AddScoped<ServicioHash>();
 builder.Services.AddScoped<EspecificacionCambioEstado>(); // Registrar EspecificacionCambioEstado
+//servicio Del Usuario Loggeado
+builder.Services.AddSingleton<ServicioUsuarioEstado>();
 
 var app = builder.Build();
 

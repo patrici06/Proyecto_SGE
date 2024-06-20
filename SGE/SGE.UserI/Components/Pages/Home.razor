@@ -1,7 +1,54 @@
 ﻿@page "/"
+@rendermode InteractiveServer
+@inject NavigationManager Navegador
+@inject SGE.Aplicacion.ServicioUsuarios servicio
+@inject ServicioUsuarioEstado logeado
+<PageTitle>Bienvenido</PageTitle>
+<div>
+    <h1>Iniciar Sesión</h1>
+    <div>
+        <p>Ingrese Email para Iniciar Sesión</p>
+        <input placeholder="Email" @bind="_usuario.correo" class="form-control">
+    </div>
+    <div>
+        <p>Ingrese Contraseña</p>
+        <input type="Contraseña" placeholder="contraseña" @bind="_usuario.contrasena" class="form-control">
+        <DialogoAlerta @ref="dialogo" Mensaje="Usuario o Contraseña no válidos" />
+    </div>
+    <button class="btn btn-primary" @onclick="Validar">Ingresar</button>
+</div>
+<button class="btn btn-primary" @onclick="Registro">Registrarse</button>
 
-<PageTitle>Home</PageTitle>
+@code {
+    private Usuario _usuario = new Usuario();
+    private DialogoAlerta dialogo = null!;
 
-<h1>Hello, world!</h1>
+    private void Validar()
+    {
+        try
+        {
+            Console.WriteLine("Validando usuario...");
+            List<Usuario> list = servicio.ListarUsuarios();
+            Usuario? usuarioRecuperado = list.FirstOrDefault(u => u.correo == _usuario.correo);
 
-Welcome to your new app.
+            if (usuarioRecuperado != null && SGE.Aplicacion.ServicioHash.validarContrasena(_usuario.contrasena, usuarioRecuperado.contrasena))
+            {
+                logeado.SetUsuario(usuarioRecuperado);
+                Navegador.NavigateTo("/general");
+            }
+            else
+            {
+                dialogo.Mostrar();
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Error: {e.Message}");
+        }
+    }
+
+    private void Registro()
+    {
+        Navegador.NavigateTo("/Registro");
+    }
+}

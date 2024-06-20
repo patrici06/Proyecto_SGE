@@ -22,16 +22,40 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/patricio rivero/Desktop/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/AltaTramite.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBbHRhVHJhbWl0ZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/patricio rivero/Desktop/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/Counter.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb3VudGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/patricio rivero/Desktop/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/DialogoAlerta.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEaWFsb2dvQWxlcnRhLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/patricio rivero/Desktop/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/patricio rivero/Desktop/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/FormularioTramite.Razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xGb3JtdWxhcmlvVHJhbWl0ZS5SYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/patricio rivero/Desktop/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/General.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xHZW5lcmFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/patricio rivero/Desktop/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/patricio rivero/Desktop/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/Registro.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xSZWdpc3Ryby5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/patricio rivero/Desktop/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/TablaTramites.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUYWJsYVRyYW1pdGVzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/patricio rivero/Desktop/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/Weather.razor]

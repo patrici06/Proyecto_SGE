@@ -28,6 +28,11 @@ public class ServicioExpedientes: IExpedienteRepositorio
         return _ExpedienteRepositorio.ConsultarTodos();
     }
 
+    public bool ExisteId(int Id)
+    {
+       return _ExpedienteRepositorio.ExisteId(Id);
+    }
+
     public void ModificarExpediente(Expediente expediente, int idUsuario)
     {
        _ExpedienteRepositorio.ModificarExpediente(expediente, idUsuario);

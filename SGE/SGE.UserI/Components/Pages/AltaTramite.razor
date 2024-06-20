@@ -1,0 +1,65 @@
+@code{
+    [Parameter]
+    public int IdUsuario{get; set;}
+    [Parameter]
+    public ServicioTramite ServicioT { get; set; } = null!;
+    [Parameter]
+    public ServicioExpedientes ServicioE{get; set;} = null!; 
+    private bool visible { get; set; }
+    
+    public void Mostrar()
+    {
+        visible = true;
+        StateHasChanged();
+    }
+
+    private void Ocultar()
+    {
+        visible = false;
+        StateHasChanged();
+    }
+}
+
+@if(visible)
+{
+    <div>
+        <input type="text" placeholder="Contenido del tramite" @bind="_tramite.Contenido" class="form-control" />
+        <input type="text" placeholder="Expediente que Pertenede" @bind="_tramite.ExpedienteId" class="form-control" />
+        <select @bind="_tramite.EstadoTramite" class="from-control">
+            @foreach(var estado in estados)
+            {
+                <option value="@estado">@estado</option>
+            }
+        </select>
+        <button class="btn btn-primary" @onclick="GuardarTramite">Guardar</button>
+        <button class="btn btn-secondary" @onclick="Ocultar">Cancelar</button>
+    </div>
+}
+
+@code {
+    private Tramite _tramite = new Tramite();
+    private List<EstadoTramite> estados = new List<EstadoTramite> { EstadoTramite.Despacho,
+                                                                    EstadoTramite.EscritoPresentado, 
+                                                                    EstadoTramite.PaseAEstudio,
+                                                                    EstadoTramite.Resolucion,
+                                                                    EstadoTramite.Notificacion,
+                                                                    EstadoTramite.PaseAlArchivo
+                                                                   };
+    private void GuardarTramite()
+    {
+        try{
+         if (string.IsNullOrEmpty(_tramite.Contenido) || string.IsNullOrEmpty(_tramite.ExpedienteId.ToString()))
+                throw new ValidacionException("No se completaron correctamente los campos");
+            // Verificar la existencia del Expediente
+            if (!ServicioE.ExisteId(_tramite.ExpedienteId))
+                throw new ValidacionException("El expediente no existe.");
+            _tramite.IdUsuario = IdUsuario;
+            _tramite.FechaHoraCreacion = DateTime.Now; 
+            _tramite.FechaHoraUltimaModificacion = DateTime.Now;
+            ServicioT.AgregarRegistro(_tramite);
+            Ocultar();
+        }catch{
+            Ocultar();
+        }
+    }
+}

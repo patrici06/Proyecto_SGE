@@ -14,7 +14,7 @@ public class ServicioTramite : ITramiteRepositorio
         _tramiteRepositorio.AgregarRegistro(tramite); 
     }
 
-    public List<Tramite> ConsultaPorEtiqueta(EstadoTramite estado)
+    public List<Tramite>? ConsultaPorEtiqueta(EstadoTramite estado)
     {
         return _tramiteRepositorio.ConsultaPorEtiqueta(estado);
     }
@@ -22,6 +22,11 @@ public class ServicioTramite : ITramiteRepositorio
     public Tramite? ConsultaPorId(int idTramite)
     {
         return _tramiteRepositorio.ConsultaPorId(idTramite);
+    }
+
+    public List<Tramite>? ConsultarTodos()
+    {
+        return _tramiteRepositorio.ConsultarTodos();
     }
 
     public void ElimiarRegistro(int idTramie, int idUsuario)

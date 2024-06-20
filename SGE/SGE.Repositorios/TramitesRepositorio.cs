@@ -17,7 +17,11 @@ public class TramitesRepositorio : ITramiteRepositorio
     }
     public void AgregarRegistro(Tramite tramite)
     {
-        _context.Tramites.Add(tramite); 
+        try{
+        _context.Tramites.Add(tramite);
+        if(!_expedienteRepositorio.ExisteId(tramite.ExpedienteId)){
+            throw new ValidacionException($"No existe Expediente con Id{tramite.ExpedienteId}"); 
+        }
         _context.SaveChanges();
         Expediente? ex = _expedienteRepositorio.ConsultaPorId(tramite.ExpedienteId); 
         if (ex != null)
@@ -25,7 +29,10 @@ public class TramitesRepositorio : ITramiteRepositorio
            ex = _cambio.CambioEstado(ex, tramite);
            _expedienteRepositorio.ModificarExpediente(ex, tramite.IdUsuario);
         }
-       
+        }catch (Exception e)
+        {
+            Console.WriteLine(e.Message.ToString());
+        }
     }
 
     public List<Tramite> ConsultaPorEtiqueta(EstadoTramite estado)
@@ -38,6 +45,15 @@ public class TramitesRepositorio : ITramiteRepositorio
     public Tramite? ConsultaPorId(int idTramite)
     { 
         return _context.Tramites.Where(t => t.Id == idTramite).SingleOrDefault();
+    }
+
+    public List<Tramite>? ConsultarTodos()
+    {
+        List<Tramite>? tramites = new List<Tramite>();
+        if(_context.Tramites.Count()> 0)
+            tramites = _context.Tramites.OrderDescending().ToList();
+        else throw new RepositorioException("no Hay Tramites en la DB");
+        return tramites; 
     }
 
     public void ElimiarRegistro(int idTramite, int idUsuario)

@@ -8,6 +8,7 @@ public interface IExpedienteRepositorio
     public void ModificarExpediente(Expediente expediente, int idUsuario);
     public void BajaExpediente(int idExpediente);
     public Expediente? ConsultaPorId(int id);
+    public bool ExisteId(int Id);
     public List<Expediente>? ConsultarTodos();
     //public Expediente? ConsultarExpedienteYTramites(int idExpediente);
 }

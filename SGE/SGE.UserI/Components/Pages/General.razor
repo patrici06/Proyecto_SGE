@@ -1,0 +1,96 @@
+@using SGE.UserI.Components.Pages;
+@page "/general"
+@rendermode InteractiveServer
+@inject NavigationManager Navegador
+@inject SGE.Aplicacion.ServicioExpedientes ServiceExpediente
+@inject SGE.Aplicacion.ServicioTramite ServiceTramites
+@inject SGE.Aplicacion.ServicioUsuarios ServiceUsuarios
+
+<h3>AGREGAR TRAMITE</h3>
+<DialogoAlerta @ref="dialogo" Mensaje=@msj></DialogoAlerta>
+<AltaTramite @ref="altaTramite" ServicioT= "ServiceTramites" ServicioE= "ServiceExpediente" IdUsuario="1"></AltaTramite>
+<button class="btn btn-primary" @onclick ="AT">AltaTramite</button>
+
+<h3>CONSULTAR TODOS LOS TRAMITES</h3>
+<input type="idTramite" placeholder="id a buscar" @bind="numTramite" class="form-control">
+<button class="btn btn-primary" @onclick="MT"> MostrarTodoTramite</button>
+<TablaTramites @ref= "tablaTramites" tramites="tramites" STramite= "ServiceTramites" IdUsuario="1" permisoElim="true" permisoMod="true" ></TablaTramites>
+<h3>CONSULTAR TRAMITES POR EN BASE A UN EXPEDIENTE</h3>
+<h3>CONSULTAR TRAMITES POR  CONSULTAR POR ID DEL MISMO</h3>
+<h3>CONSULTART TRAMIRES POR ETIQUETA</h3>
+<TablaTramites @ref= "tablaTramitesEtiqueta" tramites="tramites" STramite= "ServiceTramites" IdUsuario="1" permisoElim="true" permisoMod="true" ></TablaTramites> 
+<select @bind="estadoTramite" class="from-control">
+            @foreach(var estado in estados)
+            {
+                <option value="@estado">@estado</option>
+            }
+        </select>
+        <button class="btn btn-primary" @onclick="TE">buscar</button>
+
+
+@code{
+    private DialogoAlerta dialogo = null!;
+    private string msj = "DESCONOCIDO";
+    //recursos para Alta
+    private TablaTramites tablaTramitesEtiqueta = null!;
+    private AltaTramite altaTramite = null!;
+    private TablaTramites tablaTramites = null!;
+    private EstadoTramite estadoTramite;
+    private int numTramite = -1;
+    private List<Tramite>? tramites = null;
+    private List<EstadoTramite> estados = new List<EstadoTramite> { EstadoTramite.Despacho,
+                                                                    EstadoTramite.EscritoPresentado, 
+                                                                    EstadoTramite.PaseAEstudio,
+                                                                    EstadoTramite.Resolucion,
+                                                                    EstadoTramite.Notificacion,
+                                                                    EstadoTramite.PaseAlArchivo
+                                                                   };
+    private static bool MBT_estado = true;
+    private void TE()
+    {
+        try
+        {
+             tramites = ServiceTramites.ConsultaPorEtiqueta(estadoTramite);
+            if((tramites!= null)&&(tramites.Count()== 0))
+                throw new ValidacionException("Vacio");
+             tablaTramitesEtiqueta.Mostrar();
+        }catch(Exception e)
+        {
+            msj = e.Message.ToString();
+            dialogo.Mostrar();
+        }
+    }
+    private void AT()
+    {
+        try
+        {
+            altaTramite.Mostrar();
+        }
+        catch(Exception e)
+        {
+            msj = e.Message.ToString();
+            dialogo.Mostrar();
+        }
+
+    }
+    private void MT()
+    {
+        try{
+        if(MBT_estado){
+            tramites = ServiceTramites.ConsultarTodos();
+            tablaTramites.Mostrar();
+            MBT_estado = !MBT_estado;
+        } 
+        else{
+            MBT_estado = !MBT_estado;
+            tablaTramites.Ocultar();
+             StateHasChanged();
+
+        }
+        } catch (Exception e)
+        {
+            msj = e.Message.ToString();
+            dialogo.Mostrar();
+        }
+    }
+}

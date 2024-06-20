@@ -1,29 +1,25 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 
-namespace Repositorios
-{
+namespace Repositorios;
+
     public class DataSqlite
     {
-        public static void Inicializar()
+
+     public static void Inicializar()
+    {
+        using var context = new DataContext();
+       if(context.Database.EnsureCreated()){
+        var connection = context.Database.GetDbConnection();
+        connection.Open();
+        using (var command = connection.CreateCommand())
         {
-            using var context = new DataContext();
-            if (context.Database.EnsureCreated())
-            {
-                context.Database.EnsureCreated();
-                var connection = context.Database.GetDbConnection();
-                connection.Open();
-                using (var command = connection.CreateCommand())
-                {
-                command.CommandText = "PRAGMA journal_mode=DELETE;";
-                command.ExecuteNonQuery();
-                }
-                Console.WriteLine("Se creó la base de datos");
-            }
-            else
-            {
-                Console.WriteLine("La base de datos ya existe");
-            }
+            command.CommandText = "PRAGMA journal_mode=DELETE;";
+            command.ExecuteNonQuery();
         }
+        Console.WriteLine("Se creo exitosamente La Base de Datos");
+       }
+       else 
+        Console.WriteLine("ya existe");
     }
-}
+    }

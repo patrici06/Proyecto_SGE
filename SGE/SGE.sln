@@ -7,9 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aplicacion", "Aplicacion\Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositorios", "Repositorios\Repositorios.csproj", "{DE3AB24B-43A0-4C57-A8EF-3ACF9DAC9E98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{11CA10F5-99BF-45F9-83E5-02E669A44DA7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserInterface", "UserInterface\UserInterface.csproj", "{4438B60F-F714-4819-BB00-93B88AD9F00B}"
 EndProject
-
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,5 +34,13 @@ Global
 		{11CA10F5-99BF-45F9-83E5-02E669A44DA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11CA10F5-99BF-45F9-83E5-02E669A44DA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11CA10F5-99BF-45F9-83E5-02E669A44DA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80010382-12A0-4742-A914-C0D687C2D83D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80010382-12A0-4742-A914-C0D687C2D83D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80010382-12A0-4742-A914-C0D687C2D83D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80010382-12A0-4742-A914-C0D687C2D83D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4438B60F-F714-4819-BB00-93B88AD9F00B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4438B60F-F714-4819-BB00-93B88AD9F00B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4438B60F-F714-4819-BB00-93B88AD9F00B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4438B60F-F714-4819-BB00-93B88AD9F00B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -15,12 +15,10 @@ namespace Repositorios;
         public DbSet<Tramite> Tramites { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            string relativePath = Path.Combine("Repositorios", "SGE.sqlite");
-            string absolutePath = Path.GetFullPath(relativePath);
-            optionsBuilder.UseSqlite($"Data Source={absolutePath}");
-        }
+         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+         {
+             optionsBuilder.UseSqlite($"Data Source=SGE.sqlite");
+         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,11 +36,11 @@ namespace Repositorios;
             modelBuilder.Entity<Expediente>(entity =>
             {
                 entity.HasKey(e => e.Id);
-                entity.Property(e => e.Caratula).IsRequired(false);
-                entity.Property(e => e.FechaCreacion).IsRequired(false);
-                entity.Property(e => e.FechaModificacion).IsRequired(false);
-                entity.Property(e => e.IdUsuarioModificacion).IsRequired(false);
-                entity.Property(e => e.Estado).IsRequired(false);
+                entity.Property(e => e.Caratula).IsRequired();
+                entity.Property(e => e.FechaCreacion).IsRequired();
+                entity.Property(e => e.FechaModificacion).IsRequired();
+                entity.Property(e => e.IdUsuarioModificacion).IsRequired();
+                entity.Property(e => e.Estado).IsRequired();
 
                 entity.HasMany<Tramite>()
                       .WithOne()

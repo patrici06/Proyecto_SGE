@@ -1,6 +1,6 @@
 namespace Aplicacion;
 
-public class ServicioUsuarios 
+public class ServicioUsuarios : IUsuariosRepositorios
 {
 
     private readonly IUsuariosRepositorios _repositorio;
@@ -10,18 +10,17 @@ public class ServicioUsuarios
         _repositorio = repositorio;
     }
 
-    public void RegistrarUsuario(string nombre, string apellido, string correo, string contrasena, List<Permiso> permisos)
+    public void Crear(Usuario usuario)
     {
-        var usuario = new Usuario(nombre, apellido, correo, contrasena, permisos);
-        _repositorio.Crear(usuario);
+      _repositorio.Crear(usuario);
     }
 
-    public Usuario? IniciarSesion(string correo, string contrasena)
+    public Usuario? Logear(string correo, string contrasena)
     {
         return _repositorio.Logear(correo, contrasena);
     }
 
-    public void AsignarPermisos(Usuario usuario, List<Permiso> permisos, int idUsuario)
+    public void OtorgarPermisos(Usuario usuario, List<Permiso> permisos)
     {
         _repositorio.OtorgarPermisos(usuario, permisos);
     }
@@ -31,19 +30,18 @@ public class ServicioUsuarios
         _repositorio.EliminarUsuario(id);
     }
 
-    public void ActualizarUsuario(Usuario usuario)
+    public void ModificarUsuario(Usuario usuario)
     {
         _repositorio.ModificarUsuario(usuario);
     }
 
-    public Usuario? BuscarPorId(int idUsuario)
+    public Usuario? ObtenerUsuarioPorId(int id)
     {
-        return _repositorio.ObtenerUsuarioPorId(idUsuario);
+        return _repositorio.ObtenerUsuarioPorId(id);
     }
 
-    public List<Usuario> ObtenerUsuarios()
+    public List<Usuario> ListarUsuarios()
     {
         return _repositorio.ListarUsuarios();
     }
-
 }

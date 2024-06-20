@@ -1,6 +1,6 @@
 using Aplicacion;
 
-public class ServicioAutorizacion 
+public class ServicioAutorizacion: IServicioAutorizacion 
 {
     private readonly ServicioUsuarios _servicioUsuarios;
     private readonly UsuarioValidador _usuarioValidador;
@@ -12,9 +12,10 @@ public class ServicioAutorizacion
     }
 
     //Recibe una lista de permisos y verifica que el usuario tenga esos mismos permisos
-    public bool TienePermiso(int usuarioId, Permiso permiso)
+    public bool TienePermiso(Usuario usuarioId, Permiso permiso)
     {
-        var usuario = _servicioUsuarios.BuscarPorId(usuarioId);
+        var usuario = _servicioUsuarios.ObtenerUsuarioPorId(usuarioId.Id);
         return _usuarioValidador.TienePermiso(usuario, permiso);
+    
     }
 }

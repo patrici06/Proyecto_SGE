@@ -48,7 +48,7 @@
     private void GuardarTramite()
     {
         try{
-         if (string.IsNullOrEmpty(_tramite.Contenido) || string.IsNullOrEmpty(_tramite.ExpedienteId.ToString()))
+         if (!string.IsNullOrEmpty(_tramite.Contenido) || !string.IsNullOrEmpty(_tramite.ExpedienteId.ToString()))
                 throw new ValidacionException("No se completaron correctamente los campos");
             // Verificar la existencia del Expediente
             if (!ServicioE.ExisteId(_tramite.ExpedienteId))

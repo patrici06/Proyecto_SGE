@@ -20,9 +20,9 @@ public class ServicioUsuarios : IUsuariosRepositorios
         return _repositorio.Logear(correo, contrasena);
     }
 
-    public void OtorgarPermisos(Usuario usuario, List<Permiso> permisos)
+    public void OtorgarPermisos(Usuario usuario, Permiso permiso)
     {
-        _repositorio.OtorgarPermisos(usuario, permisos);
+        _repositorio.OtorgarPermisos(usuario, permiso);
     }
 
     public void EliminarUsuario(int id)

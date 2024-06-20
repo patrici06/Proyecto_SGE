@@ -1,4 +1,53 @@
-@* @code {
+@code {
     [Parameter]
+    public ServicioTramite ServiTramite { get; set; } = null!;
+    [Parameter]
+    public Tramite tramite { get; set; } = new Tramite();
+    [Parameter]
+    public int IdUsuario{get; set;}
+    private bool visible { get; set; }
 
-} *@
+    public void Mostrar()
+    {
+        visible = true;
+        StateHasChanged();
+    }
+
+    private void Ocultar()
+    {
+        visible = false;
+        StateHasChanged();
+    }
+
+    private void GuardarTramite()
+    {
+        try
+        {
+            if (string.IsNullOrEmpty(tramite.Contenido))
+                throw new ValidacionException("No se completaron correctamente los campos");
+
+            tramite.FechaHoraUltimaModificacion = DateTime.Now;
+            ServiTramite.ModificarRegistro(tramite, IdUsuario);
+            Ocultar();
+        }
+        catch (Exception e)
+        {
+            // Manejar excepciones (mostrar mensajes de error, etc.)
+        }
+    }
+}
+
+@if (visible)
+{
+    <div>
+        <input type="text" placeholder="Contenido del tramite" @bind="tramite.Contenido" class="form-control" />
+        <select @bind="tramite.EstadoTramite" class="form-control">
+            @foreach (var estado in Enum.GetValues(typeof(EstadoTramite)))
+            {
+                <option value="@estado">@estado</option>
+            }
+        </select>
+        <button class="btn btn-primary" @onclick="GuardarTramite">Guardar</button>
+        <button class="btn btn-secondary" @onclick="Ocultar">Cancelar</button>
+    </div>
+}

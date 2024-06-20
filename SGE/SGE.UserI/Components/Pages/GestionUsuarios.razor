@@ -1,0 +1,210 @@
+@page "/gestion-usuarios"
+@rendermode InteractiveServer
+@inject SGE.Aplicacion.ServicioUsuarios UsuarioService
+@inject ServicioUsuarioEstado estado
+
+<h1>Gestión de Usuarios</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Correo</th>
+            <th>Permisos</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var usuario in usuarios)
+        {
+            <tr>
+                @if(usuario.permisos.Contains(Permiso.adminPermiso) == false)
+                {
+                    <td>@usuario.nombre</td>
+                    <td>@usuario.apellido</td>
+                    <td>@usuario.correo</td>
+                    <td>@foreach(var permiso in usuario.permisos)
+                        {
+                            @if(permiso != Permiso.adminPermiso)
+                            {
+                                <option value="@permiso">@permiso</option>
+                            }
+                        }
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" @onclick="() => EditarUsuario(usuario)">Editar</button>
+                        <button class="btn btn-danger" @onclick="() => EliminarUsuario(usuario)">Eliminar</button>
+                        <button class="btn btn-primary" @onclick="() => AgregarPermiso(usuario)">Agregar Permiso</button>
+                        <button class="btn btn-danger" @onclick="() => EliminarPermiso(usuario)">Eliminar Permiso</button>
+                    </td>
+                }
+            </tr>
+        }
+        <DialogoAlerta @ref="dialogo" Mensaje="@msj"></DialogoAlerta>
+    </tbody>
+</table>
+
+@if (mostrarEliminar) 
+{
+    <div>
+        <h5>Confirmación de Eliminación</h5>
+        <p>¿Estás seguro de que deseas eliminar este usuario?</p>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="NoMostrar">Cancelar</button>
+        <button type="button" class="btn btn-danger" @onclick="EliminarUsuarioConfirmado">Eliminar</button>
+    </div>
+}
+
+@if (mostrarPermiso) 
+{
+    <div>
+        <h5>Agregar un Permiso</h5>
+        <select @bind="nuevoPermiso" class="from-control">
+            @foreach(var permiso in permisos)
+            {
+               <option value="@permiso">@permiso</option>
+            }
+        </select>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="NoMostrar">Cancelar</button>
+        <button type="button" class="btn btn-danger" @onclick="OtorgarPermiso">Otorgar</button>
+    </div>
+}
+
+@if (mostrarPermiso2) 
+{
+    <div>
+        <h5>Eliminar un Permiso</h5>
+        <select @bind="nuevoPermiso" class="from-control">
+            @foreach(var permiso in usuarioAEditar.permisos)
+            {
+               <option value="@permiso">@permiso</option>
+            }
+        </select>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="NoMostrar">Cancelar</button>
+        <button type="button" class="btn btn-danger" @onclick="QuitarPermiso">Quitar</button>
+    </div>
+}
+
+@if (mostrarEditar)
+{
+    <div>
+        <h5>Editar Usuario</h5>
+
+        <form>
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" @bind="usuarioAEditar.nombre">
+            </div>
+
+            <div class="form-group">
+                <label for="apellido">Apellido:</label>
+                <input type="text" class="form-control" id="apellido" @bind="usuarioAEditar.apellido">
+            </div>
+
+            <div class="form-group">
+                <label for="correo">Correo:</label>
+                <input type="email" class="form-control" id="correo" @bind="usuarioAEditar.correo">
+            </div>
+        </form>
+
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="NoMostrar">Cancelar</button>
+        <button type="button" class="btn btn-primary" @onclick="GuardarCambiosUsuario">Guardar Cambios</button>
+    </div>
+}
+
+@code {
+    private DialogoAlerta dialogo = null!;
+    private string msj = "El usuario ya cuenta con ese permiso";
+    private List<Usuario> usuarios = new List<Usuario>();
+    private bool mostrarPermiso = false;
+    private bool mostrarPermiso2 = false;
+    private bool mostrarEliminar = false;
+    private Usuario usuarioAEliminar;
+    private bool mostrarEditar = false;
+    private Usuario usuarioAEditar;
+    private Permiso nuevoPermiso;
+    private List<Permiso> permisos = new List<Permiso> { 
+                Permiso.ExpedienteAlta, 
+                Permiso.ExpedienteBaja, 
+                Permiso.ExpedienteModificacion, 
+                Permiso.TramiteAlta, 
+                Permiso.TramiteBaja, 
+                Permiso.TramiteModificacion, 
+                Permiso.adminPermiso };
+
+    protected override void OnInitialized()
+    {
+        usuarios = UsuarioService.ListarUsuarios();
+    }
+
+    private void QuitarPermiso()
+    {
+        usuarioAEditar.permisos.Remove(nuevoPermiso);
+        UsuarioService.ModificarUsuario(usuarioAEditar);
+        NoMostrar();
+    }
+
+    private void EliminarPermiso(Usuario usuario)
+    {
+        usuarioAEditar = usuario;
+        mostrarPermiso2 = true;
+    }
+
+    private void OtorgarPermiso()
+    {
+        if(usuarioAEditar.permisos.Contains(nuevoPermiso) == false)
+        {
+            UsuarioService.OtorgarPermisos(usuarioAEditar, nuevoPermiso);
+            OnInitialized();
+        }
+        else
+        {
+            dialogo.Mostrar();
+        }
+        NoMostrar();
+    }
+
+    private void AgregarPermiso(Usuario usuario)
+    {
+        usuarioAEditar = usuario;
+        mostrarPermiso = true;
+    }
+
+    private void GuardarCambiosUsuario()
+    {
+        UsuarioService.ModificarUsuario(usuarioAEditar);
+        OnInitialized();
+        NoMostrar();
+    }
+
+    private void EditarUsuario(Usuario usuario)
+    {
+        usuarioAEditar = usuario;
+        mostrarEditar = true;
+    }
+
+    private void EliminarUsuario(Usuario usuario)
+    {
+        usuarioAEliminar = usuario;
+        mostrarEliminar = true;
+    }
+
+    private void EliminarUsuarioConfirmado()
+    {
+        UsuarioService.EliminarUsuario(usuarioAEliminar.Id);
+        usuarios.Remove(usuarioAEliminar);
+        if(usuarioAEliminar.Id == estado.Usuario.Id)
+        {
+            estado.SetUsuario(new Usuario());
+        }
+        NoMostrar();
+    }
+
+    private void NoMostrar()
+    {
+        mostrarEliminar = false;
+        mostrarEditar = false;
+        mostrarPermiso = false;
+        mostrarPermiso2 = false;
+    }
+}

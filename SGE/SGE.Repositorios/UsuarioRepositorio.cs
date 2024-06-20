@@ -35,12 +35,12 @@ public class UsuarioRepositorio : IUsuariosRepositorios
             throw new RepositorioException("Error de Usuario: No hay un Usuario con ese ID");
     }
 
-    public void OtorgarPermisos(Usuario usuario, List<Permiso> Permisos)
+    public void OtorgarPermisos(Usuario usuario, Permiso permiso)
     {
         var user = _context.Usuarios.Find(usuario.Id);
         if (user != null)
         {
-            user.permisos = Permisos;
+            user.permisos.Add(permiso);
             _context.Update(user);
             _context.SaveChanges();
         }

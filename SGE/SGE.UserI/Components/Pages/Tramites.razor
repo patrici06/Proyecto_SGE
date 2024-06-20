@@ -1,0 +1,158 @@
+@using SGE.UserI.Components.Pages
+@page "/tramites"
+@rendermode InteractiveServer
+@inject NavigationManager Navegador
+@inject SGE.Aplicacion.ServicioExpedientes ServiceExpediente
+@inject SGE.Aplicacion.ServicioTramite ServiceTramites
+@inject SGE.Aplicacion.ServicioUsuarios ServiceUsuarios
+@inject UsuarioValidador validador
+@inject ServicioUsuarioEstado loggeado
+
+@if(loggeado.Usuario != null) 
+{
+    <p>AGREGAR TRAMITE</p>
+    <DialogoAlerta @ref="dialogo" Mensaje="@msj"></DialogoAlerta>
+    <AltaTramite @ref="altaTramite" ServicioT= "ServiceTramites" ServicioE= "ServiceExpediente" IdUsuario="usuario.Id"></AltaTramite>
+    <button class="btn btn-primary" @onclick ="AT">AltaTramite</button>
+
+    <p>CONSULTAR TODOS LOS TRAMITES</p>
+    <button class="btn btn-primary" @onclick="MT"> MostrarTodoTramite</button>
+    <TablaTramites @ref= "tablaTramites" tramites="tramites" STramite= "ServiceTramites" Id="usuario.Id" permisoElim="EvaluarUsuario(Permiso.TramiteBaja)" permisoMod="EvaluarUsuario(Permiso.TramiteModificacion)" ></TablaTramites>
+    
+    <p>CONSULTAR TRAMITES POR EN BASE A UN EXPEDIENTE</p>
+    <input type="idExpediente" placeholder="id Expediente de tramites a Buscar" @bind="idExpediente" class="form-control">
+    <button class="btn btn-primary" @onclick="TEI">buscar</button>
+    <TablaTramites @ref= "tablaTramitesExpediente" tramites="tramites" STramite= "ServiceTramites" Id="usuario.Id" permisoElim="EvaluarUsuario(Permiso.TramiteBaja)" permisoMod="EvaluarUsuario(Permiso.TramiteModificacion)" ></TablaTramites>
+    
+    <p>CONSULTAR TRAMITES POR  CONSULTAR POR ID DEL MISMO</p>
+    <input type="idTramite" placeholder="id a buscar" @bind="numTramite" class="form-control">
+    <button class="btn btn-primary" @onclick="MTID"> MostrarTodoTramite</button>
+    <TablaTramites @ref= "tablaTramitesPorID" tramites="tramites" STramite= "ServiceTramites" Id="usuario.Id" permisoElim="EvaluarUsuario(Permiso.TramiteBaja)" permisoMod="EvaluarUsuario(Permiso.TramiteModificacion)" ></TablaTramites>
+    
+    <p>CONSULTART TRAMIRES POR ETIQUETA</p>
+    <TablaTramites @ref= "tablaTramitesEtiqueta" tramites="tramites" STramite= "ServiceTramites" Id="usuario.Id" permisoElim="EvaluarUsuario(Permiso.TramiteBaja)" permisoMod="EvaluarUsuario(Permiso.TramiteModificacion)" ></TablaTramites> 
+    <select @bind="estadoTramite" class="from-control">
+                @foreach(var estado in estados)
+                {
+                    <option value="@estado">@estado</option>
+                }
+            </select>
+            <button class="btn btn-primary" @onclick="TE">buscar</button>
+}
+else
+{
+    <p>No hay un usuario logeado.</p>
+}
+
+
+@code{
+    private Usuario usuario = new Usuario("NAU", "NAU", "NAU","NAU", new List<Permiso>());
+    protected override void OnInitialized()
+    {
+        if(loggeado.Usuario != null){
+            usuario = loggeado.Usuario;
+        }
+        <!--HARDCODE-->
+        ServiceExpediente.AltaExpediente(new Expediente("una Caratula", EstadoExpediente.RecienIniciado, null,usuario.Id));
+    }
+    private int idExpediente = -1;
+    private TablaTramites tablaTramitesEtiqueta = null!;
+    private TablaTramites tablaTramitesExpediente = null!;
+    private TablaTramites tablaTramites = null!;
+    private TablaTramites tablaTramitesPorID = null!;
+    private AltaTramite altaTramite = null!;
+    private DialogoAlerta dialogo = null!;
+    private string msj = "DESCONOCIDO";
+    //recursos para Alta
+    private EstadoTramite estadoTramite;
+    private int numTramite = -1;
+    private List<Tramite>? tramites = new List<Tramite>();
+    private List<EstadoTramite> estados = new List<EstadoTramite> { EstadoTramite.Despacho,
+                                                                    EstadoTramite.EscritoPresentado, 
+                                                                    EstadoTramite.PaseAEstudio,
+                                                                    EstadoTramite.Resolucion,
+                                                                    EstadoTramite.Notificacion,
+                                                                    EstadoTramite.PaseAlArchivo
+                                                                   };
+    private void MTID(){
+        try
+        { 
+            Tramite? act = ServiceTramites.ConsultaPorId(numTramite);
+            if(tramites == null)
+                tramites = new List<Tramite>();  
+            if(act == null)
+                throw new RepositorioException("No se encontro");
+            else{
+            tramites.Add(act);
+            tablaTramitesPorID.Mostrar();
+            }
+        }
+        catch(Exception e)
+        {
+            msj = e.Message.ToString(); 
+            dialogo.Mostrar();
+        }
+    }   
+    private void TEI(){
+        try{
+          Expediente? e = ServiceExpediente.ConsultaPorId(idExpediente); 
+          if((e == null )||(e.Tramites == null)){
+                throw new RepositorioException("No existe Tramite Especificado");
+          }
+          tramites = e.Tramites; 
+          tablaTramitesExpediente.Mostrar(); 
+        }
+        catch(Exception e)
+        {
+            msj = e.Message.ToString(); 
+            dialogo.Mostrar();
+        }
+    }
+    private void TE()
+    {
+        try
+        {
+             tramites = ServiceTramites.ConsultaPorEtiqueta(estadoTramite);
+            if((tramites!= null)&&(tramites.Count()== 0))
+                throw new ValidacionException("No se encuentran coincidencias");
+             tablaTramitesEtiqueta.Mostrar();
+        }catch(Exception e)
+        {
+            msj = e.Message.ToString();
+            dialogo.Mostrar();
+        }
+    }
+    private void AT()
+    {
+        try
+        {
+            if(EvaluarUsuario(Permiso.ExpedienteAlta))
+                altaTramite.Mostrar();
+            else    
+                throw new ValidacionException("No posee Permisos requeridos");
+        }
+        catch(Exception e)
+        {
+            msj = e.Message.ToString();
+            dialogo.Mostrar();
+        }
+
+    }
+    private void MT()
+    {
+        try{
+            tramites = ServiceTramites.ConsultarTodos();
+            tablaTramites.Mostrar();
+             StateHasChanged();
+        } 
+        catch (Exception e)
+        {
+            msj = e.Message.ToString();
+            dialogo.Mostrar();
+        }
+    }
+
+    private bool EvaluarUsuario(Permiso permiso){
+            return   validador.TienePermiso(usuario, permiso);
+    } 
+}

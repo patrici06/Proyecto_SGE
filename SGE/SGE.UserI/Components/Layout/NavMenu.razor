@@ -1,4 +1,7 @@
-﻿<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
+﻿@using SGE.Aplicacion
+@inject ServicioUsuarioEstado logeado
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css">
 <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">Proyecto SGE</a>
@@ -22,7 +25,7 @@
         </div>
 
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="">
+            <NavLink class="nav-link" href="tramites">
                 <span class="bi bi-file-earmark-text-fill" aria-hidden="true"></span> Tramites
             </NavLink>
         </div>
@@ -32,5 +35,14 @@
                 <span class="bi bi-person-fill" aria-hidden="true"></span> Usuario
             </NavLink>
         </div>
+
+        @if (logeado.Usuario?.permisos.Contains(Permiso.adminPermiso) == true)
+        {
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="gestion-usuarios">
+                    <span class="bi bi-people-fill" aria-hidden="true"></span> Gestión de Usuarios
+                </NavLink>
+            </div>
+        }
     </nav>
 </div>

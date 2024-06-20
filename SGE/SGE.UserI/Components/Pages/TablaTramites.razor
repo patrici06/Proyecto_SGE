@@ -1,3 +1,6 @@
+@page "/tabla-tramites"
+@using SGE.Aplicacion
+
 @code {
     [Parameter]
     public List<Tramite> tramites { get; set; } = new List<Tramite>();
@@ -6,7 +9,7 @@
     public ServicioTramite STramite { get; set; } = null!;
 
     [Parameter]
-    public int IdUsuario { get; set; }
+    public int Id { get; set; }
 
     [Parameter]
     public bool permisoElim { get; set; }
@@ -15,6 +18,8 @@
     public bool permisoMod { get; set; }
 
     private bool visible { get; set; }
+    private Tramite tramiteModificado { get; set; } = new Tramite();
+    private FormularioTramite formularioTramite = null!;
 
     public void Mostrar()
     {
@@ -31,22 +36,16 @@
     private void EliminarTramite(Tramite tramite)
     {
         tramites.Remove(tramite);
-        STramite.ElimiarRegistro(tramite.Id, IdUsuario);
+        STramite.ElimiarRegistro(tramite.Id, Id);
         StateHasChanged();
         Ocultar();
         Mostrar();
-         // Oculta el componente después de eliminar el trámite
     }
 
     private void ModificarTramite(Tramite tramite)
     {
-
-        // Lógica para mostrar un formulario de modificación
-        // Ejemplo: Utilizando un componente FormularioTramite
-        // Asumiendo que FormularioTramite es otro componente Razor
-
-        // Puedes crear un método para abrir un modal o mostrar otro componente
-        // para editar el trámite seleccionado.
+        tramiteModificado = tramite;
+        formularioTramite.Mostrar();
     }
 }
 
@@ -84,6 +83,7 @@
                             @if (permisoMod)
                             {
                                 <button class="btn btn-primary btn-sm" @onclick="() => ModificarTramite(tramite)">Modificar</button>
+                                <FormularioTramite @ref="formularioTramite" ServiTramite="STramite" tramite="tramiteModificado"></FormularioTramite>
                             }
                         </td>
                     </tr>

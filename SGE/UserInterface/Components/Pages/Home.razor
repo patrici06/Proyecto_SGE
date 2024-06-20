@@ -1,9 +1,14 @@
 ﻿@page "/"
+@rendermode InteractiveServer
+@inject Aplicacion.ServiciosUsuarios. Uservice
 
+<div>
+<div><H1>Inicio de Sesión</H1></div>    
+    <span>
+        <b>Email del Usuario</b>
+         <input placeholder="Email.com" @bind="usuario.Nombre" class=""> 
+        <b>Contraseña</b>
+         <input placeholder="Contraseña" @bind="usuario.Contrasenia" class="usuario.Contrasenia"> 
+    </span>
 
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
-
-
-}
+</div> 

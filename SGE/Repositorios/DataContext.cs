@@ -54,7 +54,7 @@ namespace Repositorios;
                 entity.Property(u => u.apellido).IsRequired();
                 entity.Property(u => u.correo).IsRequired();
                 entity.Property(u => u.contrasena).IsRequired();
-                entity.Property(u => u.permisos).IsRequired();
+                entity.Property(u => u.permisos).IsRequired(false);
             });
         }
     }

@@ -8,22 +8,20 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-//Agregamos el contexto de Base de Datos;
+//Agregamos el contexto de Base de Datos y la creamos de no existir
 DataContext dataContext = new DataContext();
 DataSqlite.Inicializar();
-//builder.Services.AddDbContext<DataContext>(options =>
-  //  options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
-//Agregarmos Servicios de Aplicacion
-builder.Services.AddScoped<IUsuariosRepositorios, UsuarioRepositorio>( _context => new UsuarioRepositorio(dataContext));
+
+builder.Services.AddScoped<IUsuariosRepositorios, UsuarioRepositorio>( UR => new UsuarioRepositorio(dataContext));
 builder.Services.AddTransient<ServicioUsuarios>();
 
 builder.Services.AddScoped<ServicioAutorizacion>();
 builder.Services.AddScoped<UsuarioValidador>();
 
-builder.Services.AddScoped<IExpedienteRepositorio, ExpedienteRepositorio>(_context => new ExpedienteRepositorio(dataContext));
+builder.Services.AddScoped<IExpedienteRepositorio, ExpedienteRepositorio>( ER => new ExpedienteRepositorio(dataContext));
 builder.Services.AddTransient<ServicioExpedientes>();
 
-builder.Services.AddScoped<ITramiteRepositorio, TramitesRepositorio>(_context => new TramitesRepositorio(dataContext,   
+builder.Services.AddScoped<ITramiteRepositorio, TramitesRepositorio>( TR => new TramitesRepositorio(dataContext,   
                                                                                     new ExpedienteRepositorio(dataContext)
                                                                                     ,new EspecificacionCambioEstado()));
 builder.Services.AddTransient<ServicioTramite>();

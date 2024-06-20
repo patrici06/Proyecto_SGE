@@ -1,23 +1,23 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SGE.UserI.bundle.scp.css",
+      "Id": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\que\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SGE.UserI.bundle.scp.css",
       "PackagePath": "staticwebassets\\SGE.UserI.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\app.css",
+      "Id": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\que\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\app.css",
       "PackagePath": "staticwebassets\\app.css"
     },
     {
-      "Id": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Id": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\que\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\que\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Users\\patricio rivero\\Desktop\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\favicon.png",
+      "Id": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\que\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {

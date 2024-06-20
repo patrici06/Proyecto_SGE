@@ -1,0 +1,91 @@
+@page "/usuario"
+@rendermode InteractiveServer
+@inject ServicioUsuarioEstado logeado
+@inject SGE.Aplicacion.ServicioUsuarios UsuarioService
+
+<h1>Información del Usuario</h1>
+
+@if (logeado.Usuario != null)
+{
+    <div>
+        <p><strong>Nombre:</strong> @logeado.Usuario.nombre</p>
+        <p><strong>Apellido:</strong> @logeado.Usuario.apellido</p>
+        <p><strong>Correo:</strong> @logeado.Usuario.correo</p>
+        <button @onclick="MostrarFormularioEdicion" class="btn btn-primary">Modificar Datos</button>
+    </div>
+    @if (mostrarFormulario)
+    {
+        <EditForm Model="usuarioEditable" OnValidSubmit="GuardarCambios">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group">
+                <label for="nuevoNombre">Nuevo Nombre</label>
+                <InputText id="nuevoNombre" class="form-control" @bind-Value="usuarioEditable.nombre" />
+            </div>
+            <div class="form-group">
+                <label for="nuevoApellido">Nuevo Apellido</label>
+                <InputText id="nuevoApellido" class="form-control" @bind-Value="usuarioEditable.apellido" />
+            </div>
+            <div class="form-group">
+                <label for="nuevoCorreo">Nuevo Correo</label>
+                <InputText id="nuevoCorreo" class="form-control" @bind-Value="usuarioEditable.correo" />
+            </div>
+            <div class="form-group">
+                <label for="nuevaContrasena">Nueva Contraseña</label>
+                <InputText id="nuevaContrasena" type="password" class="form-control" @bind-Value="usuarioEditable.contrasena" />
+            </div>
+            <div class="form-group">
+                <label for="contrasenaActual">Contraseña Actual</label>
+                <InputText id="contrasenaActual" type="password" class="form-control" @bind-Value="contrasenaActual" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            <DialogoAlerta @ref="dialogo" Mensaje="@msj"></DialogoAlerta>
+        </EditForm>
+    }
+}
+else
+{
+    <p>No hay un usuario logeado.</p>
+}
+
+@code {
+    private DialogoAlerta dialogo = null!;
+    private string msj = "La contraseña actual no es correcta";
+    private Usuario usuarioEditable = new Usuario(); 
+    private string contrasenaActual = "";
+    private bool mostrarFormulario = false;
+
+    private void MostrarFormularioEdicion()
+    {
+        if (logeado.Usuario != null)
+        {
+            mostrarFormulario = true;
+        }
+    }
+
+    private void GuardarCambios() 
+    {
+        if (logeado.Usuario != null && logeado.Usuario.contrasena == SGE.Aplicacion.ServicioHash.generarHashContrasena(contrasenaActual))
+        {
+            logeado.Usuario.nombre = usuarioEditable.nombre;
+            logeado.Usuario.apellido = usuarioEditable.apellido;
+            logeado.Usuario.correo = usuarioEditable.correo;
+            logeado.Usuario.contrasena = SGE.Aplicacion.ServicioHash.generarHashContrasena(usuarioEditable.contrasena);
+
+            // Actualizar el usuario en el servicio de usuarios
+            UsuarioService.ModificarUsuario(logeado.Usuario);
+
+            // Ocultar el formulario de edición
+            mostrarFormulario = false;
+        }
+        else
+        {
+            // Manejar el error: la contraseña actual no coincide
+            Console.WriteLine("La contraseña actual no es correcta.");
+            
+            dialogo.Mostrar();
+        }
+    }
+}

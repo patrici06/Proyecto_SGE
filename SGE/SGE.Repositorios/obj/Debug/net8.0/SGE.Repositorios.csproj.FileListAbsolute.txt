@@ -46,3 +46,19 @@ C:\Users\patricio rivero\Desktop\FINALMENTE\Proyecto_SGE\SGE\SGE.Repositorios\ob
 C:\Users\patricio rivero\Desktop\FINALMENTE\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\refint\SGE.Repositorios.dll
 C:\Users\patricio rivero\Desktop\FINALMENTE\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.pdb
 C:\Users\patricio rivero\Desktop\FINALMENTE\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\ref\SGE.Repositorios.dll
+C:\Users\jg481\OneDrive\Escritorio\.NET\basededatosylacon\Proyecto_SGE\SGE\SGE.Repositorios\bin\Debug\net8.0\SGE.Repositorios.deps.json
+C:\Users\jg481\OneDrive\Escritorio\.NET\basededatosylacon\Proyecto_SGE\SGE\SGE.Repositorios\bin\Debug\net8.0\SGE.Repositorios.dll
+C:\Users\jg481\OneDrive\Escritorio\.NET\basededatosylacon\Proyecto_SGE\SGE\SGE.Repositorios\bin\Debug\net8.0\SGE.Repositorios.pdb
+C:\Users\jg481\OneDrive\Escritorio\.NET\basededatosylacon\Proyecto_SGE\SGE\SGE.Repositorios\bin\Debug\net8.0\SGE.Aplicacion.dll
+C:\Users\jg481\OneDrive\Escritorio\.NET\basededatosylacon\Proyecto_SGE\SGE\SGE.Repositorios\bin\Debug\net8.0\SGE.Aplicacion.pdb
+C:\Users\jg481\OneDrive\Escritorio\.NET\basededatosylacon\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.csproj.AssemblyReference.cache
+C:\Users\jg481\OneDrive\Escritorio\.NET\basededatosylacon\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jg481\OneDrive\Escritorio\.NET\basededatosylacon\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.AssemblyInfoInputs.cache
+C:\Users\jg481\OneDrive\Escritorio\.NET\basededatosylacon\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.AssemblyInfo.cs
+C:\Users\jg481\OneDrive\Escritorio\.NET\basededatosylacon\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.csproj.CoreCompileInputs.cache
+C:\Users\jg481\OneDrive\Escritorio\.NET\basededatosylacon\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.sourcelink.json
+C:\Users\jg481\OneDrive\Escritorio\.NET\basededatosylacon\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repo.5B6658F4.Up2Date
+C:\Users\jg481\OneDrive\Escritorio\.NET\basededatosylacon\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.dll
+C:\Users\jg481\OneDrive\Escritorio\.NET\basededatosylacon\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\refint\SGE.Repositorios.dll
+C:\Users\jg481\OneDrive\Escritorio\.NET\basededatosylacon\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.pdb
+C:\Users\jg481\OneDrive\Escritorio\.NET\basededatosylacon\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\ref\SGE.Repositorios.dll

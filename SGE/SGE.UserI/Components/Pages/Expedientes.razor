@@ -126,6 +126,7 @@ else
                             <td>@ex.IdUsuarioModificacion</td>
                             <td>@ex.Estado</td>
                             <td>
+                                <button class="btn btn-primary btn-sm" @onclick="() => MostrarTramites(ex)">Mostrar Tramites</button>
                                 @if(EvaluarUsuario(Permiso.ExpedienteBaja))
                                 {
                                     <button class="btn btn-danger btn-sm" @onclick="() => Baja(ex.Id)">Eliminar</button>
@@ -135,6 +136,36 @@ else
                                     <button class="btn btn-primary btn-sm" @onclick="() => ModificarExpedienteID(ex)">Modificar</button>
                                 }
                             </td>
+                        </tr>
+                    }
+                </tbody>
+    </table>
+}
+@if(MostrarTramitesDeEx)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Expediente ID</th>
+                <th>Contenido</th>
+                <th>Fecha de Creación</th>
+                <th>Fecha de Última Modificación</th>
+                <th>Usuario que Modificó</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+                <tbody>
+                    @foreach (var t in tramites)
+                    {
+                        <tr>
+                            <td>@t.Id</td>
+                            <td>@t.ExpedienteId</td>
+                            <td>@t.Contenido</td>
+                            <td>@t.FechaHoraCreacion</td>
+                            <td>@t.FechaHoraUltimaModificacion</td>
+                            <td>@t.IdUsuario</td>
+                            <td>@t.EstadoTramite</td>
                         </tr>
                     }
                 </tbody>
@@ -156,6 +187,28 @@ else
     private int idExpediente;
     private string caratula;
     private List<Expediente>? expedientes;
+    private List<Tramite>? tramites;
+    private bool MostrarTramitesDeEx = false;
+    
+    private void MostrarTramites(Expediente ex)
+    {
+        Mostrar = false;
+        try
+        {
+            tramites = ex.Tramites;
+            if(tramites == null)
+                throw new Exception("El expediente no tiene ningun Tramite");
+            else
+            {
+                MostrarTramitesDeEx = true;
+            }
+        }
+        catch(Exception e)
+        {
+            msj = e.Message;
+            dialogo.Mostrar();
+        }
+    }
 
     private void ModificarExpedienteID(Expediente ex)
     {
@@ -294,6 +347,7 @@ else
         AltaVisible = false;
         ModificacionVisible = false;
         BajaVisible = false;
+        MostrarTramitesDeEx = false;
     }
 
     private void SetFalso(bool estado)

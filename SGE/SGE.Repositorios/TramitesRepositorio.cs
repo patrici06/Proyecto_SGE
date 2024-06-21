@@ -25,6 +25,9 @@ public class TramitesRepositorio : ITramiteRepositorio
             throw new ValidacionException($"No existe Expediente con Id {tramite.ExpedienteId}");
         }
 
+        _context.Tramites.Add(tramite);
+        _context.SaveChanges();
+        
         Expediente ex = _expedienteRepositorio.ConsultaPorId(tramite.ExpedienteId);
         if (ex != null)
         {
@@ -37,9 +40,6 @@ public class TramitesRepositorio : ITramiteRepositorio
 
             _expedienteRepositorio.ModificarExpediente(ex, tramite.IdUsuario);
         }
-
-        _context.Tramites.Add(tramite);
-        _context.SaveChanges();
     }
     catch (DbUpdateException ex)
     {
@@ -93,8 +93,8 @@ public class TramitesRepositorio : ITramiteRepositorio
         }
         else
         {
-             int lastIndex = expedienteAsociado.Tramites.Count - 1;
-             if (expedienteAsociado.Tramites[lastIndex].Id == idTramite)
+            int lastIndex = expedienteAsociado.Tramites.Count - 1;
+            if (expedienteAsociado.Tramites[lastIndex].Id == idTramite)
             {
                 if (lastIndex >= 1)
                 {

@@ -6,181 +6,430 @@
 @inject SGE.Aplicacion.ServicioTramite ServiceTramites
 @inject SGE.Aplicacion.ServicioUsuarios ServiceUsuarios
 @inject UsuarioValidador validador
-@inject ServicioUsuarioEstado loggeado
+@inject ServicioUsuarioEstado logeado
 
-@if(loggeado.Usuario != null) 
+<PageTitle>Tramites</PageTitle>
+<h1>Tramites</h1>
+
+@if (logeado.Usuario != null)
 {
-    <p>Agregar Tramite</p>
-    <DialogoAlerta @ref="dialogo" Mensaje="@msj"></DialogoAlerta>
-    <button class="btn btn-primary" @onclick ="AT">AltaTramite</button>
-
-    <p>Listar todo Tramite</p>
-    <button class="btn btn-primary" @onclick="MT">Mostrar Todo Tramite</button>
-    
-    <p>Listar Tramites por Id Expediente</p>
-    <input type="text" placeholder="id Expediente de tramites a Buscar" @bind="idExpediente" class="form-control">
-    <button class="btn btn-primary" @onclick="TEI">Buscar</button>
-    
-    <p>Consultar Tramite por id </p>
-    <input type="text" placeholder="id a buscar" @bind="numTramite" class="form-control">
-    <button class="btn btn-primary" @onclick="MTID">Mostrar Tramite por ID</button>
-    
-    <p>Listar Tramites mediante etiqueta</p>
-    <select @bind="estadoTramite" class="form-control">
-        @foreach(var estado in estados)
-        {
-            <option value="@estado">@estado</option>
-        }
-    </select>
-    <button class="btn btn-primary" @onclick="TE">Buscar</button>
-    <div>
-        <p>------------------------------------------------------------------</p>
-        <h6>Interfaz:</h6>
-    </div>
-    <TablaTramites @ref="tablaTramitesEtiqueta" tramites="tramitesEtiqueta" STramite="ServiceTramites" Id="usuario.Id" permisoElim="EvaluarUsuario(Permiso.TramiteBaja)" permisoMod="EvaluarUsuario(Permiso.TramiteModificacion)"></TablaTramites>
-    <TablaTramites @ref="tablaTramitesPorID" tramites="tramitesPorID" STramite="ServiceTramites" Id="usuario.Id" permisoElim="EvaluarUsuario(Permiso.TramiteBaja)" permisoMod="EvaluarUsuario(Permiso.TramiteModificacion)"></TablaTramites>
-    <TablaTramites @ref="tablaTramitesExpediente" tramites="tramitesExpediente" STramite="ServiceTramites" Id="usuario.Id" permisoElim="EvaluarUsuario(Permiso.TramiteBaja)" permisoMod="EvaluarUsuario(Permiso.TramiteModificacion)"></TablaTramites>
-    <TablaTramites @ref="tablaTramites" tramites="tramites" STramite="ServiceTramites" Id="usuario.Id" permisoElim="EvaluarUsuario(Permiso.TramiteBaja)" permisoMod="EvaluarUsuario(Permiso.TramiteModificacion)"></TablaTramites>
-    <AltaTramite @ref="altaTramite" ServicioT= "ServiceTramites" ServicioE= "ServiceExpediente" IdUsuario="usuario.Id"></AltaTramite>
+    <h4>Agregar Tramite</h4>
+    <button class="btn btn-primary" @onclick ="AltaTramite">Alta</button>
+    <br>
+    <h4>Modificar Tramite</h4>
+    <button class="btn btn-primary" @onclick ="ModificarTramite">Modificar</button>
+    <br>
+    <h4>Dar de Baja un Tramite</h4>
+    <button class="btn btn-primary" @onclick ="BajaTramite">Baja</button>
+    <br>
+    <h4>Mostrar todos los Tramites</h4>
+    <button class="btn btn-primary" @onclick ="MostrarTramites">Mostrar</button>
+    <br>
+    <h4>Mostrar todos los Tramites por Etiqueta</h4>
+    <button class="btn btn-primary" @onclick ="MostrarTramitesPorE">Mostrar</button>
+    <br>
+    <h5>Limpiar Pantalla</h5>
+    <button class="btn btn-primary" @onclick ="reset">Clear</button>
 }
 else
 {
     <p>No hay un usuario logeado.</p>
 }
+@if(AltaVisible)
+{
+    <div>
+        <h6>Dar de alta un Tramite</h6>
+        <form>
+            <div class="form-group">
+                <label for="contenido">Contenido</label>
+                <input type="text" class="form-control" id="contenido" @bind="contenido">
+            </div>
+            <div class="form-group">
+                <label for="idExpediente">ID de Expediente</label>
+                <input type="text" class="form-control" id="idExpediente" @bind="idExpediente">
+            </div>
+            <select @bind="nuevoEstado" class="form-control">
+                @foreach (var estado in Enum.GetValues(typeof(EstadoTramite)))
+                {
+                    <option value="@estado">@estado</option>
+                }
+            </select>
+        </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="NoMostrar">Cancelar</button>
+        <button type="button" class="btn btn-primary" @onclick="Buscar">Alta</button>
+    </div>
+}
+@if(MostrarPorE){
+ 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Expediente ID</th>
+                <th>Contenido</th>
+                <th>Fecha de Creación</th>
+                <th>Fecha de Última Modificación</th>
+                <th>Usuario que Modificó</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+                <tbody>
+                    @foreach (var t in tramitesEtiqueta)
+                    {
+                        @if(t.EstadoTramite == consultaTramite)
+                        {
+                            <tr>
+                                <td>@t.Id</td>
+                                <td>@t.ExpedienteId</td>
+                                <td>@t.Contenido</td>
+                                <td>@t.FechaHoraCreacion</td>
+                                <td>@t.FechaHoraUltimaModificacion</td>
+                                <td>@t.IdUsuario</td>
+                                <td>@t.EstadoTramite</td>
+                                <td>
+                                    @if(validador.TienePermiso(logeado.Usuario, Permiso.TramiteBaja))
+                                    {
+                                        <button class="btn btn-danger btn-sm" @onclick="() => BuscarBaja(t.Id)">Eliminar</button>
+                                    }
+                                    @if (validador.TienePermiso(logeado.Usuario, Permiso.TramiteModificacion))
+                                    {
+                                        <button class="btn btn-primary btn-sm" @onclick="() => ModificarTramiteId(t)">Modificar</button>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+    </table>   
+}
+@if(Mostrar)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Expediente ID</th>
+                <th>Contenido</th>
+                <th>Fecha de Creación</th>
+                <th>Fecha de Última Modificación</th>
+                <th>Usuario que Modificó</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+                <tbody>
+                    @foreach (var t in tramites)
+                    {
+                        <tr>
+                            <td>@t.Id</td>
+                            <td>@t.ExpedienteId</td>
+                            <td>@t.Contenido</td>
+                            <td>@t.FechaHoraCreacion</td>
+                            <td>@t.FechaHoraUltimaModificacion</td>
+                            <td>@t.IdUsuario</td>
+                            <td>@t.EstadoTramite</td>
+                            <td>
+                                @if(validador.TienePermiso(logeado.Usuario, Permiso.TramiteBaja))
+                                {
+                                    <button class="btn btn-danger btn-sm" @onclick="() => BuscarBaja(t.Id)">Eliminar</button>
+                                }
+                                @if (validador.TienePermiso(logeado.Usuario, Permiso.TramiteModificacion))
+                                {
+                                    <button class="btn btn-primary btn-sm" @onclick="() => ModificarTramiteId(t)">Modificar</button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+    </table>
+}
+@if(BajaVisible)
+{
+    <div>
+        <h6>Dar de Baja un Tramite</h6>
+        <form>
+        <div class="form-group">
+            <label for="idTramite">ID del Tramite a Eliminar</label>
+            <input type="text" class="form-control" id="idTramite" @bind="idTramite">
+        </div>
+        </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="NoMostrar">Cancelar</button>
+        <button type="button" class="btn btn-primary" @onclick="() => BuscarBaja(idTramite)">Buscar</button>
+    </div>
+}
+@if(ModificacionVisible)
+{
+    <div>
+        <h6>Modificar un Tramite</h6>
+        <form>
+        <div class="form-group">
+            <label for="idTramite">ID del Tramite a Modificar</label>
+            <input type="text" class="form-control" id="idTramite" @bind="idTramite">
+        </div>
+        </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="NoMostrar">Cancelar</button>
+        <button type="button" class="btn btn-primary" @onclick="() => BuscarMod(idTramite)">Buscar</button>
+    </div>
+}
+@if(ModIdOk)
+{
+    <div>
+        <h6>Modificar un Tramite</h6>
+        <form>
+        <div class="form-group">
+            <label for="contenido">Nuevo Contenido para el Tramite</label>
+            <input type="text" class="form-control" id="contenido" @bind="contenido">
+        </div>
+        </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => SetFalso(ModIdOk)">Cancelar</button>
+        <button type="button" class="btn btn-primary" @onclick="Modificar">Confirmar</button>
+    </div>
+}
+@if(MostrarElector){
+    <div>
+        <h6>seleccione</h6>
+        <select @bind="consultaTramite" class="form-control">
+                @foreach (var estado in Enum.GetValues(typeof(EstadoTramite)))
+                {
+                    <option value="@estado">@estado</option>
+                }
+        </select>
+        <button type="button" class="btn btn-primary" @onclick="BuscarE">buscar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => SetFalso(MostrarElector)">Cancelar</button>
+    </div>
+}
 
-@code {
-    private Usuario usuario = new Usuario("NAU", "NAU", "NAU", "NAU", new List<Permiso>());
-    protected override void OnInitialized()
-    {
-        if (loggeado.Usuario != null)
-        {
-            usuario = loggeado.Usuario;
-        }
-    }
 
+
+<!--  -->
+<DialogoAlerta @ref="dialogo" Mensaje="@msj"></DialogoAlerta>
+
+@code
+{
+    private EstadoTramite consultaTramite = EstadoTramite.EscritoPresentado;
+    private Tramite tramite;
+    private EstadoTramite nuevoEstado;
+    private bool AltaVisible = false;
     private int idExpediente;
-    private int numTramite;
     private string msj = "";
-
-    private List<Tramite> tramites = new List<Tramite>();
-    private List<Tramite> tramitesExpediente = new List<Tramite>();
-    private List<Tramite> tramitesPorID = new List<Tramite>();
-    private List<Tramite>? tramitesEtiqueta = new List<Tramite>();
-
-    private EstadoTramite estadoTramite;
-    private List<EstadoTramite> estados = new List<EstadoTramite> {
-        EstadoTramite.Despacho,
-        EstadoTramite.EscritoPresentado,
-        EstadoTramite.PaseAEstudio,
-        EstadoTramite.Resolucion,
-        EstadoTramite.Notificacion,
-        EstadoTramite.PaseAlArchivo
-    };
-
-    private AltaTramite altaTramite = null!;
+    private string contenido = "";
     private DialogoAlerta dialogo = null!;
-    private TablaTramites tablaTramites = null!;
-    private TablaTramites tablaTramitesExpediente = null!;
-    private TablaTramites tablaTramitesPorID = null!;
-    private TablaTramites tablaTramitesEtiqueta = null!;
+    private List<Tramite>? tramites = new List<Tramite>();
+    private List<Tramite>? tramitesEtiqueta = new List<Tramite>();
+    private bool Mostrar = false;
+    private bool BajaVisible = false;
+    private int idTramite;
+    private bool ModificacionVisible = false;
+    private bool ModIdOk = false;
+    private bool MostrarPorE = false;
+    private bool MostrarElector = false;
+    private Tramite? tramiteMod;
 
-    private void AT()
+    private void ModificarTramiteId(Tramite t)
+    {
+        reset();
+        tramiteMod = t;
+        ModIdOk = true;
+    }
+    private void BuscarE(){
+        reset();
+        MostrarPorE = true;
+    }
+    private void Modificar()
     {
         try
         {
-            if (!EvaluarUsuario(Permiso.TramiteAlta))
-                throw new ValidacionException("No posee Permisos requeridos");
-            altaTramite.Mostrar();
+            if(String.IsNullOrWhiteSpace(contenido))
+            {
+                throw new RepositorioException("El contenido no puede estar vacio");
+            }
+            if(tramiteMod != null)
+            {
+                tramiteMod.Contenido = contenido;
+                ServiceTramites.ModificarRegistro(tramiteMod, logeado.Usuario.Id);
+                ModIdOk = false;
+            }
+
+        }
+        catch(Exception e)
+        {
+            msj = (e.Message);
+            dialogo.Mostrar();
+        }
+    }
+
+    private void BuscarMod(int idT)
+    {
+        try
+        {
+            tramiteMod = ServiceTramites.ConsultaPorId(idT);
+            if(tramiteMod == null)
+                throw new RepositorioException("El tramite no existe");
+            else
+            {
+                reset();
+                ModIdOk = true;
+            }
+        }
+        catch(Exception e)
+        {
+            msj = e.Message;
+            dialogo.Mostrar();
+        }
+    }
+
+    private void BuscarBaja(int idT)
+    {
+        try
+        {
+            Tramite? tramiteBorrar = ServiceTramites.ConsultaPorId(idT);
+            if(tramiteBorrar == null)
+                throw new RepositorioException("El tramite no existe");
+            else
+            {
+                ServiceTramites.ElimiarRegistro(idT, logeado.Usuario.Id);
+            }
+        }
+        catch(Exception e)
+        {
+            msj = e.Message;
+            dialogo.Mostrar();
+        }
+    }
+
+    private void Buscar()
+    {
+        try
+        {
+            Expediente? ex = ServiceExpediente.ConsultaPorId(idExpediente);
+            if(ex == null)
+                throw new RepositorioException("No existe ese Expediente");
+            else
+            {
+                if(String.IsNullOrWhiteSpace(contenido))
+                    throw new ValidacionException("El contenido no puede estar vacio");
+                else
+                {
+                    tramite = new Tramite();
+                    tramite.FechaHoraCreacion = DateTime.Now;
+                    tramite.FechaHoraUltimaModificacion = DateTime.Now;
+                    tramite.ExpedienteId = idExpediente;
+                    tramite.Contenido = contenido;
+                    tramite.EstadoTramite = nuevoEstado;
+                    tramite.IdUsuario = logeado.Usuario.Id;
+                    ServiceTramites.AgregarRegistro(tramite);
+                    msj = "Carga Exitosa";
+                    dialogo.Mostrar();
+                    reset();
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            msj = e.Message;
+            dialogo.Mostrar();
+        }
+    }
+
+    private void AltaTramite()
+    {
+        try
+        {
+            if(validador.TienePermiso(logeado.Usuario, Permiso.TramiteAlta))
+            {
+                reset();
+                AltaVisible = true;
+            }
+            else
+                throw new ValidacionException("No posee el permiso");
+        }
+        catch(Exception e)
+        {
+            msj = e.Message;
+            dialogo.Mostrar();
+        }
+    }
+    private void ModificarTramite()
+    {
+        try
+        {
+            if(validador.TienePermiso(logeado.Usuario, Permiso.TramiteModificacion))
+            {
+                reset();
+                ModificacionVisible = true;
+            }
+            else
+            {
+                throw new ValidacionException("El usuario no cuenta con el permiso para realizar esta accion");
+            }
+        }
+        catch(Exception e)
+        {
+            msj = e.Message;
+            dialogo.Mostrar();
+            NoMostrar();
+        }
+    }
+    private void MostrarTramitesPorE(){
+        try
+        {
+            tramitesEtiqueta = ServiceTramites.ConsultaPorEtiqueta(consultaTramite);
+            if(tramitesEtiqueta != null)
+            {
+                reset();
+                MostrarElector= true;
+            }
+            else throw new  RepositorioException("No hay elementos que coincidan");
+        }
+        catch(Exception e)
+        {
+            msj = e.Message;
+            dialogo.Mostrar();
+        }
+    }
+    private void BajaTramite()
+    {
+        reset();
+        BajaVisible = true;
+    }
+
+    private void MostrarTramites()
+    {
+        try
+        {
             tramites = ServiceTramites.ConsultarTodos();
+            if(tramites != null)
+            {
+                reset();
+                Mostrar = true;
+            }
         }
-        catch (Exception e)
+        catch(Exception e)
         {
-            msj = e.Message.ToString();
-            dialogo.Mostrar();
-        }
-           finally
-        {
-            // Asegurarse de llamar StateHasChanged() para actualizar la interfaz
-            StateHasChanged();
-        }
-    }
-
-    private void MT()
-    {
-        try
-        {
-            tramites = ServiceTramites.ConsultarTodos()?? new List<Tramite>();
-            tablaTramites.Mostrar();
-            StateHasChanged();
-        }
-        catch (Exception e)
-        {
-            msj = e.Message.ToString();
+            msj = e.Message;
             dialogo.Mostrar();
         }
     }
 
-    private void TEI()
+    private void NoMostrar()
     {
-        try
-        {
-            Expediente? expediente = ServiceExpediente.ConsultaPorId(idExpediente);
-            if (expediente == null)
-                throw new RepositorioException("No existe Expediente");
-            if(expediente.Tramites == null)
-                throw new RepositorioException("No tiene Tramites asociados");
-            foreach(var t in expediente.Tramites)
-                Console.WriteLine(t.Id);
-            tramitesExpediente = expediente.Tramites;
-            tablaTramitesExpediente.Mostrar();
-        }
-        catch (Exception e)
-        {
-            msj = e.Message.ToString();
-            dialogo.Mostrar();
-        }
+        AltaVisible = false;
+        BajaVisible = false;
+        ModificacionVisible = false;
+    }
+    private void SetFalso(bool estado)
+    {
+        estado = false;
     }
 
-    private void MTID()
+    private void reset()
     {
-        try
-        {
-            Tramite? tramite = ServiceTramites.ConsultaPorId(numTramite);
-            if (tramitesPorID == null)
-                tramitesPorID = new List<Tramite>();
-
-            if (tramite == null)
-                throw new RepositorioException("No se encontró el trámite");
-
-            tramitesPorID.Add(tramite);
-            tablaTramitesPorID.Mostrar();
-        }
-        catch (Exception e)
-        {
-            msj = e.Message.ToString();
-            dialogo.Mostrar();
-        }
-    }
-
-    private void TE()
-    {
-        try
-        {
-            tramitesEtiqueta = ServiceTramites.ConsultaPorEtiqueta(estadoTramite);
-            if (tramitesEtiqueta != null && tramitesEtiqueta.Count == 0)
-                throw new ValidacionException("No se encuentran coincidencias");
-
-            tablaTramitesEtiqueta.Mostrar();
-        }
-        catch (Exception e)
-        {
-            msj = e.Message.ToString();
-            dialogo.Mostrar();
-        }
-    }
-
-    private bool EvaluarUsuario(Permiso permiso)
-    {
-        return validador.TienePermiso(usuario, permiso);
+        MostrarPorE = false;
+        Mostrar = false;
+        AltaVisible = false;
+        BajaVisible = false;
+        ModificacionVisible = false;
+        MostrarElector = false;
     }
 }

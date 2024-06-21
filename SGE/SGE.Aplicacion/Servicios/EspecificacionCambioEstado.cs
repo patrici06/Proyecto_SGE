@@ -2,9 +2,9 @@ namespace SGE.Aplicacion;
 
 public class EspecificacionCambioEstado()
 {
-    public Expediente CambioEstado (Expediente retorno, Tramite ultimoTramite)
+    public Expediente CambioEstado (Expediente retorno, EstadoTramite estadoTramite)
     {
-        switch(ultimoTramite.EstadoTramite)
+        switch(estadoTramite)
             {
                 case EstadoTramite.Resolucion: retorno.Estado = EstadoExpediente.ConResolucion;
                 break;

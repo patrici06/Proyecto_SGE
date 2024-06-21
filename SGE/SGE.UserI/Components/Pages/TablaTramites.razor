@@ -1,6 +1,5 @@
 @page "/tabla-tramites"
 @using SGE.Aplicacion
-
 @code {
     [Parameter]
     public List<Tramite> tramites { get; set; } = new List<Tramite>();
@@ -38,8 +37,6 @@
         tramites.Remove(tramite);
         STramite.ElimiarRegistro(tramite.Id, Id);
         StateHasChanged();
-        Ocultar();
-        Mostrar();
     }
 
     private void ModificarTramite(Tramite tramite)
@@ -53,6 +50,7 @@
 {
     <div>
         <h3>Lista de Trámites</h3>
+        <button class="btn btn-secondary" @onclick="Ocultar">Cerrar</button>
         <table class="table">
             <thead>
                 <tr>
@@ -62,6 +60,7 @@
                     <th>Fecha de Última Modificación</th>
                     <th>Expediente</th>
                     <th>Usuario que Modificó</th>
+                    <th>EstadoTramite</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -75,6 +74,7 @@
                         <td>@tramite.FechaHoraUltimaModificacion.ToShortDateString()</td>
                         <td>@tramite.ExpedienteId</td>
                         <td>@tramite.IdUsuario</td>
+                        <td>@tramite.EstadoTramite</td>
                         <td>
                             @if (permisoElim)
                             {

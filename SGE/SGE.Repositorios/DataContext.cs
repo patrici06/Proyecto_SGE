@@ -34,26 +34,26 @@ namespace SGE.Repositorios;
 
             modelBuilder.Entity<Expediente>(entity =>
             {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.Caratula).IsRequired();
-                entity.Property(e => e.FechaCreacion).IsRequired();
-                entity.Property(e => e.FechaModificacion).IsRequired();
-                entity.Property(e => e.IdUsuarioModificacion).IsRequired();
-                entity.Property(e => e.Estado).IsRequired();
+        entity.HasKey(e => e.Id);
+        entity.Property(e => e.Caratula).IsRequired();
+        entity.Property(e => e.FechaCreacion).IsRequired();
+        entity.Property(e => e.FechaModificacion).IsRequired();
+        entity.Property(e => e.IdUsuarioModificacion).IsRequired();
+        entity.Property(e => e.Estado).IsRequired();
 
-                entity.HasMany<Tramite>()
-                      .WithOne()
-                      .HasForeignKey(t => t.ExpedienteId);
-            });
+        entity.HasMany<Tramite>()
+              .WithOne()
+              .HasForeignKey(t => t.ExpedienteId);
+    });
 
-            modelBuilder.Entity<Usuario>(entity =>
-            {
-                entity.HasKey(u => u.Id);
-                entity.Property(u => u.nombre).IsRequired();
-                entity.Property(u => u.apellido).IsRequired();
-                entity.Property(u => u.correo).IsRequired();
-                entity.Property(u => u.contrasena).IsRequired();
-                entity.Property(u => u.permisos).IsRequired(false);
-            });
+    modelBuilder.Entity<Usuario>(entity =>
+    {
+        entity.HasKey(u => u.Id);
+        entity.Property(u => u.nombre).IsRequired();
+        entity.Property(u => u.apellido).IsRequired();
+        entity.Property(u => u.correo).IsRequired();
+        entity.Property(u => u.contrasena).IsRequired();
+        entity.Property(u => u.permisos).IsRequired(false);
+    });
         }
     }

@@ -39,7 +39,7 @@
 }
 
 @code {
-    private Tramite? _tramite;
+    private Tramite _tramite = new Tramite(); 
     private int idExpediente; 
     private string contenido = ""; 
     private EstadoTramite estadoTramite;
@@ -55,7 +55,6 @@
     private void GuardarTramite()
     {
         try{
-            _tramite = new Tramite();
              if (string.IsNullOrEmpty(contenido) || string.IsNullOrEmpty(idExpediente.ToString()))
                 throw new ValidacionException("No se completaron correctamente los campos");
             // Verificar la existencia del Expediente
@@ -68,7 +67,7 @@
             _tramite.FechaHoraCreacion = DateTime.Now; 
             _tramite.FechaHoraUltimaModificacion = DateTime.Now;
             ServicioT.AgregarRegistro(_tramite);
-            throw new Exception("Carga Exitosa");
+            
         }catch (Exception e ){
             msj = e.Message.ToString();
         }finally{

@@ -25,7 +25,7 @@ public class ExpedienteRepositorio: IExpedienteRepositorio
         Expediente? expediente = _context.Expedientes.Where(e => e.Id == idExpediente).SingleOrDefault();
         if ( expediente != null )
         {
-            if (expediente.Tramites != null && expediente.Tramites.Any())
+            if (expediente.Tramites != null && !expediente.Tramites.Any())
             {
                foreach(Tramite t in expediente.Tramites)
                 {
@@ -41,7 +41,10 @@ public class ExpedienteRepositorio: IExpedienteRepositorio
 
     public Expediente? ConsultaPorId(int id)
     {
-        return _context.Expedientes.Where(e => e.Id == id).SingleOrDefault();
+        return _context.Expedientes
+                   .Include(e => e.Tramites)
+                   .Where(e => e.Id == id)
+                   .SingleOrDefault();
     }
 
     public List<Expediente>? ConsultarTodos()
@@ -52,9 +55,9 @@ public class ExpedienteRepositorio: IExpedienteRepositorio
     }
 
     public bool ExisteId(int Id)
-{
+    {
     return _context.Expedientes.Any(e => e.Id == Id);
-}
+    }
 
     public void ModificarExpediente(Expediente expediente, int idUsuario)
     {
@@ -64,6 +67,7 @@ public class ExpedienteRepositorio: IExpedienteRepositorio
         remplazado.IdUsuarioModificacion = idUsuario;
         remplazado.FechaModificacion = DateTime.Now;
         remplazado.Estado = expediente.Estado;
+        remplazado.Tramites = expediente.Tramites;
         _context.Expedientes.Update(remplazado);
         _context.SaveChanges();
     }

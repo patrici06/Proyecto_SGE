@@ -15,9 +15,9 @@ public class ExpedienteRepositorio: IExpedienteRepositorio
     public void AltaExpediente(Expediente expediente)
     {
        
-       _context.Expedientes.Add( expediente );
+       _context.Expedientes.Add(expediente);
        _context.SaveChanges();
-       
+
     }
 
     public void BajaExpediente(int idExpediente)

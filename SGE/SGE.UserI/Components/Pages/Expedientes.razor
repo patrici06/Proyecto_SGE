@@ -5,3 +5,299 @@
     public bool ExisteId(int Id);
     public List<Expediente>? ConsultarTodos();
  -->
+@using SGE.UserI.Components.Pages
+@page "/expedientes"
+@rendermode InteractiveServer
+@inject NavigationManager Navegador
+@inject SGE.Aplicacion.ServicioExpedientes ServiceExpediente
+@inject SGE.Aplicacion.ServicioTramite ServiceTramites
+@inject SGE.Aplicacion.ServicioUsuarios ServiceUsuarios
+@inject UsuarioValidador validador
+@inject ServicioUsuarioEstado logeado
+
+<PageTitle>Expedientes</PageTitle>
+<h1>Expedientes</h1>
+
+@if (logeado.Usuario != null)
+{
+    <h4>Agregar Expediente</h4>
+    <button class="btn btn-primary" @onclick ="AltaExpediente">Alta</button>
+    <br>
+    <h4>Modificar Expediente</h4>
+    <button class="btn btn-primary" @onclick ="ModificarExpediente">Modificar</button>
+    <br>
+    <h4>Dar de Baja un Expediente</h4>
+    <button class="btn btn-primary" @onclick ="BajaExpediente">Baja</button>
+    <br>
+    <h4>Mostrar todos los Expedientes</h4>
+    <button class="btn btn-primary" @onclick ="MostrarExpedientes">Mostrar</button>
+}
+else
+{
+    <p>No hay un usuario logeado.</p>
+}
+@if(AltaVisible)
+{
+    <div>
+        <h6>Dar de alta un Expediente</h6>
+        <form>
+            <div class="form-group">
+                <label for="caratula">Caratula</label>
+                <input type="text" class="form-control" id="caratula" @bind="caratula">
+            </div>
+        </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="NoMostrar">Cancelar</button>
+        <button type="button" class="btn btn-primary" @onclick="Alta">Alta</button>
+    </div>
+}
+@if(ModificacionVisible)
+{
+    <div>
+        <h6>Modificar un Expediente</h6>
+        <form>
+        <div class="form-group">
+            <label for="idExpediente">ID del Expediente a Modificar</label>
+            <input type="text" class="form-control" id="idExpediente" @bind="idExpediente">
+        </div>
+        </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="NoMostrar">Cancelar</button>
+        <button type="button" class="btn btn-primary" @onclick="() => Buscar(1)">Buscar</button>
+    </div>
+}
+@if(ModificacionIdOk)
+{
+    <div>
+        <h6>Modificar un Expediente</h6>
+        <form>
+        <div class="form-group">
+            <label for="caratula">Nueva Caratula para el Expediente</label>
+            <input type="text" class="form-control" id="caratula" @bind="caratula">
+        </div>
+        </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => SetFalso(ModificacionIdOk)">Cancelar</button>
+        <button type="button" class="btn btn-primary" @onclick="Modificar">Confirmar</button>
+    </div>
+}
+@if(BajaVisible)
+{
+    <div>
+        <h6>Dar de Baja un Expediente</h6>
+        <form>
+        <div class="form-group">
+            <label for="idExpediente">ID del Expediente a Eliminar</label>
+            <input type="text" class="form-control" id="idExpediente" @bind="idExpediente">
+        </div>
+        </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="NoMostrar">Cancelar</button>
+        <button type="button" class="btn btn-primary" @onclick="() => Buscar(2)">Buscar</button>
+    </div>
+}
+@if(BajaIdOk)
+{
+    <div>
+        <h6>Dar de Baja un Expediente</h6>
+        <p>Esta seguro que desea eliminar el Expediente?</p>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => SetFalso(BajaIdOk)">Cancelar</button>
+        <button type="button" class="btn btn-primary" @onclick="() => Baja(idExpediente)">Confirmar</button>
+    </div>
+}
+@if(Mostrar)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Caratula</th>
+                <th>Fecha de Creación</th>
+                <th>Fecha de Última Modificación</th>
+                <th>Usuario que Modificó</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+                <tbody>
+                    @foreach (var ex in expedientes)
+                    {
+                        <tr>
+                            <td>@ex.Id</td>
+                            <td>@ex.Caratula</td>
+                            <td>@ex.FechaCreacion</td>
+                            <td>@ex.FechaModificacion</td>
+                            <td>@ex.IdUsuarioModificacion</td>
+                            <td>@ex.Estado</td>
+                            <td>
+                                @if(EvaluarUsuario(Permiso.ExpedienteBaja))
+                                {
+                                    <button class="btn btn-danger btn-sm" @onclick="() => Baja(ex.Id)">Eliminar</button>
+                                }
+                                @if (EvaluarUsuario(Permiso.ExpedienteModificacion))
+                                {
+                                    <button class="btn btn-primary btn-sm" @onclick="() => ModificarExpedienteID(ex)">Modificar</button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+    </table>
+}
+<DialogoAlerta @ref="dialogo" Mensaje="@msj"></DialogoAlerta>
+
+@code {
+    private DialogoAlerta dialogo = null!;
+    private string msj = "";
+    private Expediente? expedienteAModificar;
+    private bool ModificacionVisible = false;
+    private Expediente expediente;
+    private bool AltaVisible = false;
+    private bool BajaVisible = false;
+    private bool BajaIdOk = false;
+    private bool ModificacionIdOk = false;
+    private bool Mostrar = false;
+    private int idExpediente;
+    private string caratula;
+    private List<Expediente>? expedientes;
+
+    private void ModificarExpedienteID(Expediente ex)
+    {
+        expedienteAModificar = ex;
+        ModificacionIdOk = true;
+    }
+
+    private void MostrarExpedientes()
+    {
+        expedientes = ServiceExpediente.ConsultarTodos();
+        if(expedientes != null)
+            Mostrar = true;
+        else
+        {
+            msj = "No hay ningun Expediente";
+            dialogo.Mostrar();
+        }
+    }
+    private void Baja(int idEx)
+    {
+        ServiceExpediente.BajaExpediente(idEx);
+        expedientes = ServiceExpediente.ConsultarTodos();
+        BajaIdOk = false;
+    }
+
+    private void BajaExpediente()
+    {
+        BajaVisible = true;
+    }
+
+    private void Modificar()
+    {
+        try
+        {
+            if(String.IsNullOrWhiteSpace(caratula))
+            {
+                throw new RepositorioException("La caratula no puede estar vacia");
+            }
+            if(expedienteAModificar != null)
+            {
+                expedienteAModificar.Caratula = caratula;
+                ServiceExpediente.ModificarExpediente(expedienteAModificar, logeado.Usuario.Id);
+                ModificacionIdOk = false;
+            }
+
+        }
+        catch(Exception e)
+        {
+            msj = (e.Message);
+            dialogo.Mostrar();
+        }
+    }
+
+    private void Buscar(int n)
+    {
+        expedienteAModificar = ServiceExpediente.ConsultaPorId(idExpediente);
+        if(expedienteAModificar == null)
+        {
+            msj = "El Expediente no Existe";
+            dialogo.Mostrar();
+        }
+        else
+        {
+            NoMostrar();
+            if(n == 1)
+                ModificacionIdOk = true;
+            else if(n == 2)
+                BajaIdOk = true;
+        }
+    }
+
+    private void ModificarExpediente()
+    {
+        try
+        {
+            if(EvaluarUsuario(Permiso.ExpedienteModificacion))
+                ModificacionVisible = true;
+            else
+            {
+                throw new ValidacionException("El usuario no cuenta con el permiso para realizar esta accion");
+            }
+        }
+        catch(Exception e)
+        {
+            msj = e.Message;
+            dialogo.Mostrar();
+            NoMostrar();
+        }
+    }
+
+    private void Alta()
+    {
+        try
+        {
+            if(!String.IsNullOrWhiteSpace(caratula))
+            {
+                expediente = new Expediente();
+                expediente.Caratula = caratula;
+                expediente.IdUsuarioModificacion = logeado.Usuario.Id;
+                expediente.Estado = EstadoExpediente.RecienIniciado;
+                ServiceExpediente.AltaExpediente(expediente);
+            }
+            else    
+                throw new RepositorioException("La caratula no debe estar vacia");
+            NoMostrar();
+        }
+        catch(Exception e)
+        {
+            msj = e.Message;
+            dialogo.Mostrar();
+        }
+    }
+
+    private void AltaExpediente()
+    {
+        try
+        {
+            if(EvaluarUsuario(Permiso.ExpedienteAlta))
+                AltaVisible = true;
+            else    
+                throw new ValidacionException("No posee Permisos requeridos");
+        }
+        catch(Exception e)
+        {
+            msj = e.Message;
+            dialogo.Mostrar();
+        }
+    }
+
+    private bool EvaluarUsuario(Permiso permiso){
+        return   validador.TienePermiso(logeado.Usuario, permiso);
+    } 
+
+    private void NoMostrar()
+    {
+        AltaVisible = false;
+        ModificacionVisible = false;
+        BajaVisible = false;
+    }
+
+    private void SetFalso(bool estado)
+    {
+        estado = false;
+    }
+}

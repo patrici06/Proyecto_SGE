@@ -34,7 +34,7 @@
             if (usuarioRecuperado != null && SGE.Aplicacion.ServicioHash.validarContrasena(_usuario.contrasena, usuarioRecuperado.contrasena))
             {
                 logeado.SetUsuario(usuarioRecuperado);
-                Navegador.NavigateTo("/general");
+                Navegador.NavigateTo("expedientes");
             }
             else
             {

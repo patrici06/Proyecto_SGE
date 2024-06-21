@@ -23,9 +23,11 @@
 @if(visible)
 {
     <div>
-        <input type="text" placeholder="Contenido del tramite" @bind="_tramite.Contenido" class="form-control" />
-        <input type="text" placeholder="Expediente que Pertenede" @bind="_tramite.ExpedienteId" class="form-control" />
-        <select @bind="_tramite.EstadoTramite" class="from-control">
+        <DialogoAlerta @ref="alerta" Mensaje ="@msj"></DialogoAlerta>
+        <input type="text" placeholder="Contenido del tramite" @bind="contenido" class="form-control" />
+        <p>ID_Expediente Corresponde</p>
+        <input type="text" placeholder="Expediente que Pertenede" @bind="idExpediente" class="form-control" />
+        <select @bind="estadoTramite" class="from-control">
             @foreach(var estado in estados)
             {
                 <option value="@estado">@estado</option>
@@ -37,7 +39,10 @@
 }
 
 @code {
-    private Tramite _tramite = new Tramite();
+    private Tramite? _tramite;
+    private int idExpediente; 
+    private string contenido = ""; 
+    private EstadoTramite estadoTramite;
     private List<EstadoTramite> estados = new List<EstadoTramite> { EstadoTramite.Despacho,
                                                                     EstadoTramite.EscritoPresentado, 
                                                                     EstadoTramite.PaseAEstudio,
@@ -45,21 +50,29 @@
                                                                     EstadoTramite.Notificacion,
                                                                     EstadoTramite.PaseAlArchivo
                                                                    };
+    private DialogoAlerta alerta = null!; 
+    private string msj = "";
     private void GuardarTramite()
     {
         try{
-         if (!string.IsNullOrEmpty(_tramite.Contenido) || !string.IsNullOrEmpty(_tramite.ExpedienteId.ToString()))
+            _tramite = new Tramite();
+             if (string.IsNullOrEmpty(contenido) || string.IsNullOrEmpty(idExpediente.ToString()))
                 throw new ValidacionException("No se completaron correctamente los campos");
             // Verificar la existencia del Expediente
-            if (!ServicioE.ExisteId(_tramite.ExpedienteId))
+            if (!ServicioE.ExisteId(idExpediente))
                 throw new ValidacionException("El expediente no existe.");
+            _tramite.Contenido = contenido;
+            _tramite.EstadoTramite = estadoTramite;
+            _tramite.ExpedienteId = idExpediente;
             _tramite.IdUsuario = IdUsuario;
             _tramite.FechaHoraCreacion = DateTime.Now; 
             _tramite.FechaHoraUltimaModificacion = DateTime.Now;
             ServicioT.AgregarRegistro(_tramite);
-            Ocultar();
-        }catch{
-            Ocultar();
+            throw new Exception("Carga Exitosa");
+        }catch (Exception e ){
+            msj = e.Message.ToString();
+        }finally{
+            alerta.Mostrar();
         }
     }
 }

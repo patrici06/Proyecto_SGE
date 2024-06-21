@@ -8,6 +8,7 @@
 @inject UsuarioValidador validador
 @inject ServicioUsuarioEstado loggeado
 
+<h1>Tramites</h1>
 @if(loggeado.Usuario != null) 
 {
     <p>AGREGAR TRAMITE</p>
@@ -52,8 +53,6 @@ else
         if(loggeado.Usuario != null){
             usuario = loggeado.Usuario;
         }
-        <!--HARDCODE-->
-        ServiceExpediente.AltaExpediente(new Expediente("una Caratula", EstadoExpediente.RecienIniciado, null,usuario.Id));
     }
     private int idExpediente = -1;
     private TablaTramites tablaTramitesEtiqueta = null!;

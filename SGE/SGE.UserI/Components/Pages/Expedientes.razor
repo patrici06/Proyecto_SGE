@@ -9,9 +9,13 @@
 @page "/expedientes"
 @rendermode InteractiveServer
 @inject NavigationManager Navegador
-@inject SGE.Aplicacion.ServicioExpedientes ServiceExpediente
-@inject SGE.Aplicacion.ServicioTramite ServiceTramites
-@inject SGE.Aplicacion.ServicioUsuarios ServiceUsuarios
+
+@inject SGE.Aplicacion.CasoUsoAltaExpediente altaExpediente
+@inject SGE.Aplicacion.CasoUsoBajaExpediente bajaExpediente
+@inject SGE.Aplicacion.CasoUsoConsultaExpedienteID consultaExpedienteID
+@inject SGE.Aplicacion.CasoUsoConsultaExpedientes consultaExpedientes
+@inject SGE.Aplicacion.CasoUsoModificacionExpediente modificacionExpediente
+
 @inject UsuarioValidador validador
 @inject ServicioUsuarioEstado logeado
 
@@ -218,7 +222,7 @@ else
 
     private void MostrarExpedientes()
     {
-        expedientes = ServiceExpediente.ConsultarTodos();
+        expedientes = consultaExpedientes.Ejecutar();
         if(expedientes != null)
             Mostrar = true;
         else
@@ -229,8 +233,8 @@ else
     }
     private void Baja(int idEx)
     {
-        ServiceExpediente.BajaExpediente(idEx);
-        expedientes = ServiceExpediente.ConsultarTodos();
+        bajaExpediente.Ejecutar(idEx);
+        expedientes = consultaExpedientes.Ejecutar();
         BajaIdOk = false;
     }
 
@@ -250,7 +254,7 @@ else
             if(expedienteAModificar != null)
             {
                 expedienteAModificar.Caratula = caratula;
-                ServiceExpediente.ModificarExpediente(expedienteAModificar, logeado.Usuario.Id);
+                modificacionExpediente.Ejecutar(expedienteAModificar, logeado.Usuario.Id);
                 ModificacionIdOk = false;
             }
 
@@ -264,7 +268,7 @@ else
 
     private void Buscar(int n)
     {
-        expedienteAModificar = ServiceExpediente.ConsultaPorId(idExpediente);
+        expedienteAModificar = consultaExpedienteID.Ejecutar(idExpediente);
         if(expedienteAModificar == null)
         {
             msj = "El Expediente no Existe";
@@ -309,7 +313,7 @@ else
                 expediente.Caratula = caratula;
                 expediente.IdUsuarioModificacion = logeado.Usuario.Id;
                 expediente.Estado = EstadoExpediente.RecienIniciado;
-                ServiceExpediente.AltaExpediente(expediente);
+                altaExpediente.Ejecutar(expediente);
             }
             else    
                 throw new RepositorioException("La caratula no debe estar vacia");

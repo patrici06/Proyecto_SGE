@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\basededatosylacon\\Proyecto_SGE\\SGE\\SGE.Repositorios\\SGE.Repositorios.csproj": {}
+    "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.Repositorios\\SGE.Repositorios.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\basededatosylacon\\Proyecto_SGE\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj": {
+    "C:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\basededatosylacon\\Proyecto_SGE\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj",
+        "projectUniqueName": "C:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj",
         "projectName": "SGE.Aplicacion",
-        "projectPath": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\basededatosylacon\\Proyecto_SGE\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj",
-        "packagesPath": "C:\\Users\\jg481\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\basededatosylacon\\Proyecto_SGE\\SGE\\SGE.Aplicacion\\obj\\",
+        "projectPath": "C:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj",
+        "packagesPath": "C:\\Users\\patricio rivero\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.Aplicacion\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\jg481\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\patricio rivero\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -62,17 +62,17 @@
         }
       }
     },
-    "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\basededatosylacon\\Proyecto_SGE\\SGE\\SGE.Repositorios\\SGE.Repositorios.csproj": {
+    "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.Repositorios\\SGE.Repositorios.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\basededatosylacon\\Proyecto_SGE\\SGE\\SGE.Repositorios\\SGE.Repositorios.csproj",
+        "projectUniqueName": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.Repositorios\\SGE.Repositorios.csproj",
         "projectName": "SGE.Repositorios",
-        "projectPath": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\basededatosylacon\\Proyecto_SGE\\SGE\\SGE.Repositorios\\SGE.Repositorios.csproj",
-        "packagesPath": "C:\\Users\\jg481\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\basededatosylacon\\Proyecto_SGE\\SGE\\SGE.Repositorios\\obj\\",
+        "projectPath": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.Repositorios\\SGE.Repositorios.csproj",
+        "packagesPath": "C:\\Users\\patricio rivero\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.Repositorios\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\jg481\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\patricio rivero\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -84,8 +84,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\basededatosylacon\\Proyecto_SGE\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj": {
-                "projectPath": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\basededatosylacon\\Proyecto_SGE\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj"
+              "C:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj": {
+                "projectPath": "C:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj"
               }
             }
           }

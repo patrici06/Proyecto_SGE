@@ -1,7 +1,9 @@
 ﻿@page "/"
 @rendermode InteractiveServer
 @inject NavigationManager Navegador
-@inject SGE.Aplicacion.ServicioUsuarios servicio
+@inject SGE.Aplicacion.CasoUsoLoguear loguearUsuario
+@inject SGE.Aplicacion.CasoUsoConsultaUsuarios consultaUsuarios
+
 @inject ServicioUsuarioEstado logeado
 <PageTitle>Bienvenido</PageTitle>
 <div>
@@ -13,13 +15,14 @@
     <div>
         <p>Ingrese Contraseña</p>
         <input type="Contraseña" placeholder="contraseña" @bind="_usuario.contrasena" class="form-control">
-        <DialogoAlerta @ref="dialogo" Mensaje="Usuario o Contraseña no válidos" />
+        <DialogoAlerta @ref="dialogo" Mensaje= msj />
     </div>
     <button class="btn btn-primary" @onclick="Validar">Ingresar</button>
 </div>
 <button class="btn btn-primary" @onclick="Registro">Registrarse</button>
 
 @code {
+    private String msj = " ";
     private Usuario _usuario = new Usuario();
     private DialogoAlerta dialogo = null!;
 
@@ -28,22 +31,12 @@
         try
         {
             Console.WriteLine("Validando usuario...");
-            List<Usuario> list = servicio.ListarUsuarios();
-            Usuario? usuarioRecuperado = list.FirstOrDefault(u => u.correo == _usuario.correo);
-
-            if (usuarioRecuperado != null && SGE.Aplicacion.ServicioHash.validarContrasena(_usuario.contrasena, usuarioRecuperado.contrasena))
-            {
-                logeado.SetUsuario(usuarioRecuperado);
-                Navegador.NavigateTo("expedientes");
-            }
-            else
-            {
-                dialogo.Mostrar();
-            }
+            loguearUsuario.Ejecutar(_usuario.correo, _usuario.contrasena);
         }
         catch (Exception e)
         {
-            Console.WriteLine($"Error: {e.Message}");
+            msj = e.Message;
+            dialogo.Mostrar();
         }
     }
 

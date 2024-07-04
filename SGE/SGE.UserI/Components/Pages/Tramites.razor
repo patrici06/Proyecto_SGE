@@ -2,9 +2,16 @@
 @page "/tramites"
 @rendermode InteractiveServer
 @inject NavigationManager Navegador
-@inject SGE.Aplicacion.ServicioExpedientes ServiceExpediente
-@inject SGE.Aplicacion.ServicioTramite ServiceTramites
-@inject SGE.Aplicacion.ServicioUsuarios ServiceUsuarios
+
+@inject SGE.Aplicacion.CasoUsoConsultaExpedienteID consultaExpedienteID
+
+@inject SGE.Aplicacion.CasoUsoAltaTramite altaTramite
+@inject SGE.Aplicacion.CasoUsoBajaTramite bajaTramite 
+@inject SGE.Aplicacion.CasoUsoConsultaEtiquetaTramite consultaTramiteEtiqueta
+@inject SGE.Aplicacion.CasoUsoConsultaTramiteID consultaTramiteID
+@inject SGE.Aplicacion.CasoUsoConsultaTramites consultaTramites
+@inject SGE.Aplicacion.CasoUsoModificacionTramite modificacionTramite
+
 @inject UsuarioValidador validador
 @inject ServicioUsuarioEstado logeado
 
@@ -247,7 +254,7 @@ else
             if(tramiteMod != null)
             {
                 tramiteMod.Contenido = contenido;
-                ServiceTramites.ModificarRegistro(tramiteMod, logeado.Usuario.Id);
+                modificacionTramite.Ejecutar(tramiteMod, logeado.Usuario.Id);
                 ModIdOk = false;
             }
 
@@ -263,7 +270,7 @@ else
     {
         try
         {
-            tramiteMod = ServiceTramites.ConsultaPorId(idT);
+            tramiteMod = consultaTramiteID.Ejecutar(idT);
             if(tramiteMod == null)
                 throw new RepositorioException("El tramite no existe");
             else
@@ -283,12 +290,12 @@ else
     {
         try
         {
-            Tramite? tramiteBorrar = ServiceTramites.ConsultaPorId(idT);
+            Tramite? tramiteBorrar = consultaTramiteID.Ejecutar(idT);
             if(tramiteBorrar == null)
                 throw new RepositorioException("El tramite no existe");
             else
             {
-                ServiceTramites.ElimiarRegistro(idT, logeado.Usuario.Id);
+                bajaTramite.Ejecutar(idT, logeado.Usuario.Id);
             }
         }
         catch(Exception e)
@@ -302,7 +309,7 @@ else
     {
         try
         {
-            Expediente? ex = ServiceExpediente.ConsultaPorId(idExpediente);
+            Expediente? ex = consultaExpedienteID.Ejecutar(idExpediente);
             if(ex == null)
                 throw new RepositorioException("No existe ese Expediente");
             else
@@ -318,7 +325,7 @@ else
                     tramite.Contenido = contenido;
                     tramite.EstadoTramite = nuevoEstado;
                     tramite.IdUsuario = logeado.Usuario.Id;
-                    ServiceTramites.AgregarRegistro(tramite);
+                    altaTramite.Ejecutar(tramite);
                     msj = "Carga Exitosa";
                     dialogo.Mostrar();
                     reset();
@@ -374,7 +381,7 @@ else
     private void MostrarTramitesPorE(){
         try
         {
-            tramitesEtiqueta = ServiceTramites.ConsultaPorEtiqueta(consultaTramite);
+            tramitesEtiqueta = consultaTramiteEtiqueta.Ejecutar(consultaTramite);
             if(tramitesEtiqueta != null)
             {
                 reset();
@@ -398,7 +405,7 @@ else
     {
         try
         {
-            tramites = ServiceTramites.ConsultarTodos();
+            tramites = consultaTramites.Ejecutar();
             if(tramites != null)
             {
                 reset();

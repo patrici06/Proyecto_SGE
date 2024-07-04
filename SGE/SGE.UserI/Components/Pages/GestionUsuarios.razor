@@ -1,6 +1,11 @@
 @page "/gestion-usuarios"
 @rendermode InteractiveServer
-@inject SGE.Aplicacion.ServicioUsuarios UsuarioService
+@inject SGE.Aplicacion.CasoUsoAltaUsuario altaUsuario
+@inject SGE.Aplicacion.CasoUsoBajaUsuario bajaUsuario
+@inject SGE.Aplicacion.CasoUsoConsultaUsuarioID consultaUsuarioID
+@inject SGE.Aplicacion.CasoUsoConsultaUsuarios consultaUsuarios
+@inject SGE.Aplicacion.CasoUsoModificacionUsuario modificacionUsuario
+@inject SGE.Aplicacion.CasoUsoOtorgarPermisos otorgarPermisos
 @inject ServicioUsuarioEstado estado
 
 <h1>Gestión de Usuarios</h1>
@@ -134,13 +139,13 @@
 
     protected override void OnInitialized()
     {
-        usuarios = UsuarioService.ListarUsuarios();
+        usuarios = consultaUsuarios.Ejecutar();
     }
 
     private void QuitarPermiso()
     {
         usuarioAEditar.permisos.Remove(nuevoPermiso);
-        UsuarioService.ModificarUsuario(usuarioAEditar);
+        modificacionUsuario.Ejecutar(usuarioAEditar);
         NoMostrar();
     }
 
@@ -154,7 +159,7 @@
     {
         if(usuarioAEditar.permisos.Contains(nuevoPermiso) == false)
         {
-            UsuarioService.OtorgarPermisos(usuarioAEditar, nuevoPermiso);
+            otorgarPermisos.Ejecutar(usuarioAEditar, nuevoPermiso);
             OnInitialized();
         }
         else
@@ -172,7 +177,7 @@
 
     private void GuardarCambiosUsuario()
     {
-        UsuarioService.ModificarUsuario(usuarioAEditar);
+        modificacionUsuario.Ejecutar(usuarioAEditar);
         OnInitialized();
         NoMostrar();
     }
@@ -191,7 +196,7 @@
 
     private void EliminarUsuarioConfirmado()
     {
-        UsuarioService.EliminarUsuario(usuarioAEliminar.Id);
+        bajaUsuario.Ejecutar(usuarioAEliminar.Id);
         usuarios.Remove(usuarioAEliminar);
         if(usuarioAEliminar.Id == estado.Usuario.Id)
         {

@@ -14,20 +14,41 @@ builder.Services.AddRazorComponents()
 //Agregamos el contexto de Base de Datos y la creamos de no existir
 DataContext dataContext = new DataContext();
 DataSqlite.Inicializar();
-//servicios
+//Configuro Repositorio Usuarios
 builder.Services.AddScoped<IUsuariosRepositorios, UsuarioRepositorio>( UR => new UsuarioRepositorio(dataContext));
-builder.Services.AddTransient<ServicioUsuarios>();
+//Decalro los casos de uso de usuarios como Transient
+builder.Services.AddTransient<CasoUsoAltaUsuario>(); 
+builder.Services.AddTransient<CasoUsoBajaUsuario>(); 
+builder.Services.AddTransient<CasoUsoConsultaUsuarioID>(); 
+builder.Services.AddTransient<CasoUsoConsultaUsuarios>();
+builder.Services.AddTransient<CasoUsoLoguear>();
+builder.Services.AddTransient<CasoUsoModificacionUsuario>();
+builder.Services.AddTransient<CasoUsoOtorgarPermisos>();
 
 builder.Services.AddScoped<ServicioAutorizacion>();
 builder.Services.AddScoped<UsuarioValidador>();
 
+//Configuro Repositorio Expediente
 builder.Services.AddScoped<IExpedienteRepositorio, ExpedienteRepositorio>( ER => new ExpedienteRepositorio(dataContext));
-builder.Services.AddTransient<ServicioExpedientes>();
 
+//Configuro Repositorios de Tramires
 builder.Services.AddScoped<ITramiteRepositorio, TramitesRepositorio>( TR => new TramitesRepositorio(dataContext,   
                                                                                     new ExpedienteRepositorio(dataContext)
                                                                                     ,new EspecificacionCambioEstado()));
-builder.Services.AddTransient<ServicioTramite>();
+//Declaro los casos de Uso de Tramites como Transient
+builder.Services.AddTransient<CasoUsoBajaTramite>();
+builder.Services.AddTransient<CasoUsoAltaTramite>();
+builder.Services.AddTransient<CasoUsoConsultaEtiquetaTramite>();
+builder.Services.AddTransient<CasoUsoConsultaTramiteID>();
+builder.Services.AddTransient<CasoUsoConsultaTramites>();
+builder.Services.AddTransient<CasoUsoModificacionTramite>();
+
+//Declaro los casos de Uso de Expedientes como Transient
+builder.Services.AddTransient<CasoUsoBajaExpediente>();
+builder.Services.AddTransient<CasoUsoAltaExpediente>();
+builder.Services.AddTransient<CasoUsoConsultaExpedienteID>();
+builder.Services.AddTransient<CasoUsoConsultaExpedientes>();
+builder.Services.AddTransient<CasoUsoModificacionExpediente>();
 
 builder.Services.AddScoped<ServicioHash>();
 builder.Services.AddScoped<EspecificacionCambioEstado>(); // Registrar EspecificacionCambioEstado

@@ -1,7 +1,8 @@
 @page "/usuario"
 @rendermode InteractiveServer
 @inject ServicioUsuarioEstado logeado
-@inject SGE.Aplicacion.ServicioUsuarios UsuarioService
+
+@inject SGE.Aplicacion.CasoUsoModificacionUsuario modificacionUsuario
 
 <h1>Información del Usuario</h1>
 
@@ -75,7 +76,7 @@ else
             logeado.Usuario.contrasena = SGE.Aplicacion.ServicioHash.generarHashContrasena(usuarioEditable.contrasena);
 
             // Actualizar el usuario en el servicio de usuarios
-            UsuarioService.ModificarUsuario(logeado.Usuario);
+        modificacionUsuario.Ejecutar(logeado.Usuario);
 
             // Ocultar el formulario de edición
             mostrarFormulario = false;

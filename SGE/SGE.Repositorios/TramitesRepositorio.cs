@@ -84,9 +84,7 @@ public class TramitesRepositorio : ITramiteRepositorio
 
         Expediente? expedienteAsociado = _context.Expedientes.Where(e => e.Id == tramite.ExpedienteId).SingleOrDefault();
         if(expedienteAsociado == null) throw new RepositorioException($"NO Pertenece a ningun Tramite");
-        if(expedienteAsociado.Tramites == null) throw new RepositorioException($"NO Pertenece a ningun Tramite");
-        if(expedienteAsociado.Tramites != null)
-            expedienteAsociado.Tramites.Remove(tramite);
+        if(expedienteAsociado.Tramites == null) throw new RepositorioException($"NO Pertenece a ningun Expediente");
         if (expedienteAsociado.Tramites == null || expedienteAsociado.Tramites.Count == 0)
         {
             expedienteAsociado = _cambio.CambioEstado(expedienteAsociado, EstadoTramite.PaseAlArchivo);
@@ -94,15 +92,13 @@ public class TramitesRepositorio : ITramiteRepositorio
         else
         {
             int lastIndex = expedienteAsociado.Tramites.Count - 1;
-            if (expedienteAsociado.Tramites[lastIndex].Id == idTramite)
+            if ((lastIndex >= 0) && (expedienteAsociado.Tramites[lastIndex].Id == idTramite))
             {
-                if (lastIndex >= 1)
-                {
-                    EstadoTramite estadoAnterior = expedienteAsociado.Tramites[lastIndex - 1].EstadoTramite;
-                    expedienteAsociado = _cambio.CambioEstado(expedienteAsociado, estadoAnterior);
-                }
+                EstadoTramite estadoAnterior = expedienteAsociado.Tramites[lastIndex - 1].EstadoTramite;
+                expedienteAsociado = _cambio.CambioEstado(expedienteAsociado, estadoAnterior);
             }
         }
+        expedienteAsociado.Tramites.Remove(tramite);
         _context.Tramites.Remove(tramite);
         _expedienteRepositorio.ModificarExpediente(expedienteAsociado, idUsuario);
         _context.SaveChanges();

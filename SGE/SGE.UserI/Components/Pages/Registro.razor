@@ -1,6 +1,10 @@
 @page "/Registro"
 @rendermode InteractiveServer
-@inject SGE.Aplicacion.ServicioUsuarios UsuarioService
+
+@inject SGE.Aplicacion.CasoUsoAltaUsuario altaUsuario
+@inject SGE.Aplicacion.CasoUsoConsultaUsuarios consultaUsuarios
+@inject SGE.Aplicacion.CasoUsoModificacionUsuario modificacionUsuario
+
 @inject ServicioUsuarioEstado UsuarioLogged
 @inject NavigationManager Navigation
 
@@ -37,12 +41,12 @@
                 ||string.IsNullOrEmpty(_usuario.nombre)
                 ||string.IsNullOrEmpty(_usuario.contrasena))
                 throw new ValidacionException("Error: Ingrese Los campos");
-        var user = UsuarioService.ListarUsuarios().FirstOrDefault(u => u.correo == _usuario.correo);
+        var user = consultaUsuarios.Ejecutar().FirstOrDefault(u => u.correo == _usuario.correo);
         if(user != null)
             throw new ValidacionException("Error: Ese correo ya fue utilizado");
         else {
             // Comprobar si es el primer usuario en registrarse
-            bool esPrimerUsuario = !UsuarioService.ListarUsuarios().Any();
+            bool esPrimerUsuario = !consultaUsuarios.Ejecutar().Any();
 
             // Asignar permisos básicos o permisos de administrador si es el primer usuario
             _usuario.permisos = esPrimerUsuario ? new List<Permiso> { 
@@ -57,7 +61,7 @@
             // Obtener hash
             _usuario.contrasena = SGE.Aplicacion.ServicioHash.generarHashContrasena(_usuario.contrasena);
             // Registrar el usuario
-            UsuarioService.Crear(_usuario);
+            altaUsuario.Ejecutar(_usuario);
             UsuarioLogged.SetUsuario(_usuario);
              // Redirigir a la página de inicio de sesión o a otra página adecuada
             Navigation.NavigateTo("/expedientes");

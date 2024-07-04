@@ -25,7 +25,7 @@ builder.Services.AddTransient<CasoUsoLoguear>();
 builder.Services.AddTransient<CasoUsoModificacionUsuario>();
 builder.Services.AddTransient<CasoUsoOtorgarPermisos>();
 
-builder.Services.AddScoped<ServicioAutorizacion>();
+// builder.Services.AddScoped<ServicioAutorizacion>();
 builder.Services.AddScoped<UsuarioValidador>();
 
 //Configuro Repositorio Expediente

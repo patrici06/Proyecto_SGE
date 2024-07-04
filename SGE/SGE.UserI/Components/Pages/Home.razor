@@ -15,14 +15,14 @@
     <div>
         <p>Ingrese Contraseña</p>
         <input type="Contraseña" placeholder="contraseña" @bind="_usuario.contrasena" class="form-control">
-        <DialogoAlerta @ref="dialogo" Mensaje= msj />
+        <DialogoAlerta @ref="dialogo" Mensaje = "@msj" />
     </div>
     <button class="btn btn-primary" @onclick="Validar">Ingresar</button>
 </div>
 <button class="btn btn-primary" @onclick="Registro">Registrarse</button>
 
 @code {
-    private String msj = " ";
+    private string msj = " ";
     private Usuario _usuario = new Usuario();
     private DialogoAlerta dialogo = null!;
 
@@ -32,6 +32,8 @@
         {
             Console.WriteLine("Validando usuario...");
             loguearUsuario.Ejecutar(_usuario.correo, _usuario.contrasena);
+            logeado.SetUsuario(_usuario);
+            Navegador.NavigateTo("/tramites");
         }
         catch (Exception e)
         {

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "eaOi84zn++YkV9rdq2nsnpWczzd8J9pmXiDEMq/AQh8=",
+  "Hash": "7NrIf6E5Y9VdMRlGG0ZyOnoBLPd7umNnvEgu54m5aEs=",
   "Source": "SGE.UserI",
   "BasePath": "_content/SGE.UserI",
   "Mode": "Default",
@@ -17,10 +17,10 @@
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\bundle\\SGE.UserI.styles.css",
+      "Identity": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\bundle\\SGE.UserI.styles.css",
       "SourceId": "SGE.UserI",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/SGE.UserI",
       "RelativePath": "SGE.UserI.styles.css",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\bundle\\SGE.UserI.styles.css"
+      "OriginalItemSpec": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\bundle\\SGE.UserI.styles.css"
     },
     {
-      "Identity": "C:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SGE.UserI.bundle.scp.css",
+      "Identity": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SGE.UserI.bundle.scp.css",
       "SourceId": "SGE.UserI",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/SGE.UserI",
       "RelativePath": "SGE.UserI.bundle.scp.css",
       "AssetKind": "All",
@@ -52,10 +52,10 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SGE.UserI.bundle.scp.css"
+      "OriginalItemSpec": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SGE.UserI.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\app.css",
+      "Identity": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\app.css",
       "SourceId": "SGE.UserI",
       "SourceType": "Discovered",
       "ContentRoot": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\",
@@ -74,7 +74,7 @@
       "OriginalItemSpec": "wwwroot\\app.css"
     },
     {
-      "Identity": "C:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Identity": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\bootstrap\\bootstrap.min.css",
       "SourceId": "SGE.UserI",
       "SourceType": "Discovered",
       "ContentRoot": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\",
@@ -93,7 +93,7 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "SGE.UserI",
       "SourceType": "Discovered",
       "ContentRoot": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\",
@@ -112,7 +112,7 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\favicon.png",
+      "Identity": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\favicon.png",
       "SourceId": "SGE.UserI",
       "SourceType": "Discovered",
       "ContentRoot": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\",

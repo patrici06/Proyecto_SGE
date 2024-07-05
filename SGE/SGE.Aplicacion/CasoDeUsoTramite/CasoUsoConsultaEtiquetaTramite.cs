@@ -8,8 +8,8 @@ public class CasoUsoConsultaEtiquetaTramite
         _tramiteRepositorio = tramiteRepositorio;
     }
 
-    public List<Tramite>? Ejecutar(EstadoTramite estado)
+    public List<Tramite> Ejecutar(EstadoTramite estado)
     {
-        return _tramiteRepositorio.ConsultaPorEtiqueta(estado);
+        return _tramiteRepositorio.ConsultaPorEtiqueta(estado)??throw new RepositorioException("No hay Coincidencias");
     }
 }

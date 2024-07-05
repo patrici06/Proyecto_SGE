@@ -1,0 +1,82 @@
+@using SGE.UserI.Components.Pages
+@page "/tramites"
+@rendermode InteractiveServer
+@inject NavigationManager Navegador
+
+@inject CasoUsoConsultaExpedienteID consultaExpedienteID
+
+@inject CasoUsoAltaTramite altaTramite
+@inject CasoUsoBajaTramite bajaTramite 
+@inject CasoUsoConsultaEtiquetaTramite consultaTramiteEtiqueta
+@inject CasoUsoConsultaTramiteID consultaTramiteID
+@inject CasoUsoConsultaTramites consultaTramites
+@inject CasoUsoModificacionTramite modificacionTramite
+
+@inject ServicioAutorizacion autorizador
+@inject ServicioUsuarioEstado logeado
+<PageTitle>Tramites</PageTitle>
+<h1>Tramites</h1>
+
+@if (logeado.Usuario != null)
+{
+    <button class="btn btn-primary" @onclick ="AltaTramite">Dar AltaTramite</button>
+    <FormularioTramite @ref="formularioTramite" User="logeado.Usuario"></FormularioTramite>
+    <DialogoAlerta @ref="formulario" Mensaje = "@excepcionAlta"></DialogoAlerta> 
+    <br>
+    <h4>Modificar Tramite</h4>
+//    <button class="btn btn-primary" @onclick ="ModificarTramite">Modificar</button>
+    <br>
+    <h4>Dar de Baja un Tramite</h4>
+ //   <button class="btn btn-primary" @onclick ="BajaTramite">Baja</button>
+    <br>
+    <button class="btn btn-primary" @onclick ="MostrarTramites">Mostrar Todos Los Tramites</button>
+    <DialogoAlerta @ref="vacio" Mensaje= "@excepcion"></DialogoAlerta>
+    <TablaTramites @ref="tablaTramites" Lista= "@tramites" User="logeado.Usuario"></TablaTramites>
+    <br>
+    <h4>Mostrar todos los Tramites por Etiqueta</h4>
+//    <button class="btn btn-primary" @onclick ="MostrarTramitesPorE">Mostrar</button>
+    <br>
+    <h5>Limpiar Pantalla</h5>
+//    <button class="btn btn-primary" @onclick ="reset">Clear</button>
+}
+else
+{
+    <p>No hay un usuario logeado.</p>
+}
+@code{
+    private TablaTramites tablaTramites = new TablaTramites(); 
+    private FormularioTramite formularioTramite = new FormularioTramite();
+    private List<Tramite> tramites = new List<Tramite>();
+    private DialogoAlerta vacio = new DialogoAlerta();
+    private DialogoAlerta formulario = new DialogoAlerta();
+    private string excepcion = "";
+    private string excepcionAlta = "";
+
+    private void MostrarTramites()
+    {
+        try
+        {
+            tramites = consultaTramites.Ejecutar();
+            tablaTramites.Mostrar();
+        }
+        catch (Exception e)
+        {
+            excepcion = e.Message;
+            vacio.Mostrar();
+        }
+    }
+    private void AltaTramite(){
+        try{
+            Console.WriteLine(logeado.Usuario.Id);
+            if(!autorizador.TienePermiso(logeado.Usuario, Permiso.TramiteAlta)) throw new AutorizacionException("No Posee Permiso");
+            formularioTramite.Mostrar();
+            StateHasChanged();
+        }
+        catch (Exception e)
+        {
+            excepcionAlta = e.Message;
+            formulario.Mostrar();
+        }
+    }
+}
+}

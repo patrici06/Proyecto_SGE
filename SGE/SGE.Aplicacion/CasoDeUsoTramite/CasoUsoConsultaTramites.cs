@@ -10,6 +10,8 @@ public class CasoUsoConsultaTramites
 
     public List<Tramite>? Ejecutar()
     {
-        return _tramiteRepositorio.ConsultarTodos();
+        List<Tramite>? tramites = _tramiteRepositorio.ConsultarTodos(); 
+        if(tramites == null || !tramites.Any()) throw new RepositorioException("No hay tramites En la DB");
+        return tramites;
     }
 }

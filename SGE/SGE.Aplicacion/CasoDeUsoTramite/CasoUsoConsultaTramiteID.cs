@@ -8,8 +8,8 @@ public class CasoUsoConsultaTramiteID
         _tramiteRepositorio = tramiteRepositorio;
     }
 
-    public Tramite? Ejecutar(int idTramite)
+    public Tramite Ejecutar(int idTramite)
     {
-        return _tramiteRepositorio.ConsultaPorId(idTramite);
+        return _tramiteRepositorio.ConsultaPorId(idTramite)?? throw new RepositorioException($"No se encuentra Id :{idTramite}");
     }
 }

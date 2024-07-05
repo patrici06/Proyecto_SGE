@@ -17,50 +17,13 @@ public class TramitesRepositorio : ITramiteRepositorio
         _cambio = cambio;
     }
     public void AgregarRegistro(Tramite tramite)
-{
-    try
     {
-        if (!_expedienteRepositorio.ExisteId(tramite.ExpedienteId))
-        {
-            throw new ValidacionException($"No existe Expediente con Id {tramite.ExpedienteId}");
-        }
-
         _context.Tramites.Add(tramite);
-        _context.SaveChanges();
-        
-        Expediente ex = _expedienteRepositorio.ConsultaPorId(tramite.ExpedienteId);
-        if (ex != null)
-        {
-            ex = _cambio.CambioEstado(ex, tramite.EstadoTramite);
-            if (ex.Tramites == null)
-            {
-                ex.Tramites = new List<Tramite>();
-            }
-            ex.Tramites.Add(tramite);
-
-            _expedienteRepositorio.ModificarExpediente(ex, tramite.IdUsuario);
-        }
+        _context.SaveChanges();       
     }
-    catch (DbUpdateException ex)
-    {
-        // Captura la excepción de Entity Framework Core
-        // y también revisa la InnerException para más detalles
-        Console.WriteLine("Error al guardar cambios:");
-        Console.WriteLine(ex.InnerException?.Message);
-        throw; // Asegura que la excepción se propague para manejarla en capas superiores
-    }
-    catch (Exception e)
-    {
-        Console.WriteLine($"Error inesperado: {e.Message}");
-        throw; // Asegura que la excepción se propague para manejarla en capas superiores
-    }
-}
-
     public List<Tramite> ConsultaPorEtiqueta(EstadoTramite estado)
     { 
-       List<Tramite> tramites = _context.Tramites.Where(t => t.EstadoTramite == estado).ToList();
-       if(tramites == null) throw new RepositorioException($"No se encontro tramites con la Etiqueda{estado}");
-       return tramites;
+     return _context.Tramites.Where(t => t.EstadoTramite == estado).ToList();
     }
 
     public Tramite? ConsultaPorId(int idTramite)
@@ -70,14 +33,10 @@ public class TramitesRepositorio : ITramiteRepositorio
 
     public List<Tramite>? ConsultarTodos()
     {
-        List<Tramite>? tramites = new List<Tramite>();
-        if(_context.Tramites.Count()> 0)
-            tramites = _context.Tramites.OrderByDescending(t => t.Id).ToList();
-        else throw new RepositorioException("no Hay Tramites en la DB");
-        return tramites; 
+            return _context.Tramites.OrderByDescending(t => t.Id).ToList();
     }
 
-    public void ElimiarRegistro(int idTramite, int idUsuario)
+     public void ElimiarRegistro(int idTramite, int idUsuario)
     {
         Tramite? tramite = _context.Tramites.Where(t => t.Id == idTramite).SingleOrDefault();
         if(tramite == null) throw new RepositorioException($"No se encontro Tramite id{idTramite}");
@@ -106,7 +65,6 @@ public class TramitesRepositorio : ITramiteRepositorio
     public void ModificarRegistro(Tramite tramite, int idUsuario)
     {
             Tramite? aux = _context.Tramites.SingleOrDefault(t => t.Id == tramite.Id);
-            if(aux == null) throw new RepositorioException($" no se encontro Tramite {tramite.Id}"); 
             aux.IdUsuario = idUsuario;
             aux.FechaHoraUltimaModificacion = DateTime.Now; 
             aux.ExpedienteId = tramite.ExpedienteId;

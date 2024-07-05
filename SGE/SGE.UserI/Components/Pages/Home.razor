@@ -30,8 +30,7 @@
     {
         try
         {
-            Console.WriteLine("Validando usuario...");
-            loguearUsuario.Ejecutar(_usuario.correo, _usuario.contrasena);
+            _usuario = loguearUsuario.Ejecutar(_usuario.correo, _usuario.contrasena);
             logeado.SetUsuario(_usuario);
             Navegador.NavigateTo("/tramites");
         }

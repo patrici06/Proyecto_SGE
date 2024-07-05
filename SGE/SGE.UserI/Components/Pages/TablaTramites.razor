@@ -1,0 +1,80 @@
+@inject SGE.Aplicacion.CasoUsoModificacionTramite modificacionTramite
+@inject SGE.Aplicacion.CasoUsoBajaTramite bajaTramite
+@inject SGE.Aplicacion.UsuarioValidador validador
+
+@if (visible)
+{
+    <button class="btn btn-danger btn-sm" @onclick="Ocultar">Cerrar</button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Expediente ID</th>
+                <th>Contenido</th>
+                <th>Fecha de Creación</th>
+                <th>Fecha de Última Modificación</th>
+                <th>Usuario que Modificó</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var t in Lista)
+            {
+                <tr>
+                    <td>@t.Id</td>
+                    <td>@t.ExpedienteId</td>
+                    <td>@t.Contenido</td>
+                    <td>@t.FechaHoraCreacion</td>
+                    <td>@t.FechaHoraUltimaModificacion</td>
+                    <td>@t.IdUsuario</td>
+                    <td>@t.EstadoTramite</td>
+                    <td>
+                        @if (validador.TienePermiso(User, Permiso.TramiteBaja))
+                        {
+                            <button class="btn btn-danger btn-sm" @onclick="() => baja(t)">Eliminar</button>
+                        }
+                        @if (validador.TienePermiso(User, Permiso.TramiteModificacion))
+                        {
+                            <button class="btn btn-primary btn-sm">Modificar</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    [Parameter] public List<Tramite> Lista { get; set; } = new List<Tramite>();
+    [Parameter] public Usuario User { get; set; }
+
+    private bool visible = false;
+    private DialogoAlerta dialogoAlerta = new DialogoAlerta();
+    public void Mostrar()
+    {
+            visible = true;
+            StateHasChanged();
+    }
+
+    private void Ocultar()
+    {
+        visible = false;
+        StateHasChanged();
+    }
+
+    private void baja(Tramite tramite)
+    {
+        try
+        {
+
+            bajaTramite.Ejecutar(tramite.Id, User.Id);
+            Lista.Remove(tramite);
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
+}

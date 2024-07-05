@@ -1,8 +1,8 @@
 namespace SGE.Aplicacion;
 
-public class TramiteValidador
+public static class TramiteValidador
 {
-    public void ValidarTramite(Tramite tramite)
+    public static void ValidarTramite(Tramite tramite)
     {
         if (string.IsNullOrEmpty(tramite.Contenido))
         {

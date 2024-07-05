@@ -1,4 +1,4 @@
-@using SGE.UserI.Components.Pages
+@* @using SGE.UserI.Components.Pages
 @page "/tramites"
 @rendermode InteractiveServer
 @inject NavigationManager Navegador
@@ -44,27 +44,7 @@ else
 }
 @if(AltaVisible)
 {
-    <div>
-        <h6>Dar de alta un Tramite</h6>
-        <form>
-            <div class="form-group">
-                <label for="contenido">Contenido</label>
-                <input type="text" class="form-control" id="contenido" @bind="contenido">
-            </div>
-            <div class="form-group">
-                <label for="idExpediente">ID de Expediente</label>
-                <input type="text" class="form-control" id="idExpediente" @bind="idExpediente">
-            </div>
-            <select @bind="nuevoEstado" class="form-control">
-                @foreach (var estado in Enum.GetValues(typeof(EstadoTramite)))
-                {
-                    <option value="@estado">@estado</option>
-                }
-            </select>
-        </form>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="NoMostrar">Cancelar</button>
-        <button type="button" class="btn btn-primary" @onclick="Buscar">Alta</button>
-    </div>
+    
 }
 @if(MostrarPorE){
  
@@ -439,4 +419,4 @@ else
         ModificacionVisible = false;
         MostrarElector = false;
     }
-}
+} *@

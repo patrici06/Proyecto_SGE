@@ -1207,11 +1207,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.Repositorios\\SGE.Repositorios.csproj",
+      "projectUniqueName": "C:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.Repositorios\\SGE.Repositorios.csproj",
       "projectName": "SGE.Repositorios",
-      "projectPath": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.Repositorios\\SGE.Repositorios.csproj",
+      "projectPath": "C:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.Repositorios\\SGE.Repositorios.csproj",
       "packagesPath": "C:\\Users\\patricio rivero\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.Repositorios\\obj\\",
+      "outputPath": "C:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.Repositorios\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\patricio rivero\\AppData\\Roaming\\NuGet\\NuGet.Config"

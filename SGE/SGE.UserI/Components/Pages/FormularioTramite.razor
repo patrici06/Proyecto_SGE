@@ -1,0 +1,72 @@
+@using SGE.UserI.Components.Pages
+@rendermode InteractiveServer
+@inject SGE.Aplicacion.CasoUsoAltaTramite alta
+
+
+@if(visible){
+    <div>
+        <h6>Ingrese Campos Del Tramite</h6>
+        <form>
+            <div class="form-group">
+                <label for="contenido">Contenido</label>
+                <input placeholder="Contenido" class="form-control" @bind="tramite.Contenido">
+            </div>
+            <div class="form-group">
+                <label for="idExpediente">ID de Expediente</label>
+                <input type="text" class="form-control" id="idExpediente" @bind="tramite.ExpedienteId">
+            </div>
+            <div class="form-group">
+                <label for="fechaHoraCreacion" class="form-label">Fecha de Creación</label>
+                <input type="datetime-local" class="form-control" id="fechaHoraCreacion" @bind="tramite.FechaHoraCreacion" />
+            </div>
+            <select @bind="tramite.EstadoTramite" class="form-control">
+                @foreach (var estado in Enum.GetValues(typeof(EstadoTramite)))
+                {
+                    <option value="@estado">@estado</option>
+                }
+            </select>
+        </form>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="Ocultar">Cancelar</button>
+        <button type="button" class="btn btn-primary" @onclick="Alta">Alta</button>
+        <DialogoAlerta @ref="dialogoAlerta" Mensaje = "@msj"></DialogoAlerta>
+    </div>
+}
+
+
+
+@code{
+ [Parameter] public Usuario User { get; set; }
+ private Tramite tramite = new Tramite();
+
+    private bool visible = false;
+    private DialogoAlerta dialogoAlerta = new DialogoAlerta();
+    private string msj = "";
+    public void Mostrar()
+    {
+            visible = true;
+            StateHasChanged();
+    }
+
+    private void Ocultar()
+    {
+        visible = false;
+        StateHasChanged();
+    }
+    private void Alta(){
+        try
+        {
+            tramite.IdUsuario = User.Id;
+            tramite.FechaHoraUltimaModificacion = DateTime.Now;
+            alta.Ejecutar(tramite, User);
+            tramite = new Tramite();
+            this.Ocultar();
+        }
+        catch(Exception e)
+        {
+            msj = e.Message;
+        }
+        finally{
+            dialogoAlerta.Mostrar();
+        }
+    }
+}

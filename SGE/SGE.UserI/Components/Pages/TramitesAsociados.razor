@@ -1,0 +1,51 @@
+@rendermode InteractiveServer
+
+@if (visible)
+{
+    <button class="btn btn-danger btn-sm" @onclick="Ocultar">Cerrar</button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Expediente ID</th>
+                <th>Contenido</th>
+                <th>Fecha de Creación</th>
+                <th>Fecha de Última Modificación</th>
+                <th>Usuario que Modificó</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var t in Lista)
+            {
+                <tr>
+                    <td>@t.Id</td>
+                    <td>@t.ExpedienteId</td>
+                    <td>@t.Contenido</td>
+                    <td>@t.FechaHoraCreacion</td>
+                    <td>@t.FechaHoraUltimaModificacion</td>
+                    <td>@t.IdUsuario</td>
+                    <td>@t.EstadoTramite</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    [Parameter] public List<Tramite> Lista { get; set; } = new List<Tramite>();
+
+    private bool visible = false;
+    public void Mostrar()
+    {
+            visible = true;
+            StateHasChanged();
+    }
+
+    private void Ocultar()
+    {
+        visible = false;
+        StateHasChanged();
+    }
+}

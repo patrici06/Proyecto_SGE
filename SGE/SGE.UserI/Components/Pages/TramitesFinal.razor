@@ -1,5 +1,5 @@
 @using SGE.UserI.Components.Pages
-@page "/tramites"
+@page "/tramitesfinal"
 @rendermode InteractiveServer
 @inject NavigationManager Navegador
 
@@ -10,8 +10,9 @@
 @inject CasoUsoConsultaEtiquetaTramite consultaTramiteEtiqueta
 @inject CasoUsoConsultaTramiteID consultaTramiteID
 @inject CasoUsoConsultaTramites consultaTramites
-@inject CasoUsoModificacionTramite modificacionTramite
-
+@* @inject CasoUsoModificacionTramite modificacionTramite
+ *@
+ 
 @inject ServicioAutorizacion autorizador
 @inject ServicioUsuarioEstado logeado
 <PageTitle>Tramites</PageTitle>
@@ -19,38 +20,55 @@
 
 @if (logeado.Usuario != null)
 {
-    <button class="btn btn-primary" @onclick ="AltaTramite">Dar AltaTramite</button>
+    <div class="expedientes-container">
+        <div class="expediente-section">
+            <h2 class="section-title">Gestión de Tramites</h2>
+            <div class="button-group">
+                <button class="btn btn-primary btn-lg" @onclick="AltaTramite">Agregar Tramite</button>
+                <button class="btn btn-primary btn-lg" @onclick="ModTramite">Modificar Tramite</button>
+                <button class="btn btn-primary btn-lg" @onclick="BajaTramite">Dar de Baja Tramite</button>
+                <button class="btn btn-primary btn-lg" @onclick="MostrarTramites">Mostrar Todos los Tramites</button>
+                <button class="btn btn-primary" @onclick ="MostrarTramitesEtiqueta">Mostrar Tramites Por Etiqueta</button>
+            </div>
+        </div>
+    </div>
+
+
+    //recursos Modularizados
     <FormularioTramite @ref="formularioTramite" User="logeado.Usuario"></FormularioTramite>
-    <DialogoAlerta @ref="formulario" Mensaje = "@excepcionAlta"></DialogoAlerta> 
-    <br>
-    <h4>Modificar Tramite</h4>
-//    <button class="btn btn-primary" @onclick ="ModificarTramite">Modificar</button>
-    <br>
-    <h4>Dar de Baja un Tramite</h4>
- //   <button class="btn btn-primary" @onclick ="BajaTramite">Baja</button>
-    <br>
-    <button class="btn btn-primary" @onclick ="MostrarTramites">Mostrar Todos Los Tramites</button>
-    <DialogoAlerta @ref="vacio" Mensaje= "@excepcion"></DialogoAlerta>
+    <FormularioModificacionTramite @ref="eliminarTramiteId" User="logeado.Usuario"></FormularioModificacionTramite>
     <TablaTramites @ref="tablaTramites" Lista= "@tramites" User="logeado.Usuario"></TablaTramites>
-    <br>
-    <h4>Mostrar todos los Tramites por Etiqueta</h4>
-//    <button class="btn btn-primary" @onclick ="MostrarTramitesPorE">Mostrar</button>
-    <br>
-    <h5>Limpiar Pantalla</h5>
-//    <button class="btn btn-primary" @onclick ="reset">Clear</button>
+    <TramitesEtiquetas @ref="tramitesEtiquetas" user="logeado.Usuario"></TramitesEtiquetas>
+    <ModificarTramite @ref="modificacionTramite" User="logeado.Usuario"></ModificarTramite>
+    //Alertas de excepciones
+    <DialogoAlerta @ref="formulario" Mensaje = "@excepcionAlta"></DialogoAlerta> 
+    <DialogoAlerta @ref="vacio" Mensaje= "@excepcion"></DialogoAlerta>
+    <DialogoAlerta @ref="Modificar" Mensaje= "@modificar"></DialogoAlerta>
+    <DialofoAlerta @ref="EliminarD" Mensaje= "@eliminar"></DialofoAlerta>
 }
 else
 {
     <p>No hay un usuario logeado.</p>
 }
 @code{
+
+    private EliminarTramitePorId eliminarPorId = new EliminarTramitePorId();
     private TablaTramites tablaTramites = new TablaTramites(); 
     private FormularioTramite formularioTramite = new FormularioTramite();
     private List<Tramite> tramites = new List<Tramite>();
+    private List<Tramite> tramitesEtiqueta =  new List<Tramite>(); 
+    
+    private ModificarTramite modificaionTramite = new ModificarTramite();
+    private DialogoAlerta Modificar = new DialogoAlerta();
     private DialogoAlerta vacio = new DialogoAlerta();
     private DialogoAlerta formulario = new DialogoAlerta();
+    private DialogoAlerta EliminarD= new DialogoAlerta();
+    private TramitesEtiquetas tramitesEtiquetas = new TramitesEtiquetas();
     private string excepcion = "";
     private string excepcionAlta = "";
+    private string modificar = "";
+    private string eliminar = "";
+    //private string excepcionEtiqueta = "";
 
     private void MostrarTramites()
     {
@@ -67,7 +85,6 @@ else
     }
     private void AltaTramite(){
         try{
-            Console.WriteLine(logeado.Usuario.Id);
             if(!autorizador.TienePermiso(logeado.Usuario, Permiso.TramiteAlta)) throw new AutorizacionException("No Posee Permiso");
             formularioTramite.Mostrar();
             StateHasChanged();
@@ -78,5 +95,29 @@ else
             formulario.Mostrar();
         }
     }
-}
+    private void MostrarTramitesEtiqueta(){
+        tramitesEtiquetas.Mostrar();
+    }
+    private void ModTramite(){
+        try
+        {
+            modificacionTramite.Mostrar(); 
+        }
+        catch(Exception e)
+        {
+            modificar = e.Message; 
+            Modificar.Mostrar(); 
+        }
+    }
+    private void Eliminar(){
+        try
+        {
+            eliminarPorId.Mostrar(); 
+        }
+        catch(Exception e)
+        {
+            eliminar = e.Message; 
+            EliminarD.Mostrar(); 
+        }
+    }
 }

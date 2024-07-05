@@ -1,0 +1,119 @@
+@using SGE.UserI.Components.Pages
+@page "/expedientesfinal"
+@rendermode InteractiveServer
+@inject NavigationManager Navegador
+
+@inject SGE.Aplicacion.CasoUsoAltaExpediente altaExpediente
+@inject SGE.Aplicacion.CasoUsoBajaExpediente bajaExpediente
+@inject SGE.Aplicacion.CasoUsoConsultaExpedienteID consultaExpedienteID
+@inject SGE.Aplicacion.CasoUsoConsultaExpedientes consultaExpedientes
+@inject SGE.Aplicacion.CasoUsoModificacionExpediente modificacionExpediente
+
+@inject ServicioAutorizacion autorizador
+@inject ServicioUsuarioEstado logeado
+
+<PageTitle>Expedientes</PageTitle>
+
+@if (logeado.Usuario != null)
+{
+    <div class="expedientes-container">
+        <div class="expediente-section">
+            <h2 class="section-title">Gestión de Expedientes</h2>
+            <div class="button-group">
+                <button class="btn btn-primary btn-lg" @onclick="AltaExpediente">Agregar Expediente</button>
+                <button class="btn btn-primary btn-lg" @onclick="ModificarExpediente">Modificar Expediente</button>
+                <button class="btn btn-primary btn-lg" @onclick="BajaExpediente">Dar de Baja Expediente</button>
+                <button class="btn btn-primary btn-lg" @onclick="MostrarExpedientes">Mostrar Todos los Expedientes</button>
+            </div>
+        </div>
+    </div>
+
+    <FormularioExpediente @ref="formularioExpediente" User="logeado.Usuario"></FormularioExpediente>
+    <TablaExpedientes @ref="tablaExpedientes" Lista= "@expedientes" User="logeado.Usuario"></TablaExpedientes>
+    <VentanaBajaExpediente @ref="ventanaBajaExpediente" expediente= "@expediente" User="logeado.Usuario"></VentanaBajaExpediente>
+    <FormularioModificacionExpediente @ref="formularioModificacionExpediente" User="logeado.Usuario"></FormularioModificacionExpediente>
+
+    <DialogoAlerta @ref="dialogoAlerta" Mensaje = "@alerta"></DialogoAlerta>
+    <DialogoConfirmacion @ref="dialogoConfirmacion" Mensaje = "@confirmacion"></DialogoConfirmacion>
+}
+else
+{
+    <h4>No hay un usuario logeado.</h4>
+}
+
+@code {
+    private DialogoAlerta dialogoAlerta = new DialogoAlerta();
+    private DialogoConfirmacion dialogoConfirmacion = new DialogoConfirmacion();
+    private TablaExpedientes tablaExpedientes = new TablaExpedientes(); 
+    private List<Expediente> expedientes = new List<Expediente>();
+    private FormularioExpediente formularioExpediente = new FormularioExpediente();
+    private FormularioModificacionExpediente formularioModificacionExpediente = new FormularioModificacionExpediente();
+    private VentanaBajaExpediente ventanaBajaExpediente = new VentanaBajaExpediente();
+    private string confirmacion = "";
+    private string alerta = "";
+
+
+    private void AltaExpediente(){
+        try{
+            Console.WriteLine(logeado.Usuario.Id);
+            if(!autorizador.TienePermiso(logeado.Usuario, Permiso.ExpedienteAlta)) throw new AutorizacionException("No Posee Permiso");
+            formularioExpediente.Mostrar();
+            StateHasChanged();
+            confirmacion = "Alta Exitosa";
+            dialogoConfirmacion.Mostrar();
+        }
+        catch (Exception e)
+        {
+            alerta = e.Message;
+            dialogoAlerta.Mostrar();
+        }
+    }
+
+    private void ModificarExpediente()
+    {
+        try
+        {
+            if(!autorizador.TienePermiso(logeado.Usuario, Permiso.ExpedienteModificacion)) throw new AutorizacionException("No Posee Permiso");
+            formularioModificacionExpediente.Mostrar();
+            StateHasChanged();
+            confirmacion = "Modificación Exitosa";
+            dialogoConfirmacion.Mostrar();
+        }
+        catch (Exception e)
+        {
+            alerta = e.Message;
+            dialogoAlerta.Mostrar();
+        }
+    }
+
+    private void BajaExpediente()
+    {
+        try
+        {
+            if(!autorizador.TienePermiso(logeado.Usuario, Permiso.ExpedienteBaja)) throw new AutorizacionException("No Posee Permiso");
+            ventanaBajaExpediente.Mostrar();
+            StateHasChanged();
+            confirmacion = "Baja Exitosa";
+            dialogoConfirmacion.Mostrar();
+        }
+        catch (Exception e)
+        {
+            alerta = e.Message;
+            dialogoAlerta.Mostrar();
+        }
+    }
+
+    private void MostrarExpedientes()
+    {
+        try
+        {
+            expedientes = consultaExpedientes.Ejecutar();
+            tablaExpedientes.Mostrar();
+        }
+        catch (Exception e)
+        {
+            alerta = e.Message;
+            dialogoAlerta.Mostrar();
+        }
+    }
+}

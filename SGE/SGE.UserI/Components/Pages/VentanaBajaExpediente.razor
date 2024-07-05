@@ -1,0 +1,46 @@
+@using SGE.UserI.Components.Pages
+@rendermode InteractiveServer
+@inject SGE.Aplicacion.CasoUsoBajaExpediente bajaExpediente
+
+
+@if(visible){
+    <div>
+        <h6>Esta Seguro que Desea Eliminar el Expediente?</h6>
+        <button type="button" class="btn btn-primary" @onclick="Baja">Confirmar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="Ocultar">Cancelar</button>
+    </div>
+}
+
+
+
+@code{
+ [Parameter] public Usuario User { get; set; }
+ [Parameter] public Expediente expediente { get; set; }
+
+    private bool visible = false;
+    public void Mostrar()
+    {
+        visible = true;
+        StateHasChanged();
+    }
+
+    private void Ocultar()
+    {
+        visible = false;
+        StateHasChanged();
+    }
+    private void Baja(){
+        try
+        {
+            bajaExpediente.Ejecutar(expediente.Id);
+        }
+        catch(Exception e)
+        {
+            throw e;
+        }
+        finally
+        {
+            this.Ocultar();
+        }
+    }
+}

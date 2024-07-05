@@ -1,4 +1,4 @@
-@inject SGE.Aplicacion.CasoUsoModificacionTramite modificacionTramite
+@rendermode InteractiveServer
 @inject SGE.Aplicacion.CasoUsoBajaTramite bajaTramite
 @inject SGE.Aplicacion.UsuarioValidador validador
 
@@ -30,15 +30,11 @@
                     <td>@t.IdUsuario</td>
                     <td>@t.EstadoTramite</td>
                     <td>
-                        @if (validador.TienePermiso(User, Permiso.TramiteBaja))
-                        {
                             <button class="btn btn-danger btn-sm" @onclick="() => baja(t)">Eliminar</button>
-                        }
-                        @if (validador.TienePermiso(User, Permiso.TramiteModificacion))
-                        {
-                            <button class="btn btn-primary btn-sm">Modificar</button>
-                        }
+                            <button class="btn btn-primary btn-sm"@onclick="()=> modificacion(t)">Modificar</button>
                     </td>
+                    <FormularioModificacionTramite @ref="formulario" User="@User" TramiteMod="@modificable"></FormularioModificacionTramite>
+                    <DialogoAlerta @ref="@dialogoAlerta" Mensaje="@msj"></DialogoAlerta>
                 </tr>
             }
         </tbody>
@@ -51,6 +47,9 @@
 
     private bool visible = false;
     private DialogoAlerta dialogoAlerta = new DialogoAlerta();
+    private string msj = "";
+    private FormularioModificacionTramite formulario = new FormularioModificacionTramite(); 
+    private Tramite modificable; 
     public void Mostrar()
     {
             visible = true;
@@ -68,13 +67,25 @@
         try
         {
 
-            bajaTramite.Ejecutar(tramite.Id, User.Id);
+            bajaTramite.Ejecutar(tramite.Id, User);
             Lista.Remove(tramite);
             StateHasChanged();
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-
+            throw e;
+        }
+    }
+    private void modificacion(Tramite t)
+    {
+        try{
+            modificable=t; 
+            formulario.Mostrar(); 
+        }
+        catch(Exception e)
+        {
+            msj = e.Message; 
+            dialogoAlerta.Mostrar(); 
         }
     }
 }

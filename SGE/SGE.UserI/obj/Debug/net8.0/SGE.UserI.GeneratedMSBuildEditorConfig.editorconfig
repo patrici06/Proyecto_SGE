@@ -9,75 +9,119 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SGE.UserI
 build_property.RootNamespace = SGE.UserI
-build_property.ProjectDir = c:\Users\patricio rivero\Desktop\Revision Final\Proyecto_SGE\SGE\SGE.UserI\
+build_property.ProjectDir = C:\Users\patricio rivero\Desktop\Revision Final\Proyecto_SGE\SGE\SGE.UserI\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = c:\Users\patricio rivero\Desktop\Revision Final\Proyecto_SGE\SGE\SGE.UserI
+build_property.MSBuildProjectDirectory = C:\Users\patricio rivero\Desktop\Revision Final\Proyecto_SGE\SGE\SGE.UserI
 build_property._RazorSourceGeneratorDebug = 
 
-[c:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/App.razor]
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/App.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/DialogoAlerta.razor]
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/DialogoAlerta.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEaWFsb2dvQWxlcnRhLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/Error.razor]
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/DialogoConfirmacion.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xEaWFsb2dvQ29uZmlybWFjaW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/EliminarTramitePorId.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFbGltaW5hclRyYW1pdGVQb3JJZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/Expedientes.razor]
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/Expedientes.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFeHBlZGllbnRlcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/FormularioTramite.razor]
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/ExpedientesFinal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFeHBlZGllbnRlc0ZpbmFsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/FormularioExpediente.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xGb3JtdWxhcmlvRXhwZWRpZW50ZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/FormularioModificacionExpediente.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xGb3JtdWxhcmlvTW9kaWZpY2FjaW9uRXhwZWRpZW50ZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/FormularioModificacionTramite.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xGb3JtdWxhcmlvTW9kaWZpY2FjaW9uVHJhbWl0ZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/FormularioTramite.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xGb3JtdWxhcmlvVHJhbWl0ZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/GestionUsuarios.razor]
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/GestionUsuarios.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xHZXN0aW9uVXN1YXJpb3MucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/Home.razor]
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/Registro.razor]
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/ModificarTramite.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNb2RpZmljYXJUcmFtaXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/Registro.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xSZWdpc3Ryby5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/TablaTramites.razor]
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/TablaExpedientes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUYWJsYUV4cGVkaWVudGVzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/TablaTramites.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUYWJsYVRyYW1pdGVzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/Tramites.razor]
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/Tramites.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUcmFtaXRlcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/TramitesFinal.razor]
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/TramitesAsociados.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUcmFtaXRlc0Fzb2NpYWRvcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/TramitesEtiquetas.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUcmFtaXRlc0V0aXF1ZXRhcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/TramitesFinal.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xUcmFtaXRlc0ZpbmFsLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/Usuarios.razor]
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/Usuarios.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xVc3Vhcmlvcy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Routes.razor]
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Pages/VentanaBajaExpediente.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xWZW50YW5hQmFqYUV4cGVkaWVudGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Routes.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSb3V0ZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/_Imports.razor]
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xfSW1wb3J0cy5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Layout/MainLayout.razor]
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Layout/MainLayout.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTWFpbkxheW91dC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-nk568npls8
 
-[c:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Layout/NavMenu.razor]
+[C:/Users/patricio rivero/Desktop/Revision Final/Proyecto_SGE/SGE/SGE.UserI/Components/Layout/NavMenu.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTmF2TWVudS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = b-5kcergcc10

@@ -18,7 +18,6 @@ public class CasoUsoAltaTramite
 
     public void Ejecutar(Tramite tramite, Usuario idUsuario)
     {
-        if(!_servicioAutorizacion.TienePermiso(idUsuario, Permiso.TramiteAlta)) throw new AutorizacionException($"No Posee Permiso{Permiso.TramiteAlta}");
         TramiteValidador.ValidarTramite(tramite); 
         Expediente? ex = _expedienteRepositorio.ConsultaPorId(tramite.ExpedienteId);
         if (ex == null)

@@ -1226,8 +1226,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj": {
-              "projectPath": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj"
+            "C:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj": {
+              "projectPath": "C:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj"
             }
           }
         }

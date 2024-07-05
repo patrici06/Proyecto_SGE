@@ -1,0 +1,49 @@
+@rendermode InteractiveServer
+@inject CasoUsoConsultaEtiquetaTramite consultaTramiteEtiqueta
+
+@code{
+    [Parameter] public Usuario user {get; set;}  = new Usuario();
+    private List<Tramites> tramitesFiltrados = new List<Tramites>(); 
+    private TablaTramites tabla = new TablaTramites(); 
+    private DialogoAlerta dialogo = new DialogoAlerta();
+    private bool visible = false;
+    private string msj = ""; 
+    private EstadoTramite estadoTramite;
+    public void Mostrar(){
+        visible = true; 
+        StateHasChanged();
+    }
+    private void Ocultar(){
+        visible = false; 
+        StateHasChanged();
+    }
+    private void Buscar(){
+        try
+        {
+            tramitesFiltrados = consultaTramiteEtiqueta.Ejecutar(estadoTramite); 
+            tabla.Mostrar(); 
+            this.Ocultar(); 
+        }
+        catch(Exception e)
+        {
+            msj = e.Message;
+            dialogoAlerta.Mostrar();
+        }
+    }
+}
+
+@if(visible){
+    <div>
+        <h3>-Seleccione un estado para filtrar-</h3>
+        <select @bind="estadoTramite" class="form-control">
+                @foreach (var estado in Enum.GetValues(typeof(EstadoTramite)))
+                {
+                    <option value="@estado">@estado</option>
+                }
+        </select>
+        <button class="btn btn-primary" @onclick ="Buscar">Buscar</button>
+        <button class="btn btn-primary" @onclick ="Ocultar">Cerrar</button>
+        <DialogoAlerta @ref="dialogo" Mensaje= "@msj"></DialogoAlerta>
+        <TablaTramites @ref="tabla" Lista ="@tramitesFiltrados" User ="@user"></TablaTramites> 
+    </div>
+}

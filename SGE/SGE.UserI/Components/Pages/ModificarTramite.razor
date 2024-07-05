@@ -1,0 +1,46 @@
+@inject CasoUsoConsultaTramiteID consultaTramite
+
+@if(visible){
+<FormularioModificacionTramite @ref="formulario" User= "@User" TramiteMod ="@tramite"></FormularioModificacionTramite>
+<form>
+    <div>
+        <label for="idTramite">ID de Expediente</label>
+        <input type="text" class="form-control" id="idTramite" @bind="@idTramite">
+    </div>
+    @* <DialogoAlerta @ref="excepciones" Mensaje = "@msj"></DialogoAlerta> *@
+    <button type="button" class="btn btn-primary" @onclick="Buscar">Buscar</button>
+    <button type="button" class="btn btn-secondary" @onclick="Ocultar">Cancelar</button>
+</form>
+}
+@code{
+    [Parameter] public Usuario User {get; set;}
+    private int idTramite; 
+    private bool visible = false;
+    private Tramite tramite; 
+    private FormularioModificacionTramite formulario = new FormularioModificacionTramite();
+
+    public void Mostrar()
+    {
+        visible = true;
+        StateHasChanged();
+    }
+
+    private void Ocultar()
+    {
+        visible = false;
+        StateHasChanged();
+    }
+    private void Buscar(){
+        try
+        {
+            tramite = consultaTramite(idTramite); 
+            formulario.Mostrar(); 
+        }
+        catch(Exception e)
+        {
+            throw e;
+            this.Ocultar();
+        }
+    }
+
+}

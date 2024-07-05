@@ -10,6 +10,8 @@ public class CasoUsoConsultaEtiquetaTramite
 
     public List<Tramite> Ejecutar(EstadoTramite estado)
     {
-        return _tramiteRepositorio.ConsultaPorEtiqueta(estado)??throw new RepositorioException("No hay Coincidencias");
+          List<Tramite>? tramites = _tramiteRepositorio.ConsultaPorEtiqueta(estado); 
+        if(tramites == null || !tramites.Any()) throw new RepositorioException("No hay tramites En la DB");
+        return tramites;
     }
 }

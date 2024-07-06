@@ -1,6 +1,7 @@
 @inject CasoUsoModificacionExpediente casoModificacion
 
 @if(visible){
+    <br>
     <div>
         <h4>Ingrese Campos Del Expediente</h4>
         <form>
@@ -26,6 +27,8 @@
         <button type="button" class="btn btn-secondary" @onclick="Ocultar">Cancelar</button>
         <button type="button" class="btn btn-primary" @onclick="Modificar">Modificar</button>
     </div>
+    <br>
+    <DialogoAlerta @ref="dialogoAlerta" Mensaje = "@alerta"></DialogoAlerta>
 }
 
 
@@ -34,6 +37,8 @@
  [Parameter] public Usuario User { get; set; }
  [Parameter] public Expediente ExpedienteMod { get; set; }
  [Parameter] public EventCallback ModExitosa { get; set; }
+ private DialogoAlerta dialogoAlerta = new DialogoAlerta();
+ private String alerta = "";
 
 
     private bool visible = false;
@@ -52,15 +57,14 @@
     private async Task Modificar(){
         try
         {   
-            casoModificacion.Ejecutar(ExpedienteMod, User.Id);
+            casoModificacion.Ejecutar(ExpedienteMod, User);
             await ModExitosa.InvokeAsync();
+            this.Ocultar();
         }
         catch(Exception e)
         {
-            throw e;
-        }
-        finally{
-            this.Ocultar();
+            alerta = e.Message;
+            dialogoAlerta.Mostrar();
         }
     }
 }

@@ -6,15 +6,15 @@
         <form>
             <div class="form-group">
                 <label for="contenido">Contenido</label>
-                <input placeholder="Contenido" class="form-control" @bind="TramiteMod.Contenido">
+                <input placeholder="TramiteMod.Contenido" class="form-control" @bind="TramiteMod.Contenido">
             </div>
             <div class="form-group">
                 <label for="idExpediente">ID de Expediente</label>
-                <input type="text" class="form-control" id="idExpediente" @bind="TramiteMod.ExpedienteId">
+                <input placeholder="TramiteMod.ExpedienteId" class="form-control"  @bind="TramiteMod.ExpedienteId">
             </div>
             <div class="form-group">
                 <label for="fechaHoraCreacion" class="form-label">Fecha de Creación</label>
-                <input type="datetime-local" class="form-control" id="fechaHoraCreacion" @bind="TramiteMod.FechaHoraCreacion" />
+                <input type="datetime-local" class="form-control" placeholder="TramiteMod.FechaHoraCreacion" @bind="TramiteMod.FechaHoraCreacion" />
             </div>
             <select @bind="TramiteMod.EstadoTramite" class="form-control">
                 @foreach (var estado in Enum.GetValues(typeof(EstadoTramite)))
@@ -26,13 +26,18 @@
         <button type="button" class="btn btn-secondary" @onclick="Ocultar">Cancelar</button>
         <button type="button" class="btn btn-primary" @onclick="Modificar">Modificar</button>
     </div>
+    <br>
+    <DialogoAlerta @ref="dialogoAlerta" Mensaje = "@alerta"></DialogoAlerta>
 }
 
 
 
 @code{
  [Parameter] public Usuario User { get; set; }
- [Parameter] public Tramite TramiteMod {get; set;} 
+ [Parameter] public Tramite TramiteMod {get; set;}
+ [Parameter] public EventCallback OnExpedienteAltaExitosa { get; set; }
+ private DialogoAlerta dialogoAlerta = new DialogoAlerta();
+ private String alerta = "";
 
     private bool visible = false;
     public void Mostrar()
@@ -46,17 +51,18 @@
         visible = false;
         StateHasChanged();
     }
-    private void Modificar(){
+    private async Task Modificar(){
         try
         {   
+
             casoModificacion.Ejecutar(TramiteMod, User);
+            this.Ocultar();
+            await OnExpedienteAltaExitosa.InvokeAsync(); 
         }
         catch(Exception e)
         {
-            throw e;
-        }
-        finally{
-            this.Ocultar();
+            alerta = e.Message;
+            dialogoAlerta.Mostrar();
         }
     }
 }

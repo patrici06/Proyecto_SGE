@@ -66,7 +66,7 @@
     private async Task Baja(int idExpediente){
         try
         {
-            bajaExpediente.Ejecutar(idExpediente);
+            bajaExpediente.Ejecutar(idExpediente, User);
             await OnExpedienteAltaExitosa.InvokeAsync();
         }
         catch(Exception e)

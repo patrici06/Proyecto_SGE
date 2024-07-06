@@ -1,20 +1,22 @@
 @inject CasoUsoBajaTramite baja
 
 @if(visible){
-    @*<FormularioModificacionTramite @ref="formulario" User= "@User" TramiteMod ="@tramite"></FormularioModificacionTramite>*@
     <form>
         <div>
-            <label for="idTramite">ID de Expediente</label>
+            <label for="idTramite">Id Tramite A Eliminar</label>
             <input type="text" class="form-control" id="idTramite" @bind="@idTramite">
         </div>
-        @* <DialogoAlerta @ref="excepciones" Mensaje = "@msj"></DialogoAlerta> *@
         <button type="button" class="btn btn-primary" @onclick="Eliminar">Eliminar</button>
         <button type="button" class="btn btn-secondary" @onclick="Ocultar">Cancelar</button>
+    <DialogoAlerta @ref="dialogoAlerta" Mensaje = "@alerta"></DialogoAlerta>
     </form>
 }
 @code
 {
     [Parameter] public Usuario User {get; set;}
+    [Parameter] public EventCallback OnExpedienteAltaExitosa { get; set; }
+    private DialogoAlerta dialogoAlerta = new DialogoAlerta();
+    private string alerta = "";
     private int idTramite; 
     private bool visible = false;
 
@@ -29,14 +31,16 @@
         visible = false;
         StateHasChanged();
     }
-    private void Eliminar(){
+    private async Task Eliminar(){
         try
         {
             baja.Ejecutar(idTramite, User);
+            await OnExpedienteAltaExitosa.InvokeAsync();
         }
         catch(Exception e)
         {
-            throw e;
+            alerta = e.Message; 
+            dialogoAlerta.Mostrar();
         }
     }
 

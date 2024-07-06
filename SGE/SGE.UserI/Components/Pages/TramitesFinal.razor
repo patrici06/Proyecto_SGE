@@ -8,7 +8,6 @@
 @inject CasoUsoAltaTramite altaTramite
 @inject CasoUsoBajaTramite bajaTramite 
 @inject CasoUsoConsultaEtiquetaTramite consultaTramiteEtiqueta
-@inject CasoUsoConsultaTramiteID consultaTramiteID
 @inject CasoUsoConsultaTramites consultaTramites
 @* @inject CasoUsoModificacionTramite modificacionTramite
  *@
@@ -35,16 +34,15 @@
 
 
     //recursos Modularizados
-    <FormularioTramite @ref="formularioTramite" User="logeado.Usuario"></FormularioTramite>
-    <FormularioModificacionTramite @ref="eliminarTramiteId" User="logeado.Usuario"></FormularioModificacionTramite>
+    <FormularioTramite @ref="formularioTramite" User="logeado.Usuario" OnExpedienteAltaExitosa="MostrarConfirmacion"></FormularioTramite>
+    <FormularioModificacionTramite @ref="eliminarTramiteId" User="logeado.Usuario" OnExpedienteAltaExitosa="MostrarConfirmacion"></FormularioModificacionTramite>
     <TablaTramites @ref="tablaTramites" Lista= "@tramites" User="logeado.Usuario"></TablaTramites>
     <TramitesEtiquetas @ref="tramitesEtiquetas" user="logeado.Usuario"></TramitesEtiquetas>
-    <ModificarTramite @ref="modificacionTramite" User="logeado.Usuario"></ModificarTramite>
+    <ModificarTramite @ref="modificacionTramite" User="logeado.Usuario" OnExpedienteAltaExitosa="MostrarConfirmacion"></ModificarTramite>
     //Alertas de excepciones
-    <DialogoAlerta @ref="formulario" Mensaje = "@excepcionAlta"></DialogoAlerta> 
-    <DialogoAlerta @ref="vacio" Mensaje= "@excepcion"></DialogoAlerta>
-    <DialogoAlerta @ref="ModificarD" Mensaje= "@modificar"></DialogoAlerta>
-    <DialogoAlerta @ref="EliminarD" Mensaje= "@eliminar"></DialogoAlerta>
+   <br>
+    <DialogoAlerta @ref="dialogoAlerta" Mensaje = "@alerta"></DialogoAlerta>
+    <DialogoConfirmacion @ref="dialogoConfirmacion" Mensaje = "@confirmacion"></DialogoConfirmacion>
 }
 else
 {
@@ -58,19 +56,22 @@ else
     private FormularioTramite formularioTramite = new FormularioTramite();
     private List<Tramite>? tramites = new List<Tramite>();
     private List<Tramite> tramitesEtiqueta =  new List<Tramite>(); 
-    
     private ModificarTramite modificacionTramite = new ModificarTramite();
-    private DialogoAlerta ModificarD = new DialogoAlerta();
-    private DialogoAlerta vacio = new DialogoAlerta();
-    private DialogoAlerta formulario = new DialogoAlerta();
-    private DialogoAlerta EliminarD= new DialogoAlerta();
-    private TramitesEtiquetas tramitesEtiquetas = new TramitesEtiquetas();
-    private string excepcion = "";
-    private string excepcionAlta = "";
-    private string modificar = "";
-    private string eliminar = "";
-    //private string excepcionEtiqueta = "";
 
+
+    private DialogoAlerta dialogoAlerta = new DialogoAlerta();
+    private DialogoConfirmacion dialogoConfirmacion = new DialogoConfirmacion();
+    private string confirmacion = "";
+    private string alerta = "";
+
+    private TramitesEtiquetas tramitesEtiquetas = new TramitesEtiquetas();
+    //private string excepcionEtiqueta = "";
+    
+    private void MostrarConfirmacion()
+    {
+        dialogoConfirmacion.Mostrar();
+        StateHasChanged();
+    }
     private void MostrarTramites()
     {
         try
@@ -80,20 +81,20 @@ else
         }
         catch (Exception e)
         {
-            excepcion = e.Message;
-            vacio.Mostrar();
+            alerta = e.Message;
+            dialogoAlerta.Mostrar();
         }
     }
     private void AltaTramite(){
         try{
             if(!autorizador.TienePermiso(logeado.Usuario, Permiso.TramiteAlta)) throw new AutorizacionException("No Posee Permiso");
             formularioTramite.Mostrar();
-            StateHasChanged();
+            confirmacion = "AltaExitosa";
         }
         catch (Exception e)
         {
-            excepcionAlta = e.Message;
-            formulario.Mostrar();
+            alerta = e.Message;
+            dialogoAlerta.Mostrar();
         }
     }
     private void MostrarTramitesEtiqueta(){
@@ -103,22 +104,25 @@ else
         try
         {
             modificacionTramite.Mostrar(); 
+            confirmacion = "Modificacion exitosa";
         }
         catch(Exception e)
         {
-            modificar = e.Message; 
-            ModificarD.Mostrar(); 
+            alerta = e.Message; 
+            dialogoAlerta.Mostrar(); 
         }
     }
     private void BajaTramite(){
         try
         {
-            eliminarPorId.Mostrar(); 
+            eliminarPorId.Mostrar();
+            StateHasChanged();
+            confirmacion = "BajaExitosa"; 
         }
         catch(Exception e)
         {
-            eliminar = e.Message; 
-            EliminarD.Mostrar(); 
+            alerta = e.Message; 
+            dialogoAlerta.Mostrar(); 
         }
     }
 }

@@ -33,8 +33,10 @@
                             <button class="btn btn-danger btn-sm" @onclick="() => baja(t)">Eliminar</button>
                             <button class="btn btn-primary btn-sm"@onclick="()=> modificacion(t)">Modificar</button>
                     </td>
-                    <FormularioModificacionTramite @ref="formulario" User="@User" TramiteMod="@modificable"></FormularioModificacionTramite>
-                    <DialogoAlerta @ref="@dialogoAlerta" Mensaje="@msj"></DialogoAlerta>
+                    <FormularioModificacionTramite @ref="formulario" User="@User" TramiteMod="@modificable" OnEvent ="@OnExpedienteAltaExitosa"></FormularioModificacionTramite>
+                     <br>
+                     <DialogoAlerta @ref="dialogoAlerta" Mensaje = "@alerta"></DialogoAlerta>
+                     <DialogoConfirmacion @ref="dialogoConfirmacion" Mensaje = "@confirmacion"></DialogoConfirmacion>
                 </tr>
             }
         </tbody>
@@ -44,10 +46,17 @@
 @code {
     [Parameter] public List<Tramite> Lista { get; set; } = new List<Tramite>();
     [Parameter] public Usuario User { get; set; }
-
+    [Parameter] public EventCallback OnExpedienteAltaExitosa { get; set; }
+    private void MostrarConfirmacion()
+    {
+        dialogoConfirmacion.Mostrar();
+        StateHasChanged();
+    }
     private bool visible = false;
     private DialogoAlerta dialogoAlerta = new DialogoAlerta();
-    private string msj = "";
+    private DialogoConfirmacion dialogoConfirmacion = new DialogoConfirmacion();
+    private string confirmacion = "";
+    private string alerta = "";
     private FormularioModificacionTramite formulario = new FormularioModificacionTramite(); 
     private Tramite modificable; 
     public void Mostrar()
@@ -69,22 +78,26 @@
 
             bajaTramite.Ejecutar(tramite.Id, User);
             Lista.Remove(tramite);
+            confirmacion = "baja exitosa";
             StateHasChanged();
         }
         catch (Exception e)
         {
-            throw e;
+            alerta = e.Message; 
+            dialogoAlerta.Mostrar();
         }
     }
-    private void modificacion(Tramite t)
+    private async Task modificacion(Tramite t)
     {
         try{
             modificable=t; 
-            formulario.Mostrar(); 
+            formulario.Mostrar();
+            confirmacion = "Modificacion exitosa"; 
+            await OnExpedienteAltaExitosa.InvokeAsync();
         }
         catch(Exception e)
         {
-            msj = e.Message; 
+            alerta = e.Message; 
             dialogoAlerta.Mostrar(); 
         }
     }

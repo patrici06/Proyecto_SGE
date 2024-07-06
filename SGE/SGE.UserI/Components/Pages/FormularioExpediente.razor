@@ -30,6 +30,7 @@
         <button type="button" class="btn btn-primary" @onclick="() => Alta(estadoElegido)">Alta</button>
     </div>
     <br>
+    <DialogoAlerta @ref="dialogoAlerta" Mensaje = "@alerta"></DialogoAlerta>
 }
 
 
@@ -38,6 +39,8 @@
  [Parameter] public EventCallback OnExpedienteAltaExitosa { get; set; }
  private Expediente expediente = new Expediente();
  private EstadoExpediente estadoElegido;
+ private DialogoAlerta dialogoAlerta = new DialogoAlerta();
+ private String alerta = "";
  private bool visible = false;
     public void Mostrar()
     {
@@ -56,17 +59,15 @@
             expediente.Estado = estadoElegido;
             expediente.IdUsuarioModificacion = User.Id;
             expediente.FechaModificacion = DateTime.Now;
-            altaExpediente.Ejecutar(expediente);
+            altaExpediente.Ejecutar(expediente, User);
             expediente = new Expediente();
             await OnExpedienteAltaExitosa.InvokeAsync();
+            this.Ocultar();
         }
         catch(Exception e)
         {
-            throw e;
-        }
-        finally
-        {
-            this.Ocultar();
+            alerta = e.Message;
+            dialogoAlerta.Mostrar();
         }
     }
 }

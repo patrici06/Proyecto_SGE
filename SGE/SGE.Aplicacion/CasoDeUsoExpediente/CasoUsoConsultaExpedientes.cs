@@ -9,6 +9,8 @@ public class CasoUsoConsultaExpedientes
 
     public List<Expediente>? Ejecutar()
     {
-        return _ExpedienteRepositorio.ConsultarTodos();
+        List<Expediente>? expedientes = _ExpedienteRepositorio.ConsultarTodos();
+        if(expedientes == null || !expedientes.Any()) throw new RepositorioException("No hay Expedientes En la DB");
+        return expedientes;
     }
 }

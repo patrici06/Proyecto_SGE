@@ -3,12 +3,16 @@ namespace SGE.Aplicacion;
 public class CasoUsoAltaExpediente
 {
     private readonly IExpedienteRepositorio _ExpedienteRepositorio;
-    public CasoUsoAltaExpediente(IExpedienteRepositorio expedienteRepositorio){
+    private readonly UsuarioValidador _UsuarioValidador;
+    public CasoUsoAltaExpediente(IExpedienteRepositorio expedienteRepositorio, UsuarioValidador _usuarioValidador){
         _ExpedienteRepositorio = expedienteRepositorio;
+        _UsuarioValidador = _usuarioValidador;
     }
 
-    public void Ejecutar(Expediente expediente)
+    public void Ejecutar(Expediente expediente, Usuario user)
     {
+        ExpedienteValidador.ValidarExpediente(expediente);
+        if(!_UsuarioValidador.TienePermiso(user, Permiso.ExpedienteAlta)) throw new AutorizacionException($"No posee permiso {Permiso.ExpedienteAlta}");
         _ExpedienteRepositorio.AltaExpediente(expediente);
     }
 }

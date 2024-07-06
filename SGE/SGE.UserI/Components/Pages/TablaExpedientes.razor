@@ -82,9 +82,10 @@
     {
         try
         {
-            bajaExpediente.Ejecutar(expediente.Id);
+            bajaExpediente.Ejecutar(expediente.Id, User);
             Lista.Remove(expediente);
             StateHasChanged();
+            Ocultar();
         }
         catch (Exception exc)
         {

@@ -29,19 +29,21 @@
         </form>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="Ocultar">Cancelar</button>
         <button type="button" class="btn btn-primary" @onclick="Alta">Alta</button>
-        <DialogoAlerta @ref="dialogoAlerta" Mensaje = "@msj"></DialogoAlerta>
     </div>
+    <br>
+    <DialogoAlerta @ref="dialogoAlerta" Mensaje = "@alerta"></DialogoAlerta>
 }
 
 
 
 @code{
  [Parameter] public Usuario User { get; set; }
+ [Parameter] public EventCallback OnExpedienteAltaExitosa { get; set; }
  private Tramite tramite = new Tramite();
+ private DialogoAlerta dialogoAlerta = new DialogoAlerta();
+ private String alerta = "";
 
     private bool visible = false;
-    private DialogoAlerta dialogoAlerta = new DialogoAlerta();
-    private string msj = "";
     public void Mostrar()
     {
             visible = true;
@@ -53,20 +55,19 @@
         visible = false;
         StateHasChanged();
     }
-    private void Alta(){
+    private async Task Alta(){
         try
         {
             tramite.IdUsuario = User.Id;
             tramite.FechaHoraUltimaModificacion = DateTime.Now;
             alta.Ejecutar(tramite, User);
             tramite = new Tramite();
+            await OnExpedienteAltaExitosa.InvokeAsync();
             this.Ocultar();
         }
         catch(Exception e)
         {
-            msj = e.Message;
-        }
-        finally{
+            alerta = e.Message;
             dialogoAlerta.Mostrar();
         }
     }

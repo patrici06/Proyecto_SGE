@@ -1,24 +1,62 @@
 @inject CasoUsoConsultaTramiteID consultaTramite
+@inject CasoUsoModificacionTramite casoModificacion
 
 @if(visible){
-<FormularioModificacionTramite @ref="formulario" User= "@User" TramiteMod ="@tramite"></FormularioModificacionTramite>
 <form>
     <div>
-        <label for="idTramite">ID de Expediente</label>
+        <label for="idTramite">ID de Tramite</label>
         <input type="text" class="form-control" id="idTramite" @bind="@idTramite">
     </div>
-    @* <DialogoAlerta @ref="excepciones" Mensaje = "@msj"></DialogoAlerta> *@
     <button type="button" class="btn btn-primary" @onclick="Buscar">Buscar</button>
     <button type="button" class="btn btn-secondary" @onclick="Ocultar">Cancelar</button>
+    <DialogoAlerta @ref="dialogoAlerta" Mensaje = "@alerta"></DialogoAlerta>
 </form>
 }
+
+@if(visible2){
+    <div>
+        <h6>Ingrese Campos Del Tramite</h6>
+        <form>
+            <div class="form-group">
+                <label for="contenido">Contenido</label>
+                <input placeholder="tramite.Contenido" class="form-control" @bind="tramite.Contenido">
+            </div>
+            <div class="form-group">
+                <label for="idExpediente">ID de Expediente</label>
+                <input placeholder="tramite.ExpedienteId" class="form-control"  @bind="tramite.ExpedienteId">
+            </div>
+            <div class="form-group">
+                <label for="fechaHoraCreacion" class="form-label">Fecha de Creación</label>
+                <input type="datetime-local" class="form-control" placeholder="tramite.FechaHoraCreacion" @bind="tramite.FechaHoraCreacion" />
+            </div>
+            <select @bind="tramite.EstadoTramite" class="form-control">
+                @foreach (var estado in Enum.GetValues(typeof(EstadoTramite)))
+                {
+                    <option value="@estado">@estado</option>
+                }
+            </select>
+        </form>
+        <button type="button" class="btn btn-secondary" @onclick="Ocultar">Cancelar</button>
+        <button type="button" class="btn btn-primary" @onclick="Modificar">Modificar</button>
+    </div>
+    <br>
+    <DialogoAlerta @ref="dialogoAlerta" Mensaje = "@alerta"></DialogoAlerta>
+}
+
 @code{
     [Parameter] public Usuario User {get; set;}
+    [Parameter] public EventCallback OnExpedienteAltaExitosa { get; set; }
     private int idTramite; 
     private bool visible = false;
-    private Tramite tramite; 
-    private FormularioModificacionTramite formulario = new FormularioModificacionTramite();
-
+    private bool visible2 = false;
+    private Tramite tramite = new Tramite(); 
+    private DialogoAlerta dialogoAlerta = new DialogoAlerta();
+    
+    private string alerta = "";
+    private void MostrarConfirmacion()
+    {
+        StateHasChanged();
+    }
     public void Mostrar()
     {
         visible = true;
@@ -28,18 +66,34 @@
     private void Ocultar()
     {
         visible = false;
+        visible2 = false;
         StateHasChanged();
     }
-    private void Buscar(){
+    private async Task Buscar(){
         try
         {
-            tramite = consultaTramite.Ejecutar(idTramite); 
-            formulario.Mostrar(); 
+            tramite = consultaTramite.Ejecutar(idTramite);
+            visible = false; 
+            visible2 = true;
         }
         catch(Exception e)
         {
-            throw e;
+            alerta = e.Message;
+            dialogoAlerta.Mostrar();
+        }
+    }
+    private async Task Modificar(){
+        try
+        {   
+
+            casoModificacion.Ejecutar(tramite, User);
             this.Ocultar();
+            await OnExpedienteAltaExitosa.InvokeAsync(); 
+        }
+        catch(Exception e)
+        {
+            alerta = e.Message;
+            dialogoAlerta.Mostrar();
         }
     }
 

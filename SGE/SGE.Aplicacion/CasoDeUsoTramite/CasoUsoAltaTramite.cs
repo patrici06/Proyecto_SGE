@@ -29,6 +29,6 @@ public class CasoUsoAltaTramite
                 ex.Tramites = new List<Tramite>();
             }
             ex.Tramites.Add(tramite);
-        _expedienteRepositorio.ModificarExpediente(ex, tramite.IdUsuario); 
+        _expedienteRepositorio.ModificarExpediente(ex, idUsuario.Id); 
     }
 }

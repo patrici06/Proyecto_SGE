@@ -8,8 +8,6 @@
         <button type="button" class="btn btn-secondary" @onclick="Ocultar">Cancelar</button>
         <button type="button" class="btn btn-primary" @onclick="() => Buscar(idExpediente)">Buscar</button>
     </div>
-    <br>
-    <DialogoAlerta @ref="dialogoAlerta" Mensaje = "@alerta"></DialogoAlerta>
 }
 @if(visible2){
     <div>
@@ -38,6 +36,8 @@
         <button type="button" class="btn btn-primary" @onclick="Modificar">Modificar</button>
     </div>
 }
+<br>
+<DialogoAlerta @ref="dialogoAlerta" Mensaje = "@alerta"></DialogoAlerta>
 
 
 
@@ -87,15 +87,14 @@
     private async Task Modificar(){
         try
         {   
-            casoModificacion.Ejecutar(ExpedienteMod, User.Id);
+            casoModificacion.Ejecutar(ExpedienteMod, User);
             await OnExpedienteAltaExitosa.InvokeAsync();
+            this.Ocultar();
         }
         catch(Exception e)
         {
-            throw e;
-        }
-        finally{
-            this.Ocultar();
+            alerta = e.Message;
+            dialogoAlerta.Mostrar();
         }
     }
 }

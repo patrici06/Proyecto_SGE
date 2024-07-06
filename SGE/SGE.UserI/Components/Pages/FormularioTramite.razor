@@ -5,7 +5,7 @@
 
 @if(visible){
     <div>
-        <h6>Ingrese Campos Del Tramite</h6>
+        <h3>Ingrese Campos Del Tramite</h3>
         <form>
             <div class="form-group">
                 <label for="contenido">Contenido</label>
@@ -19,6 +19,7 @@
                 <label for="fechaHoraCreacion" class="form-label">Fecha de Creación</label>
                 <input type="datetime-local" class="form-control" id="fechaHoraCreacion" @bind="tramite.FechaHoraCreacion" />
             </div>
+            <p>Estado</p>
             <select @bind="tramite.EstadoTramite" class="form-control">
                 @foreach (var estado in Enum.GetValues(typeof(EstadoTramite)))
                 {

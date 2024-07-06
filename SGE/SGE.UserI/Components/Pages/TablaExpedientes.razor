@@ -1,5 +1,6 @@
 @rendermode InteractiveServer
 @inject SGE.Aplicacion.CasoUsoModificacionExpediente modificacionExpediente
+@inject CasoUsoConsultaExpedienteID casoBuscarID
 @inject SGE.Aplicacion.CasoUsoBajaExpediente bajaExpediente
 @inject SGE.Aplicacion.UsuarioValidador validador
 
@@ -37,29 +38,34 @@
                         {
                             <button class="btn btn-primary btn-sm" @onclick="() => modificar(e)">Modificar</button>
                         }
-                        <button class="btn btn-primary btn-sm" @onclick="() => mostrar()">Mostrar Tramites</button>
+                        <button class="btn btn-primary btn-sm" @onclick="() => mostrar(e)">Mostrar Tramites</button>
                     </td>
                 </tr>
-                <FormularioModificacionExpediente @ref="formularioModificacionExpediente" User="logeado.Usuario"></FormularioModificacionExpediente>
+                <FormularioModificacionExpediente2 @ref="formularioModificacionExpediente2" User="User" ExpedienteMod="@ExpedienteMod" ModExitosa="CambiarEstado"></FormularioModificacionExpediente2>
             }
         </tbody>
     </table>
-    <TramitesAsociados @ref="tramitesAsociados" Lista="e.Tramites"></TramitesAsociados>
+    <br>
+    <TramitesAsociados @ref="tramitesAsociados" Lista="@tramites"></TramitesAsociados>
+    <br>
+    <DialogoAlerta @ref="dialogoAlerta" Mensaje = "@alerta"></DialogoAlerta>
 }
 
 @code {
-    [Parameter] public List<Expediente> Lista { get; set; } = new List<Expediente>();
+    [Parameter] public List<Expediente> Lista { get; set; }
     [Parameter] public Usuario User { get; set; }
-    private FormularioModificacionExpediente formularioModificacionExpediente = new FormularioModificacionExpediente();
+    private DialogoAlerta dialogoAlerta = new DialogoAlerta();
+    private String alerta = "";
+    private Expediente ExpedienteMod;
+    private List<Tramite> tramites = new List<Tramite>();
+    private FormularioModificacionExpediente2 formularioModificacionExpediente2 = new FormularioModificacionExpediente2();
     private TramitesAsociados tramitesAsociados = new TramitesAsociados();
-    private String confirmacion = "";
-    private DialogoConfirmacion dialogoConfirmacion = new DialogoConfirmacion();
 
     private bool visible = false;
     public void Mostrar()
     {
-            visible = true;
-            StateHasChanged();
+        visible = true;
+        StateHasChanged();
     }
 
     private void Ocultar()
@@ -68,6 +74,10 @@
         StateHasChanged();
     }
 
+    private void CambiarEstado()
+    {
+        StateHasChanged();
+    }
     private void baja(Expediente expediente)
     {
         try
@@ -76,38 +86,47 @@
             Lista.Remove(expediente);
             StateHasChanged();
         }
-        catch (Exception ex)
+        catch (Exception exc)
         {
-            throw ex;
+            alerta = exc.Message;
+            dialogoAlerta.Mostrar();
         }
     }
 
-    private void mostrar()
+    private void mostrar(Expediente e)
     {
         try
         {
             if(!e.Tramites.Any()) throw new RepositorioException("Este Expediente no Tiene ningún Tramite");
+            else tramites = e.Tramites;
             tramitesAsociados.Mostrar();
         }
-        catch (Exception ex)
+        catch (Exception exc)
         {
-            throw ex;
+            alerta = exc.Message;
+            dialogoAlerta.Mostrar();
         }
     }
 
-    private void modificar(Expediente expediente)
+    private void modificar(Expediente e)
     {
         try
         {
-            if(!validador.TienePermiso(logeado.Usuario, Permiso.ExpedienteModificacion)) throw new AutorizacionException("No Posee Permiso");
-            formularioModificacionExpediente.Mostrar();
-            StateHasChanged();
-            confirmacion = "Modificación Exitosa";
-            dialogoConfirmacion.Mostrar();
+            if(!validador.TienePermiso(User, Permiso.ExpedienteModificacion)) throw new AutorizacionException("No Posee Permiso");
+            else 
+            {
+                ExpedienteMod = casoBuscarID.Ejecutar(e.Id);
+                if(ExpedienteMod == null) throw new RepositorioException("Expediente no Disponible");
+                else {
+                    formularioModificacionExpediente2.ExpedienteMod = ExpedienteMod;
+                    formularioModificacionExpediente2.Mostrar();
+                }
+            }
         }
-        catch (Exception e)
+        catch (Exception exc)
         {
-            throw e;
+            alerta = exc.Message;
+            dialogoAlerta.Mostrar();
         }
     }
 }

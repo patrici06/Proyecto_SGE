@@ -58,3 +58,15 @@ C:\Users\patricio rivero\Desktop\Revision Final\Proyecto_SGE\SGE\SGE.Aplicacion\
 C:\Users\patricio rivero\Desktop\Revision Final\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\refint\SGE.Aplicacion.dll
 C:\Users\patricio rivero\Desktop\Revision Final\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\SGE.Aplicacion.pdb
 c:\Users\patricio rivero\Desktop\Revision Final\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\ref\SGE.Aplicacion.dll
+C:\Users\jg481\OneDrive\Escritorio\.NET\SeraEsteElFin\Proyecto_SGE\SGE\SGE.Aplicacion\bin\Debug\net8.0\SGE.Aplicacion.deps.json
+C:\Users\jg481\OneDrive\Escritorio\.NET\SeraEsteElFin\Proyecto_SGE\SGE\SGE.Aplicacion\bin\Debug\net8.0\SGE.Aplicacion.dll
+C:\Users\jg481\OneDrive\Escritorio\.NET\SeraEsteElFin\Proyecto_SGE\SGE\SGE.Aplicacion\bin\Debug\net8.0\SGE.Aplicacion.pdb
+C:\Users\jg481\OneDrive\Escritorio\.NET\SeraEsteElFin\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\SGE.Aplicacion.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jg481\OneDrive\Escritorio\.NET\SeraEsteElFin\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\SGE.Aplicacion.AssemblyInfoInputs.cache
+C:\Users\jg481\OneDrive\Escritorio\.NET\SeraEsteElFin\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\SGE.Aplicacion.AssemblyInfo.cs
+C:\Users\jg481\OneDrive\Escritorio\.NET\SeraEsteElFin\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\SGE.Aplicacion.csproj.CoreCompileInputs.cache
+C:\Users\jg481\OneDrive\Escritorio\.NET\SeraEsteElFin\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\SGE.Aplicacion.sourcelink.json
+C:\Users\jg481\OneDrive\Escritorio\.NET\SeraEsteElFin\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\SGE.Aplicacion.dll
+C:\Users\jg481\OneDrive\Escritorio\.NET\SeraEsteElFin\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\refint\SGE.Aplicacion.dll
+C:\Users\jg481\OneDrive\Escritorio\.NET\SeraEsteElFin\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\SGE.Aplicacion.pdb
+C:\Users\jg481\OneDrive\Escritorio\.NET\SeraEsteElFin\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\ref\SGE.Aplicacion.dll

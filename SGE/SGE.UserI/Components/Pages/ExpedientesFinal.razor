@@ -28,11 +28,14 @@
         </div>
     </div>
 
-    <FormularioExpediente @ref="formularioExpediente" User="logeado.Usuario"></FormularioExpediente>
-    <TablaExpedientes @ref="tablaExpedientes" Lista= "@expedientes" User="logeado.Usuario"></TablaExpedientes>
-    <VentanaBajaExpediente @ref="ventanaBajaExpediente" expediente= "@expediente" User="logeado.Usuario"></VentanaBajaExpediente>
-    <FormularioModificacionExpediente @ref="formularioModificacionExpediente" User="logeado.Usuario"></FormularioModificacionExpediente>
+    <br><br><br>
 
+    <FormularioExpediente @ref="formularioExpediente" User="logeado.Usuario" OnExpedienteAltaExitosa="MostrarConfirmacion"></FormularioExpediente>
+    <TablaExpedientes @ref="tablaExpedientes" Lista= "@expedientes" User="logeado.Usuario"></TablaExpedientes>
+    <VentanaBajaExpediente @ref="ventanaBajaExpediente" User="logeado.Usuario" OnExpedienteAltaExitosa="MostrarConfirmacion"></VentanaBajaExpediente>
+    <FormularioModificacionExpediente @ref="formularioModificacionExpediente" User="logeado.Usuario" OnExpedienteAltaExitosa="MostrarConfirmacion"></FormularioModificacionExpediente>
+
+    <br>
     <DialogoAlerta @ref="dialogoAlerta" Mensaje = "@alerta"></DialogoAlerta>
     <DialogoConfirmacion @ref="dialogoConfirmacion" Mensaje = "@confirmacion"></DialogoConfirmacion>
 }
@@ -53,14 +56,17 @@ else
     private string alerta = "";
 
 
+    private void MostrarConfirmacion()
+    {
+        dialogoConfirmacion.Mostrar();
+        StateHasChanged();
+    }
+
     private void AltaExpediente(){
         try{
-            Console.WriteLine(logeado.Usuario.Id);
             if(!autorizador.TienePermiso(logeado.Usuario, Permiso.ExpedienteAlta)) throw new AutorizacionException("No Posee Permiso");
             formularioExpediente.Mostrar();
-            StateHasChanged();
             confirmacion = "Alta Exitosa";
-            dialogoConfirmacion.Mostrar();
         }
         catch (Exception e)
         {
@@ -75,9 +81,7 @@ else
         {
             if(!autorizador.TienePermiso(logeado.Usuario, Permiso.ExpedienteModificacion)) throw new AutorizacionException("No Posee Permiso");
             formularioModificacionExpediente.Mostrar();
-            StateHasChanged();
             confirmacion = "Modificación Exitosa";
-            dialogoConfirmacion.Mostrar();
         }
         catch (Exception e)
         {
@@ -94,7 +98,6 @@ else
             ventanaBajaExpediente.Mostrar();
             StateHasChanged();
             confirmacion = "Baja Exitosa";
-            dialogoConfirmacion.Mostrar();
         }
         catch (Exception e)
         {
@@ -108,6 +111,7 @@ else
         try
         {
             expedientes = consultaExpedientes.Ejecutar();
+            if(!expedientes.Any()) throw new RepositorioException("No hay Expedientes");
             tablaExpedientes.Mostrar();
         }
         catch (Exception e)

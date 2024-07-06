@@ -1,13 +1,24 @@
 @using SGE.UserI.Components.Pages
 @rendermode InteractiveServer
 @inject SGE.Aplicacion.CasoUsoBajaExpediente bajaExpediente
+@inject SGE.Aplicacion.CasoUsoConsultaExpedienteID casoBuscarPorID
 
 
 @if(visible){
     <div>
-        <h6>Esta Seguro que Desea Eliminar el Expediente?</h6>
-        <button type="button" class="btn btn-primary" @onclick="Baja">Confirmar</button>
+        <h3>Ingrese el ID del Expediente a Eliminar</h3>
+        <input type="text" class="form-control" id="idExpediente" @bind="@idExpediente"><br>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="Ocultar">Cancelar</button>
+        <button type="button" class="btn btn-primary" @onclick="() => Buscar(idExpediente)">Buscar</button>
+    </div>
+    <br>
+    <DialogoAlerta @ref="dialogoAlerta" Mensaje = "@alerta"></DialogoAlerta>
+}
+@if(visible2){
+    <div>
+        <h3>Esta Seguro que Desea Eliminar el Expediente?</h3>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="Ocultar">Cancelar</button>
+        <button type="button" class="btn btn-primary" @onclick="() => Baja(idExpediente)">Confirmar</button>
     </div>
 }
 
@@ -15,24 +26,48 @@
 
 @code{
  [Parameter] public Usuario User { get; set; }
- [Parameter] public Expediente expediente { get; set; }
-
+ private DialogoAlerta dialogoAlerta = new DialogoAlerta();
+ private String alerta = "";
+ [Parameter] public EventCallback OnExpedienteAltaExitosa { get; set; }
     private bool visible = false;
+    private bool visible2 = false;
+    private int idExpediente;
     public void Mostrar()
     {
         visible = true;
         StateHasChanged();
     }
 
+    private void Buscar(int idExpediente)
+    {
+        try
+        {
+            Expediente? ex = casoBuscarPorID.Ejecutar(idExpediente);
+            if(ex == null) throw new RepositorioException("No Existe ese ID");
+            else 
+            {
+                visible2 = true;
+                visible = false;
+            }
+        }
+        catch(Exception e)
+        {
+            alerta = e.Message;
+            dialogoAlerta.Mostrar();
+        }
+    }
+
     private void Ocultar()
     {
         visible = false;
+        visible2 = false;
         StateHasChanged();
     }
-    private void Baja(){
+    private async Task Baja(int idExpediente){
         try
         {
-            bajaExpediente.Ejecutar(expediente.Id);
+            bajaExpediente.Ejecutar(idExpediente);
+            await OnExpedienteAltaExitosa.InvokeAsync();
         }
         catch(Exception e)
         {

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7NrIf6E5Y9VdMRlGG0ZyOnoBLPd7umNnvEgu54m5aEs=",
+  "Hash": "IYzaG8+nTEy5g5vi0Tl2bu9YFtAr8+M2P1zfGE/gn3w=",
   "Source": "SGE.UserI",
   "BasePath": "_content/SGE.UserI",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "SGE.UserI\\wwwroot",
       "Source": "SGE.UserI",
-      "ContentRoot": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\SeraEsteElFin\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\",
       "BasePath": "_content/SGE.UserI",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\bundle\\SGE.UserI.styles.css",
+      "Identity": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\SeraEsteElFin\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\bundle\\SGE.UserI.styles.css",
       "SourceId": "SGE.UserI",
       "SourceType": "Computed",
-      "ContentRoot": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\SeraEsteElFin\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
       "BasePath": "_content/SGE.UserI",
       "RelativePath": "SGE.UserI.styles.css",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\bundle\\SGE.UserI.styles.css"
+      "OriginalItemSpec": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\SeraEsteElFin\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\bundle\\SGE.UserI.styles.css"
     },
     {
-      "Identity": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SGE.UserI.bundle.scp.css",
+      "Identity": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\SeraEsteElFin\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SGE.UserI.bundle.scp.css",
       "SourceId": "SGE.UserI",
       "SourceType": "Computed",
-      "ContentRoot": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\SeraEsteElFin\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
       "BasePath": "_content/SGE.UserI",
       "RelativePath": "SGE.UserI.bundle.scp.css",
       "AssetKind": "All",
@@ -52,13 +52,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SGE.UserI.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\SeraEsteElFin\\Proyecto_SGE\\SGE\\SGE.UserI\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\SGE.UserI.bundle.scp.css"
     },
     {
-      "Identity": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\app.css",
+      "Identity": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\SeraEsteElFin\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\app.css",
       "SourceId": "SGE.UserI",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\SeraEsteElFin\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\",
       "BasePath": "_content/SGE.UserI",
       "RelativePath": "app.css",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot\\app.css"
     },
     {
-      "Identity": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Identity": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\SeraEsteElFin\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\bootstrap\\bootstrap.min.css",
       "SourceId": "SGE.UserI",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\SeraEsteElFin\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\",
       "BasePath": "_content/SGE.UserI",
       "RelativePath": "bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -93,10 +93,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\SeraEsteElFin\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "SGE.UserI",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\SeraEsteElFin\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\",
       "BasePath": "_content/SGE.UserI",
       "RelativePath": "bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -112,10 +112,10 @@
       "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\favicon.png",
+      "Identity": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\SeraEsteElFin\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\favicon.png",
       "SourceId": "SGE.UserI",
       "SourceType": "Discovered",
-      "ContentRoot": "c:\\Users\\patricio rivero\\Desktop\\Revision Final\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\jg481\\OneDrive\\Escritorio\\.NET\\SeraEsteElFin\\Proyecto_SGE\\SGE\\SGE.UserI\\wwwroot\\",
       "BasePath": "_content/SGE.UserI",
       "RelativePath": "favicon.png",
       "AssetKind": "All",

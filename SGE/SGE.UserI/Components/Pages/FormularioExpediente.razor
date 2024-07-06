@@ -5,7 +5,7 @@
 
 @if(visible){
     <div>
-        <h6>Ingrese Campos Del Expediente</h6>
+        <h3>Ingrese Campos Del Expediente</h3>
         <form>
             <div class="form-group">
                 <label for="Caratula">Caratula</label>
@@ -15,25 +15,30 @@
                 <label for="FechaCreacion" class="form-label">Fecha de Creación</label>
                 <input type="datetime-local" class="form-control" id="FechaCreacion" @bind="expediente.FechaCreacion" />
             </div>
-            <select @bind="expediente.Estado" class="form-control">
-                @foreach (var estado in Enum.GetValues(typeof(EstadoExpediente)))
-                {
-                    <option value="@estado">@estado</option>
-                }
-            </select>
+            <div class="form-group">
+                <p>Estado</p>
+                <select @bind="estadoElegido" class="form-control">
+                    @foreach (var estado in Enum.GetValues(typeof(EstadoExpediente)))
+                    {
+                        <option value="@estado">@estado</option>
+                    }
+                </select>
+            </div>
         </form>
+        <br>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="Ocultar">Cancelar</button>
-        <button type="button" class="btn btn-primary" @onclick="Alta">Alta</button>
+        <button type="button" class="btn btn-primary" @onclick="() => Alta(estadoElegido)">Alta</button>
     </div>
+    <br>
 }
-
 
 
 @code{
  [Parameter] public Usuario User { get; set; }
+ [Parameter] public EventCallback OnExpedienteAltaExitosa { get; set; }
  private Expediente expediente = new Expediente();
-
-    private bool visible = false;
+ private EstadoExpediente estadoElegido;
+ private bool visible = false;
     public void Mostrar()
     {
         visible = true;
@@ -45,13 +50,15 @@
         visible = false;
         StateHasChanged();
     }
-    private void Alta(){
+    private async Task Alta(EstadoExpediente estadoElegido){
         try
         {
+            expediente.Estado = estadoElegido;
             expediente.IdUsuarioModificacion = User.Id;
             expediente.FechaModificacion = DateTime.Now;
             altaExpediente.Ejecutar(expediente);
             expediente = new Expediente();
+            await OnExpedienteAltaExitosa.InvokeAsync();
         }
         catch(Exception e)
         {

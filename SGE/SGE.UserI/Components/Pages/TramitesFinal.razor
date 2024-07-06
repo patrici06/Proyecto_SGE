@@ -16,7 +16,6 @@
 @inject ServicioAutorizacion autorizador
 @inject ServicioUsuarioEstado logeado
 <PageTitle>Tramites</PageTitle>
-<h1>Tramites</h1>
 
 @if (logeado.Usuario != null)
 {
@@ -32,6 +31,7 @@
             </div>
         </div>
     </div>
+    <br><br><br>
 
 
     //recursos Modularizados
@@ -43,8 +43,8 @@
     //Alertas de excepciones
     <DialogoAlerta @ref="formulario" Mensaje = "@excepcionAlta"></DialogoAlerta> 
     <DialogoAlerta @ref="vacio" Mensaje= "@excepcion"></DialogoAlerta>
-    <DialogoAlerta @ref="Modificar" Mensaje= "@modificar"></DialogoAlerta>
-    <DialofoAlerta @ref="EliminarD" Mensaje= "@eliminar"></DialofoAlerta>
+    <DialogoAlerta @ref="ModificarD" Mensaje= "@modificar"></DialogoAlerta>
+    <DialogoAlerta @ref="EliminarD" Mensaje= "@eliminar"></DialogoAlerta>
 }
 else
 {
@@ -53,13 +53,14 @@ else
 @code{
 
     private EliminarTramitePorId eliminarPorId = new EliminarTramitePorId();
+    private FormularioModificacionTramite eliminarTramiteId = new FormularioModificacionTramite();
     private TablaTramites tablaTramites = new TablaTramites(); 
     private FormularioTramite formularioTramite = new FormularioTramite();
-    private List<Tramite> tramites = new List<Tramite>();
+    private List<Tramite>? tramites = new List<Tramite>();
     private List<Tramite> tramitesEtiqueta =  new List<Tramite>(); 
     
-    private ModificarTramite modificaionTramite = new ModificarTramite();
-    private DialogoAlerta Modificar = new DialogoAlerta();
+    private ModificarTramite modificacionTramite = new ModificarTramite();
+    private DialogoAlerta ModificarD = new DialogoAlerta();
     private DialogoAlerta vacio = new DialogoAlerta();
     private DialogoAlerta formulario = new DialogoAlerta();
     private DialogoAlerta EliminarD= new DialogoAlerta();
@@ -106,10 +107,10 @@ else
         catch(Exception e)
         {
             modificar = e.Message; 
-            Modificar.Mostrar(); 
+            ModificarD.Mostrar(); 
         }
     }
-    private void Eliminar(){
+    private void BajaTramite(){
         try
         {
             eliminarPorId.Mostrar(); 

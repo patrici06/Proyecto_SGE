@@ -49,14 +49,14 @@
     private void Modificar(){
         try
         {   
-            casoModificacion.Ejecutar(TramiteMod, User.Id);
+            casoModificacion.Ejecutar(TramiteMod, User);
         }
         catch(Exception e)
         {
             throw e;
         }
         finally{
-            this.close();
+            this.Ocultar();
         }
     }
 }

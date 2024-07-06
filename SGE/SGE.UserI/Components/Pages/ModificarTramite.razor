@@ -33,7 +33,7 @@
     private void Buscar(){
         try
         {
-            tramite = consultaTramite(idTramite); 
+            tramite = consultaTramite.Ejecutar(idTramite); 
             formulario.Mostrar(); 
         }
         catch(Exception e)

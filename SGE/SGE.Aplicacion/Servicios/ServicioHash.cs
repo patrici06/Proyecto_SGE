@@ -6,15 +6,15 @@ namespace SGE.Aplicacion;
 public class ServicioHash 
 {
 
-    public static bool validarContrasena(string contrasena, string contra)
+    public  bool validarContrasena(string contrasena, string contra)
     {
-        string hashContrasena = ServicioHash.generarHashContrasena(contrasena);
+        string hashContrasena = generarHashContrasena(contrasena);
             if(hashContrasena == contra)
                 return true;
             else
                 return false;
     }
-    public static string generarHashContrasena(string contrasena)
+    public  string generarHashContrasena(string contrasena)
     {
         byte[] inputBytes = Encoding.UTF8.GetBytes(contrasena);
         using (var sha256 = SHA256.Create())

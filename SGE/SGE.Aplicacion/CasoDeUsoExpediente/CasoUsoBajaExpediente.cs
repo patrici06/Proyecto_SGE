@@ -3,8 +3,8 @@ namespace SGE.Aplicacion;
 public class CasoUsoBajaExpediente
 {
     private readonly IExpedienteRepositorio _ExpedienteRepositorio;
-    private readonly UsuarioValidador _UsuarioValidador;
-    public CasoUsoBajaExpediente(IExpedienteRepositorio expedienteRepositorio, UsuarioValidador _usuarioValidador){
+    private readonly IServicioAutorizacion _UsuarioValidador;
+    public CasoUsoBajaExpediente(IExpedienteRepositorio expedienteRepositorio, IServicioAutorizacion _usuarioValidador){
         _ExpedienteRepositorio = expedienteRepositorio;
         _UsuarioValidador = _usuarioValidador;
     }

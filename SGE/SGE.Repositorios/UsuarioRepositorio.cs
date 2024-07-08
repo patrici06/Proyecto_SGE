@@ -9,7 +9,6 @@ namespace SGE.Repositorios;
 public class UsuarioRepositorio : IUsuariosRepositorios
 {
     private readonly DataContext _context;
-
     public UsuarioRepositorio(DataContext context)
     {
         _context = context;
@@ -21,18 +20,10 @@ public class UsuarioRepositorio : IUsuariosRepositorios
         _context.SaveChanges();
     }
 
-    public Usuario? Logear(string Correo, string Contrasena)
+    public Usuario? Logear(string Correo)
     {
         var user = _context.Usuarios.FirstOrDefault(u => u.correo == Correo);
-        if(user!= null)
-        {
-            if(ServicioHash.validarContrasena(Contrasena, user.contrasena))
-                return user;
-            else    
-                throw new ValidacionException("Error: La contraseña no es Correcta");
-        }
-        else
-            throw new RepositorioException("Error de Usuario: No hay un Usuario con ese ID");
+        return user;
     }
 
     public void OtorgarPermisos(Usuario usuario, Permiso permiso)

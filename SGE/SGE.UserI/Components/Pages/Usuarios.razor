@@ -53,7 +53,7 @@ else
 
 @code {
     private DialogoAlerta dialogo = null!;
-    private string msj = "La contraseña actual no es correcta";
+    private string msj = "";
     private Usuario usuarioEditable = new Usuario(); 
     private string contrasenaActual = "";
     private bool mostrarFormulario = false;
@@ -68,25 +68,14 @@ else
 
     private void GuardarCambios() 
     {
-        if (logeado.Usuario != null && logeado.Usuario.contrasena == SGE.Aplicacion.ServicioHash.generarHashContrasena(contrasenaActual))
-        {
-            logeado.Usuario.nombre = usuarioEditable.nombre;
-            logeado.Usuario.apellido = usuarioEditable.apellido;
-            logeado.Usuario.correo = usuarioEditable.correo;
-            logeado.Usuario.contrasena = SGE.Aplicacion.ServicioHash.generarHashContrasena(usuarioEditable.contrasena);
-
+       try{
             // Actualizar el usuario en el servicio de usuarios
-        modificacionUsuario.Ejecutar(logeado.Usuario);
-
-            // Ocultar el formulario de edición
+            modificacionUsuario.Ejecutar(logeado.Usuario,usuarioEditable,contrasenaActual);
             mostrarFormulario = false;
-        }
-        else
-        {
-            // Manejar el error: la contraseña actual no coincide
-            Console.WriteLine("La contraseña actual no es correcta.");
-            
-            dialogo.Mostrar();
+         }   
+          catch(Exception e){ 
+                msj = e.Message;
+                dialogo.Mostrar();
+            }
         }
     }
-}

@@ -20,5 +20,12 @@ public class Usuario
         this.contrasena= contrase;
         this.permisos = Permisos ?? new List<Permiso>();
     }
+    public Usuario(Usuario user){
+        this.Id = user.Id; 
+        this.contrasena = user.contrasena;
+        this.correo = user.correo; 
+        this.permisos = user.permisos;
+        this.nombre = user.nombre; 
+    }
 
 }

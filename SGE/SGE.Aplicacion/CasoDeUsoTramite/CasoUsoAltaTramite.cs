@@ -4,11 +4,11 @@ public class CasoUsoAltaTramite
 {
     private readonly ITramiteRepositorio _tramiteRepositorio;
     private readonly IExpedienteRepositorio _expedienteRepositorio;
-    private readonly EspecificacionCambioEstado _cambio;
-    private readonly ServicioAutorizacion _servicioAutorizacion;
+    private readonly ServicioCambioEstado _cambio;
+    private readonly IServicioAutorizacion _servicioAutorizacion;
     public CasoUsoAltaTramite(ITramiteRepositorio tramiteRepositorio,
                                IExpedienteRepositorio expedienteRepositorio,
-                                EspecificacionCambioEstado cambioEstado, ServicioAutorizacion servicioAutorizacion)
+                               ServicioCambioEstado cambioEstado, IServicioAutorizacion servicioAutorizacion)
     {
         _tramiteRepositorio = tramiteRepositorio;
         _expedienteRepositorio = expedienteRepositorio; 

@@ -36,15 +36,6 @@
     private void RegistrarUsuario()
     {
         try{
-            if((string.IsNullOrEmpty(_usuario.apellido))
-                ||string.IsNullOrEmpty(_usuario.correo)
-                ||string.IsNullOrEmpty(_usuario.nombre)
-                ||string.IsNullOrEmpty(_usuario.contrasena))
-                throw new ValidacionException("Error: Ingrese Los campos");
-        var user = consultaUsuarios.Ejecutar().FirstOrDefault(u => u.correo == _usuario.correo);
-        if(user != null)
-            throw new ValidacionException("Error: Ese correo ya fue utilizado");
-        else {
             // Comprobar si es el primer usuario en registrarse
             bool esPrimerUsuario = !consultaUsuarios.Ejecutar().Any();
 
@@ -58,14 +49,11 @@
                 Permiso.TramiteModificacion, 
                 Permiso.adminPermiso } : new List<Permiso> {};
     
-            // Obtener hash
-            _usuario.contrasena = SGE.Aplicacion.ServicioHash.generarHashContrasena(_usuario.contrasena);
             // Registrar el usuario
             altaUsuario.Ejecutar(_usuario);
             UsuarioLogged.SetUsuario(_usuario);
              // Redirigir a la página de inicio de sesión o a otra página adecuada
             Navigation.NavigateTo("/expedientesfinal");
-        }
         }catch(Exception e)
         {
             msj = e.Message.ToString(); 

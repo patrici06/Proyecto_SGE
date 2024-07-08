@@ -1,6 +1,6 @@
 namespace SGE.Aplicacion; 
 
-public class EspecificacionCambioEstado()
+public class ServicioCambioEstado()
 {
     public Expediente CambioEstado (Expediente retorno, EstadoTramite estadoTramite)
     {

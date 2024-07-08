@@ -1,0 +1,70 @@
+@using SGE.UserI.Components.Pages
+@rendermode InteractiveServer
+@inject SGE.Aplicacion.CasoUsoModificacionUsuarioAdmin modificacion
+
+
+@if(visible){
+    <div>
+        <h3>Ingrese Campos Del Usuario</h3>
+        <form>
+            <div class="form-group">
+                <label for="Nombre">Nombre</label>
+                <input placeholder="Nombre" class="form-control" @bind="@nombre">
+            </div>
+            <div class="form-group">
+                <label for="Apellido">Apellido</label>
+                <input placeholder="Apellido" class="form-control" @bind="@apellido">
+            </div>
+            <div class="form-group">
+                <label for="Correo">Correo</label>
+                <input placeholder="Correo" class="form-control" @bind="@correo">
+            </div>
+            <div class="form-group">
+                <label for="Contraseña">Contraseña (Dejar en blanco si no desea modificar)</label>
+                <input placeholder="Contraseña" class="form-control" @bind="@contrasena">
+            </div>
+        </form>
+        <br>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="Ocultar">Cancelar</button>
+        <button type="button" class="btn btn-primary" @onclick="() => Modificar()">Alta</button>
+    </div>
+    <br>
+    <DialogoAlerta @ref="dialogoAlerta" Mensaje = "@alerta"></DialogoAlerta>
+}
+
+
+@code{
+ [Parameter] public Usuario usuarioAModificar { get; set; }
+ private string contrasena ="";
+ private string apellido = ""; 
+ private string correo =""; 
+ private string nombre = "";
+ [Parameter] public EventCallback ModExitosa { get; set; }
+ private DialogoAlerta dialogoAlerta = new DialogoAlerta();
+ private String alerta = "";
+ private bool visible = false;
+    public void Mostrar()
+    {
+        visible = true;
+        StateHasChanged();
+    }
+
+    private void Ocultar()
+    {
+        visible = false;
+        StateHasChanged();
+    }
+    private async Task Modificar(){
+        try
+        {
+            modificacion.Ejecutar(usuarioAModificar,contrasena,apellido,correo,nombre);
+            await ModExitosa.InvokeAsync();
+            this.Ocultar();
+        }
+        catch(Exception e)
+        {
+            alerta = e.Message;
+            dialogoAlerta.Mostrar();
+        }
+    }
+}

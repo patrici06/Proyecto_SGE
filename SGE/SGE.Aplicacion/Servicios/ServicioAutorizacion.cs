@@ -3,10 +3,10 @@ using SGE.Aplicacion;
 
 public class ServicioAutorizacion: IServicioAutorizacion 
 {
-    private readonly ServicioUsuarios _servicioUsuarios;
+    private readonly  IUsuariosRepositorios _servicioUsuarios;
     private readonly UsuarioValidador _usuarioValidador;
 
-    public ServicioAutorizacion(ServicioUsuarios servicioUsuarios, UsuarioValidador usuarioValidador)
+    public ServicioAutorizacion( IUsuariosRepositorios servicioUsuarios, UsuarioValidador usuarioValidador)
     {
         _servicioUsuarios = servicioUsuarios;
         _usuarioValidador = usuarioValidador;

@@ -1,18 +1,18 @@
 @page "/gestion-usuarios"
 @rendermode InteractiveServer
-@inject SGE.Aplicacion.CasoUsoAltaUsuario altaUsuario
 @inject SGE.Aplicacion.CasoUsoBajaUsuario bajaUsuario
-@inject SGE.Aplicacion.CasoUsoConsultaUsuarioID consultaUsuarioID
 @inject SGE.Aplicacion.CasoUsoConsultaUsuarios consultaUsuarios
 @inject SGE.Aplicacion.CasoUsoModificacionUsuario modificacionUsuario
 @inject SGE.Aplicacion.CasoUsoOtorgarPermisos otorgarPermisos
 @inject ServicioUsuarioEstado estado
+@inject SGE.Aplicacion.CasoUsoEliminarPermiso eliminarPermisos
 
 <h1>Gestión de Usuarios</h1>
 
 <table class="table">
     <thead>
         <tr>
+            <th>ID</th>
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Correo</th>
@@ -26,6 +26,7 @@
             <tr>
                 @if(usuario.permisos.Contains(Permiso.adminPermiso) == false)
                 {
+                    <td>@usuario.Id</td>
                     <td>@usuario.nombre</td>
                     <td>@usuario.apellido</td>
                     <td>@usuario.correo</td>
@@ -46,9 +47,10 @@
                 }
             </tr>
         }
-        <DialogoAlerta @ref="dialogo" Mensaje="@msj"></DialogoAlerta>
     </tbody>
 </table>
+
+<FormularioUsuario @ref="formularioUsuario" usuarioAModificar="@usuarioAMod" ModExitosa="MostrarConfirmacion"></FormularioUsuario>
 
 @if (mostrarEliminar) 
 {
@@ -65,7 +67,7 @@
     <div>
         <h5>Agregar un Permiso</h5>
         <select @bind="nuevoPermiso" class="from-control">
-            @foreach(var permiso in permisos)
+            @foreach(var permiso in Enum.GetValues(typeof(Permiso)))
             {
                <option value="@permiso">@permiso</option>
             }
@@ -80,7 +82,7 @@
     <div>
         <h5>Eliminar un Permiso</h5>
         <select @bind="nuevoPermiso" class="from-control">
-            @foreach(var permiso in usuarioAEditar.permisos)
+            @foreach(var permiso in usuarioAMod.permisos)
             {
                <option value="@permiso">@permiso</option>
             }
@@ -90,126 +92,116 @@
     </div>
 }
 
-@if (mostrarEditar)
+<br>
+<DialogoConfirmacion @ref="dialogoConfirmacion" Mensaje="@confirmacion"></DialogoConfirmacion>
+<DialogoAlerta @ref="dialogoAlerta" Mensaje="@msj"></DialogoAlerta>
+
+
+@code
 {
-    <div>
-        <h5>Editar Usuario</h5>
-
-        <form>
-            <div class="form-group">
-                <label for="nombre">Nombre:</label>
-                <input type="text" class="form-control" id="nombre" @bind="usuarioAEditar.nombre">
-            </div>
-
-            <div class="form-group">
-                <label for="apellido">Apellido:</label>
-                <input type="text" class="form-control" id="apellido" @bind="usuarioAEditar.apellido">
-            </div>
-
-            <div class="form-group">
-                <label for="correo">Correo:</label>
-                <input type="email" class="form-control" id="correo" @bind="usuarioAEditar.correo">
-            </div>
-        </form>
-
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="NoMostrar">Cancelar</button>
-        <button type="button" class="btn btn-primary" @onclick="GuardarCambiosUsuario">Guardar Cambios</button>
-    </div>
-}
-
-@code {
-    private DialogoAlerta dialogo = null!;
-    private string msj = "El usuario ya cuenta con ese permiso";
     private List<Usuario> usuarios = new List<Usuario>();
+    private Usuario usuarioAMod;
+    private DialogoConfirmacion dialogoConfirmacion = new DialogoConfirmacion();
+    private String confirmacion = "";
+    private DialogoAlerta dialogoAlerta = new DialogoAlerta();
+    private String msj = "";
+    private bool mostrarEliminar = false;
     private bool mostrarPermiso = false;
     private bool mostrarPermiso2 = false;
-    private bool mostrarEliminar = false;
-    private Usuario usuarioAEliminar;
-    private bool mostrarEditar = false;
-    private Usuario usuarioAEditar;
     private Permiso nuevoPermiso;
-    private List<Permiso> permisos = new List<Permiso> { 
-                Permiso.ExpedienteAlta, 
-                Permiso.ExpedienteBaja, 
-                Permiso.ExpedienteModificacion, 
-                Permiso.TramiteAlta, 
-                Permiso.TramiteBaja, 
-                Permiso.TramiteModificacion, 
-                Permiso.adminPermiso };
+    
 
+    private FormularioUsuario formularioUsuario = new FormularioUsuario();
+        
     protected override void OnInitialized()
     {
         usuarios = consultaUsuarios.Ejecutar();
     }
 
-    private void QuitarPermiso()
+    private void MostrarConfirmacion()
     {
-        usuarioAEditar.permisos.Remove(nuevoPermiso);
-        modificacionUsuario.Ejecutar(usuarioAEditar);
-        NoMostrar();
+        StateHasChanged();
+        dialogoConfirmacion.Mostrar();
     }
 
-    private void EliminarPermiso(Usuario usuario)
+    private void EditarUsuario(Usuario user)
     {
-        usuarioAEditar = usuario;
-        mostrarPermiso2 = true;
+        confirmacion = "Modificación Exitosa";
+        usuarioAMod = user;
+        formularioUsuario.Mostrar();
     }
 
-    private void OtorgarPermiso()
+    private void EliminarUsuario(Usuario user)
     {
-        if(usuarioAEditar.permisos.Contains(nuevoPermiso) == false)
+        usuarioAMod = user;
+        mostrarEliminar = true;
+        confirmacion = "Eliminación Exitosa";
+    }
+    private void EliminarUsuarioConfirmado()
+    {
+        try
         {
-            otorgarPermisos.Ejecutar(usuarioAEditar, nuevoPermiso);
-            OnInitialized();
+            bajaUsuario.Ejecutar(usuarioAMod.Id);
+            usuarios.Remove(usuarioAMod);
+            NoMostrar();
+            MostrarConfirmacion();
         }
-        else
+        catch(Exception e)
         {
-            dialogo.Mostrar();
+            msj = e.Message;
+            dialogoAlerta.Mostrar();
         }
-        NoMostrar();
     }
 
     private void AgregarPermiso(Usuario usuario)
     {
-        usuarioAEditar = usuario;
+        usuarioAMod = usuario;
         mostrarPermiso = true;
+        confirmacion = "Permiso Otorgado";
     }
 
-    private void GuardarCambiosUsuario()
+    private void OtorgarPermiso()
     {
-        modificacionUsuario.Ejecutar(usuarioAEditar);
-        OnInitialized();
-        NoMostrar();
-    }
-
-    private void EditarUsuario(Usuario usuario)
-    {
-        usuarioAEditar = usuario;
-        mostrarEditar = true;
-    }
-
-    private void EliminarUsuario(Usuario usuario)
-    {
-        usuarioAEliminar = usuario;
-        mostrarEliminar = true;
-    }
-
-    private void EliminarUsuarioConfirmado()
-    {
-        bajaUsuario.Ejecutar(usuarioAEliminar.Id);
-        usuarios.Remove(usuarioAEliminar);
-        if(usuarioAEliminar.Id == estado.Usuario.Id)
-        {
-            estado.SetUsuario(new Usuario());
+       try
+       {     
+        if(usuarioAMod.permisos.Contains(nuevoPermiso))
+            throw new ValidacionException($"Ya posee {nuevoPermiso}");
+        otorgarPermisos.Ejecutar(usuarioAMod, nuevoPermiso);
+        MostrarConfirmacion();
         }
-        NoMostrar();
+        catch(Exception e ){
+            msj = e.Message;
+            dialogoAlerta.Mostrar();
+        }          
+    }
+
+    private void EliminarPermiso(Usuario usuario)
+    {
+        usuarioAMod = usuario;
+        mostrarPermiso2 = true;
+        confirmacion = "Permiso Eliminado";
+    }
+
+    private void QuitarPermiso()
+    {
+        try
+        {
+            eliminarPermisos.Ejecutar(usuarioAMod, nuevoPermiso);
+            NoMostrar();
+            MostrarConfirmacion();
+        }
+        catch(Exception e)
+        {
+            msj = e.Message;
+            dialogoAlerta.Mostrar();
+        }
     }
 
     private void NoMostrar()
     {
         mostrarEliminar = false;
-        mostrarEditar = false;
         mostrarPermiso = false;
         mostrarPermiso2 = false;
     }
+
 }

@@ -15,15 +15,21 @@ builder.Services.AddRazorComponents()
 DataContext dataContext = new DataContext();
 DataSqlite.Inicializar();
 
-builder.Services.AddScoped<ServicioUsuarios>(); // Registrar ServicioUsuarios
-builder.Services.AddScoped<ServicioAutorizacion>(); // Registrar ServicioAutorizacion
+
+
 builder.Services.AddScoped<UsuarioValidador>(); // Registrar UsuarioValidador
+builder.Services.AddScoped<ServicioHash>();
 
 //Configuro Repositorio Usuarios
 builder.Services.AddScoped<IUsuariosRepositorios, UsuarioRepositorio>( UR => new UsuarioRepositorio(dataContext));
+
+builder.Services.AddScoped<ServicioAutorizacion>(); // Registrar ServicioAutorizacion
+builder.Services.AddScoped<IServicioAutorizacion, ServicioAutorizacion>();
 //Decalro los casos de uso de usuarios como Transient
+builder.Services.AddTransient<CasoUsoEliminarPermiso>();
 builder.Services.AddTransient<CasoUsoAltaUsuario>(); 
 builder.Services.AddTransient<CasoUsoBajaUsuario>(); 
+builder.Services.AddTransient<CasoUsoModificacionUsuarioAdmin>();
 builder.Services.AddTransient<CasoUsoConsultaUsuarioID>(); 
 builder.Services.AddTransient<CasoUsoConsultaUsuarios>();
 builder.Services.AddTransient<CasoUsoLoguear>();
@@ -32,14 +38,11 @@ builder.Services.AddTransient<CasoUsoOtorgarPermisos>();
 
 
 
-
 //Configuro Repositorio Expediente
 builder.Services.AddScoped<IExpedienteRepositorio, ExpedienteRepositorio>( ER => new ExpedienteRepositorio(dataContext));
 
 //Configuro Repositorios de Tramires
-builder.Services.AddScoped<ITramiteRepositorio, TramitesRepositorio>( TR => new TramitesRepositorio(dataContext,   
-                                                                                    new ExpedienteRepositorio(dataContext)
-                                                                                    ,new EspecificacionCambioEstado()));
+builder.Services.AddScoped<ITramiteRepositorio, TramitesRepositorio>( TR => new TramitesRepositorio(dataContext));
 //Declaro los casos de Uso de Tramites como Transient
 builder.Services.AddTransient<CasoUsoBajaTramite>();
 builder.Services.AddTransient<CasoUsoAltaTramite>();
@@ -54,9 +57,7 @@ builder.Services.AddTransient<CasoUsoAltaExpediente>();
 builder.Services.AddTransient<CasoUsoConsultaExpedienteID>();
 builder.Services.AddTransient<CasoUsoConsultaExpedientes>();
 builder.Services.AddTransient<CasoUsoModificacionExpediente>();
-
-builder.Services.AddScoped<ServicioHash>();
-builder.Services.AddScoped<EspecificacionCambioEstado>(); // Registrar EspecificacionCambioEstado
+builder.Services.AddScoped<ServicioCambioEstado>(); // Registrar EspecificacionCambioEstado
 //servicio Del Usuario Loggeado
 builder.Services.AddSingleton<ServicioUsuarioEstado>();
 

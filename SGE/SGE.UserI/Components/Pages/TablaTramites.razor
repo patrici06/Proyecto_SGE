@@ -32,14 +32,9 @@
                     <td>@t.IdUsuario</td>
                     <td>@t.EstadoTramite</td>
                     <td>
-                        @if (validador.TienePermiso(User, Permiso.TramiteBaja))
-                        {
                             <button class="btn btn-danger btn-sm" @onclick="() => baja(t)">Eliminar</button>
-                        }
-                        @if (validador.TienePermiso(User, Permiso.TramiteModificacion))
-                        {
+                        
                             <button class="btn btn-primary btn-sm" @onclick="() => modificar(t)">Modificar</button>
-                        }
                     </td>
                 </tr>
             }

@@ -4,7 +4,7 @@ public class ServicioUsuarioEstado
 {
     public Usuario? Usuario { get; private set; }
 
-    public event Action? OnChange;
+    //public event Action? OnChange;
 
     public void SetUsuario(Usuario usuario)
     {

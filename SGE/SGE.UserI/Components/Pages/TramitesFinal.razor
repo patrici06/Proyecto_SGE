@@ -26,7 +26,7 @@
                 <button class="btn btn-primary btn-lg" @onclick="ModTramite">Modificar Tramite</button>
                 <button class="btn btn-primary btn-lg" @onclick="BajaTramite">Dar de Baja Tramite</button>
                 <button class="btn btn-primary btn-lg" @onclick="MostrarTramites">Mostrar Todos los Tramites</button>
-                <button class="btn btn-primary" @onclick ="MostrarTramitesEtiqueta">Mostrar Tramites Por Etiqueta</button>
+                <button class="btn btn-primary" @onclick ="MostrarTramitesEtiqueta">Mostrar Por Etiqueta</button>
             </div>
         </div>
     </div>
@@ -35,7 +35,7 @@
 
     //recursos Modularizados
     <FormularioTramite @ref="formularioTramite" User="logeado.Usuario" OnExpedienteAltaExitosa="MostrarConfirmacion"></FormularioTramite>
-    <FormularioModificacionTramite @ref="eliminarTramiteId" User="logeado.Usuario" OnExpedienteAltaExitosa="MostrarConfirmacion"></FormularioModificacionTramite>
+    <EliminarTramitePorId @ref="eliminarTramiteId" User="logeado.Usuario" OnExpedienteAltaExitosa="MostrarConfirmacion"></EliminarTramitePorId>
     <TablaTramites @ref="tablaTramites" Lista= "@tramites" User="logeado.Usuario"></TablaTramites>
     <TramitesEtiquetas @ref="tramitesEtiquetas" user="logeado.Usuario"></TramitesEtiquetas>
     <ModificarTramite @ref="modificacionTramite" User="logeado.Usuario" OnExpedienteAltaExitosa="MostrarConfirmacion"></ModificarTramite>
@@ -50,12 +50,12 @@ else
 }
 @code{
 
-    private EliminarTramitePorId eliminarPorId = new EliminarTramitePorId();
-    private FormularioModificacionTramite eliminarTramiteId = new FormularioModificacionTramite();
+    private EliminarTramitePorId eliminarTramiteId = new EliminarTramitePorId();
+    //private FormularioModificacionTramite eliminarTramiteId = new FormularioModificacionTramite();
     private TablaTramites tablaTramites = new TablaTramites(); 
+    private TramitesEtiquetas tramitesEtiquetas = new TramitesEtiquetas();
     private FormularioTramite formularioTramite = new FormularioTramite();
     private List<Tramite>? tramites = new List<Tramite>();
-    private List<Tramite> tramitesEtiqueta =  new List<Tramite>(); 
     private ModificarTramite modificacionTramite = new ModificarTramite();
 
 
@@ -64,7 +64,7 @@ else
     private string confirmacion = "";
     private string alerta = "";
 
-    private TramitesEtiquetas tramitesEtiquetas = new TramitesEtiquetas();
+    
     //private string excepcionEtiqueta = "";
     
     private void MostrarConfirmacion()
@@ -98,7 +98,13 @@ else
         }
     }
     private void MostrarTramitesEtiqueta(){
-        tramitesEtiquetas.Mostrar();
+        try{
+            tramitesEtiquetas.Mostrar();
+        }
+        catch(Exception e){
+            alerta = e.Message; 
+            dialogoAlerta.Mostrar();
+        }
     }
     private void ModTramite(){
         try
@@ -115,8 +121,7 @@ else
     private void BajaTramite(){
         try
         {
-            eliminarPorId.Mostrar();
-            StateHasChanged();
+            eliminarTramiteId.Mostrar();
             confirmacion = "BajaExitosa"; 
         }
         catch(Exception e)

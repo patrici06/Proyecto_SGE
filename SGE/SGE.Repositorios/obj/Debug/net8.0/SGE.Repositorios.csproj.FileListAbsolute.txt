@@ -94,3 +94,19 @@ C:\Users\jg481\OneDrive\Escritorio\.NET\SeraEsteElFin\Proyecto_SGE\SGE\SGE.Repos
 C:\Users\jg481\OneDrive\Escritorio\.NET\SeraEsteElFin\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\refint\SGE.Repositorios.dll
 C:\Users\jg481\OneDrive\Escritorio\.NET\SeraEsteElFin\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.pdb
 C:\Users\jg481\OneDrive\Escritorio\.NET\SeraEsteElFin\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\ref\SGE.Repositorios.dll
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Repositorios\bin\Debug\net8.0\SGE.Repositorios.deps.json
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Repositorios\bin\Debug\net8.0\SGE.Repositorios.dll
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Repositorios\bin\Debug\net8.0\SGE.Repositorios.pdb
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Repositorios\bin\Debug\net8.0\SGE.Aplicacion.dll
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Repositorios\bin\Debug\net8.0\SGE.Aplicacion.pdb
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.csproj.AssemblyReference.cache
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.AssemblyInfoInputs.cache
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.AssemblyInfo.cs
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.csproj.CoreCompileInputs.cache
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.sourcelink.json
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repo.5B6658F4.Up2Date
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.dll
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\refint\SGE.Repositorios.dll
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.pdb
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Repositorios\obj\Debug\net8.0\ref\SGE.Repositorios.dll

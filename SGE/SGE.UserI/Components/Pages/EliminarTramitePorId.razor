@@ -35,6 +35,7 @@
         try
         {
             baja.Ejecutar(idTramite, User);
+            this.Ocultar();
             await OnExpedienteAltaExitosa.InvokeAsync();
         }
         catch(Exception e)

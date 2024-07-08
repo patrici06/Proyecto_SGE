@@ -1,5 +1,6 @@
 @rendermode InteractiveServer
 @inject SGE.Aplicacion.CasoUsoBajaTramite bajaTramite
+@inject SGE.Aplicacion.CasoUsoConsultaTramiteID consultaId
 @inject SGE.Aplicacion.UsuarioValidador validador
 
 @if (visible)
@@ -19,6 +20,7 @@
             </tr>
         </thead>
         <tbody>
+        @if(Lista != null){
             @foreach (var t in Lista)
             {
                 <tr>
@@ -30,39 +32,41 @@
                     <td>@t.IdUsuario</td>
                     <td>@t.EstadoTramite</td>
                     <td>
+                        @if (validador.TienePermiso(User, Permiso.TramiteBaja))
+                        {
                             <button class="btn btn-danger btn-sm" @onclick="() => baja(t)">Eliminar</button>
-                            <button class="btn btn-primary btn-sm"@onclick="()=> modificacion(t)">Modificar</button>
+                        }
+                        @if (validador.TienePermiso(User, Permiso.TramiteModificacion))
+                        {
+                            <button class="btn btn-primary btn-sm" @onclick="() => modificar(t)">Modificar</button>
+                        }
                     </td>
-                    <FormularioModificacionTramite @ref="formulario" User="@User" TramiteMod="@modificable" OnEvent ="@OnExpedienteAltaExitosa"></FormularioModificacionTramite>
-                     <br>
-                     <DialogoAlerta @ref="dialogoAlerta" Mensaje = "@alerta"></DialogoAlerta>
-                     <DialogoConfirmacion @ref="dialogoConfirmacion" Mensaje = "@confirmacion"></DialogoConfirmacion>
                 </tr>
             }
+        }
         </tbody>
-    </table>
+        <FormularioModificacionTramite @ref="formulario" User="@User" TramiteMod="@modificable" OnExpedienteAltaExitosa="MostrarConfirmacion"></FormularioModificacionTramite>
+        <DialogoConfirmacion @ref="dialogoConfirmacion" Mensaje="@confirmacion"></DialogoConfirmacion>
+        <DialogoAlerta @ref="dialogoAlerta" Mensaje="@alerta"></DialogoAlerta>
+        </table>
+    <br> 
 }
 
 @code {
-    [Parameter] public List<Tramite> Lista { get; set; } = new List<Tramite>();
-    [Parameter] public Usuario User { get; set; }
-    [Parameter] public EventCallback OnExpedienteAltaExitosa { get; set; }
-    private void MostrarConfirmacion()
-    {
-        dialogoConfirmacion.Mostrar();
-        StateHasChanged();
-    }
+    [Parameter] public List<Tramite>? Lista { get; set; }
+    [Parameter] public Usuario User { get; set; } = default!;
     private bool visible = false;
     private DialogoAlerta dialogoAlerta = new DialogoAlerta();
     private DialogoConfirmacion dialogoConfirmacion = new DialogoConfirmacion();
     private string confirmacion = "";
     private string alerta = "";
-    private FormularioModificacionTramite formulario = new FormularioModificacionTramite(); 
-    private Tramite modificable; 
+    private FormularioModificacionTramite formulario = new FormularioModificacionTramite();
+    private Tramite? modificable;
+
     public void Mostrar()
     {
-            visible = true;
-            StateHasChanged();
+        visible = true;
+        StateHasChanged();
     }
 
     private void Ocultar()
@@ -70,35 +74,53 @@
         visible = false;
         StateHasChanged();
     }
-
+     private void MostrarConfirmacion()
+    {
+        dialogoConfirmacion.Mostrar();
+        StateHasChanged();
+    }
     private void baja(Tramite tramite)
     {
         try
         {
-
             bajaTramite.Ejecutar(tramite.Id, User);
-            Lista.Remove(tramite);
-            confirmacion = "baja exitosa";
+            Lista?.Remove(tramite);
+            confirmacion = "baja Exitosa";
             StateHasChanged();
         }
         catch (Exception e)
         {
-            alerta = e.Message; 
+            alerta = e.Message;
             dialogoAlerta.Mostrar();
         }
     }
-    private async Task modificacion(Tramite t)
+
+    private void modificar(Tramite t)
     {
-        try{
-            modificable=t; 
-            formulario.Mostrar();
-            confirmacion = "Modificacion exitosa"; 
-            await OnExpedienteAltaExitosa.InvokeAsync();
-        }
-        catch(Exception e)
+        try
         {
-            alerta = e.Message; 
-            dialogoAlerta.Mostrar(); 
+            if (!validador.TienePermiso(User, Permiso.ExpedienteModificacion))
+            {
+                throw new AutorizacionException("No Posee Permiso");
+            }
+            else
+            {
+                modificable = consultaId.Ejecutar(t.Id);
+                if (modificable == null)
+                {
+                    throw new RepositorioException("Expediente no Disponible");
+                }
+                else
+                {
+                    formulario.Mostrar();
+                }
+            }
+            confirmacion = "Modificacion exitosa";
+        }
+        catch (Exception e)
+        {
+            alerta = e.Message;
+            dialogoAlerta.Mostrar();
         }
     }
 }

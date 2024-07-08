@@ -70,3 +70,15 @@ C:\Users\jg481\OneDrive\Escritorio\.NET\SeraEsteElFin\Proyecto_SGE\SGE\SGE.Aplic
 C:\Users\jg481\OneDrive\Escritorio\.NET\SeraEsteElFin\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\refint\SGE.Aplicacion.dll
 C:\Users\jg481\OneDrive\Escritorio\.NET\SeraEsteElFin\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\SGE.Aplicacion.pdb
 C:\Users\jg481\OneDrive\Escritorio\.NET\SeraEsteElFin\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\ref\SGE.Aplicacion.dll
+C:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Aplicacion\bin\Debug\net8.0\SGE.Aplicacion.deps.json
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Aplicacion\bin\Debug\net8.0\SGE.Aplicacion.dll
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Aplicacion\bin\Debug\net8.0\SGE.Aplicacion.pdb
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\SGE.Aplicacion.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\SGE.Aplicacion.AssemblyInfoInputs.cache
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\SGE.Aplicacion.AssemblyInfo.cs
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\SGE.Aplicacion.csproj.CoreCompileInputs.cache
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\SGE.Aplicacion.sourcelink.json
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\SGE.Aplicacion.dll
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\refint\SGE.Aplicacion.dll
+c:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\SGE.Aplicacion.pdb
+C:\Users\patricio rivero\Desktop\nuevo laburo\Proyecto_SGE\SGE\SGE.Aplicacion\obj\Debug\net8.0\ref\SGE.Aplicacion.dll

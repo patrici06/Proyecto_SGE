@@ -3,6 +3,7 @@
 
 @code{
     [Parameter] public Usuario user {get; set;}  = new Usuario();
+    [Parameter] public EventCallback OnExpedienteAltaExitosa { get; set; }
     private List<Tramite> tramitesFiltrados = new List<Tramite>(); 
     private TablaTramites tabla = new TablaTramites(); 
     private DialogoAlerta dialogo = new DialogoAlerta();
@@ -21,8 +22,7 @@
         try
         {
             tramitesFiltrados = consultaTramiteEtiqueta.Ejecutar(estadoTramite);
-            tabla.Mostrar(); 
-            this.Ocultar(); 
+            tabla.Mostrar();  
         }
         catch(Exception e)
         {

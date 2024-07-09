@@ -16,7 +16,10 @@ public class CasoUsoModificacionTramite
          if(!_usuarioValidador.TienePermiso(idUsuario, Permiso.TramiteModificacion)) throw new AutorizacionException($"No posee permiso {Permiso.TramiteModificacion}");
          Tramite? aux = _tramiteRepositorio.ConsultaPorId(tramite.Id);
          TramiteValidador.ValidarTramite(tramite);
-         Expediente? padre = _expedienteRepositorio.ConsultaPorId(aux.Id);
+
+         Expediente? padre;
+         padre = aux != null ? _expedienteRepositorio.ConsultaPorId(aux.Id) : null;
+
          if(padre == null) throw new RepositorioException($"No existe Expediente con ID {tramite.ExpedienteId}");
          if(aux == null) throw new RepositorioException($" no se encontro Tramite {tramite.Id}"); 
          _tramiteRepositorio.ModificarRegistro(tramite, idUsuario.Id);

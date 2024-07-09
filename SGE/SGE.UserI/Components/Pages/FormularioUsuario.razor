@@ -34,7 +34,7 @@
 
 
 @code{
- [Parameter] public Usuario usuarioAModificar { get; set; }
+ [Parameter] public Usuario? usuarioAModificar { get; set; }
  private string contrasena ="";
  private string apellido = ""; 
  private string correo =""; 
@@ -57,6 +57,7 @@
     private async Task Modificar(){
         try
         {
+            if(usuarioAModificar == null) throw new ValidacionException("Usuario Vacio");
             modificacion.Ejecutar(usuarioAModificar,contrasena,apellido,correo,nombre);
             await ModExitosa.InvokeAsync();
             this.Ocultar();

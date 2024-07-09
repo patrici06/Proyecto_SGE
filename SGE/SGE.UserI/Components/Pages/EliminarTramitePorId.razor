@@ -1,3 +1,4 @@
+@using SGE.UserI.Components.Pages 
 @inject CasoUsoBajaTramite baja
 
 @if(visible){
@@ -13,7 +14,7 @@
 }
 @code
 {
-    [Parameter] public Usuario User {get; set;}
+    [Parameter] public Usuario? User {get; set;} 
     [Parameter] public EventCallback OnExpedienteAltaExitosa { get; set; }
     private DialogoAlerta dialogoAlerta = new DialogoAlerta();
     private string alerta = "";
@@ -34,10 +35,12 @@
     private async Task Eliminar(){
         try
         {
+            if(User != null){
             baja.Ejecutar(idTramite, User);
             this.Ocultar();
             await OnExpedienteAltaExitosa.InvokeAsync();
-        }
+            }
+        }   
         catch(Exception e)
         {
             alerta = e.Message; 

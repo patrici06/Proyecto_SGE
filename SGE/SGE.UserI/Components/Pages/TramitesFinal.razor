@@ -87,6 +87,7 @@ else
     }
     private void AltaTramite(){
         try{
+            if(logeado.Usuario == null) throw new ValidacionException("se produjo un error al iniciar sesion");
             if(!autorizador.TienePermiso(logeado.Usuario, Permiso.TramiteAlta)) throw new AutorizacionException("No Posee Permiso");
             formularioTramite.Mostrar();
             confirmacion = "AltaExitosa";

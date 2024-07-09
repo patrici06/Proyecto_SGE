@@ -15,15 +15,15 @@
         <form>
             <div class="form-group">
                 <label for="caratula">Caratula</label>
-                <input placeholder="caratula" class="form-control" @bind="ExpedienteMod.Caratula">
+                <input placeholder="caratula" class="form-control" @bind="Caratula">
             </div>
             <div class="form-group">
                 <label for="FechaCreacion" class="form-label">Fecha de Creación</label>
-                <input type="datetime-local" class="form-control" id="FechaCreacion" @bind="ExpedienteMod.FechaCreacion" />
+                <input type="datetime-local" class="form-control" id="FechaCreacion" @bind="FechaCreacion" />
             </div>
             <div>
                 <p>Estado</p>
-                <select @bind="ExpedienteMod.Estado" class="form-control">
+                <select @bind="Estado" class="form-control">
                     @foreach (var estado in Enum.GetValues(typeof(EstadoExpediente)))
                     {
                         <option value="@estado">@estado</option>
@@ -42,12 +42,15 @@
 
 
 @code{
- [Parameter] public Usuario User { get; set; }
+ [Parameter] public Usuario? User { get; set; }
  [Parameter] public EventCallback OnExpedienteAltaExitosa { get; set; }
  private DialogoAlerta dialogoAlerta = new DialogoAlerta();
  private String alerta = "";
  private int idExpediente;
  private Expediente? ExpedienteMod;
+ private string Caratula = ""; 
+ private DateTime FechaCreacion; 
+ private EstadoExpediente Estado;
 
 
     private bool visible = false;
@@ -86,9 +89,13 @@
 
     private async Task Modificar(){
         try
-        {   
+        {   if(ExpedienteMod != null && User != null){
+            ExpedienteMod.Caratula = Caratula;
+            ExpedienteMod.Estado = Estado; 
+            ExpedienteMod.FechaCreacion = FechaCreacion;
             casoModificacion.Ejecutar(ExpedienteMod, User);
             await OnExpedienteAltaExitosa.InvokeAsync();
+            }
             this.Ocultar();
         }
         catch(Exception e)

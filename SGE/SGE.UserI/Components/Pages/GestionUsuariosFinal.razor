@@ -82,6 +82,7 @@
     <div>
         <h5>Eliminar un Permiso</h5>
         <select @bind="nuevoPermiso" class="from-control">
+        @if(usuarioAMod != null)
             @foreach(var permiso in usuarioAMod.permisos)
             {
                <option value="@permiso">@permiso</option>
@@ -100,7 +101,7 @@
 @code
 {
     private List<Usuario> usuarios = new List<Usuario>();
-    private Usuario usuarioAMod;
+    private Usuario? usuarioAMod;
     private DialogoConfirmacion dialogoConfirmacion = new DialogoConfirmacion();
     private String confirmacion = "";
     private DialogoAlerta dialogoAlerta = new DialogoAlerta();
@@ -141,6 +142,7 @@
     {
         try
         {
+            if(usuarioAMod  == null) throw new ValidacionException("Los campos se encuentran incompletos");
             bajaUsuario.Ejecutar(usuarioAMod.Id);
             usuarios.Remove(usuarioAMod);
             NoMostrar();
@@ -163,11 +165,13 @@
     private void OtorgarPermiso()
     {
        try
-       {     
+       {
+        if(usuarioAMod != null){     
         if(usuarioAMod.permisos.Contains(nuevoPermiso))
             throw new ValidacionException($"Ya posee {nuevoPermiso}");
         otorgarPermisos.Ejecutar(usuarioAMod, nuevoPermiso);
         MostrarConfirmacion();
+        }
         }
         catch(Exception e ){
             msj = e.Message;
@@ -186,6 +190,7 @@
     {
         try
         {
+            if(usuarioAMod != null)
             eliminarPermisos.Ejecutar(usuarioAMod, nuevoPermiso);
             NoMostrar();
             MostrarConfirmacion();

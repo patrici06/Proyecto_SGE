@@ -40,16 +40,16 @@
             }
         }
         </tbody>
-        <FormularioModificacionTramite @ref="formulario" User="@User" TramiteMod="@modificable" OnExpedienteAltaExitosa="MostrarConfirmacion"></FormularioModificacionTramite>
         <DialogoConfirmacion @ref="dialogoConfirmacion" Mensaje="@confirmacion"></DialogoConfirmacion>
         <DialogoAlerta @ref="dialogoAlerta" Mensaje="@alerta"></DialogoAlerta>
         </table>
+        <FormularioModificacionTramite @ref="formulario" User="@User" TramiteMod="@modificable" OnExpedienteAltaExitosa="MostrarConfirmacion"></FormularioModificacionTramite>
     <br> 
 }
 
 @code {
     [Parameter] public List<Tramite>? Lista { get; set; }
-    [Parameter] public Usuario User { get; set; } = default!;
+    [Parameter] public Usuario? User { get; set; }
     private bool visible = false;
     private DialogoAlerta dialogoAlerta = new DialogoAlerta();
     private DialogoConfirmacion dialogoConfirmacion = new DialogoConfirmacion();
@@ -78,10 +78,10 @@
     {
         try
         {
+            if(User == null) throw new ValidacionException("Usuario no loguado");
             bajaTramite.Ejecutar(tramite.Id, User);
             Lista?.Remove(tramite);
             confirmacion = "baja Exitosa";
-            StateHasChanged();
         }
         catch (Exception e)
         {

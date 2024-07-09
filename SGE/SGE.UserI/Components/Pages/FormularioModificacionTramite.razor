@@ -33,9 +33,9 @@
 }
 
 @code {
-    [Parameter] public Usuario User { get; set; } = default!;
-    [Parameter] public Tramite? TramiteMod { get; set; } = default!;
-    [Parameter] public EventCallback OnExpedienteAltaExitosa { get; set; } = default!;
+    [Parameter] public Usuario? User { get; set; }
+    [Parameter] public Tramite? TramiteMod { get; set; } 
+    [Parameter] public EventCallback OnExpedienteAltaExitosa { get; set; }
 
     private bool visible = false;
     private DialogoAlerta dialogoAlerta = new DialogoAlerta();
@@ -65,7 +65,9 @@
     {
         try
         {
+            if(TramiteMod != null && User != null){
             casoModificacion.Ejecutar(TramiteMod, User);
+            }
             this.Ocultar();
             await OnExpedienteAltaExitosa.InvokeAsync();
         }

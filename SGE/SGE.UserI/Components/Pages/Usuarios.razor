@@ -69,8 +69,10 @@ else
     private void GuardarCambios() 
     {
        try{
+            if(logeado.Usuario != null){
             // Actualizar el usuario en el servicio de usuarios
             modificacionUsuario.Ejecutar(logeado.Usuario,usuarioEditable,contrasenaActual);
+            }
             mostrarFormulario = false;
          }   
           catch(Exception e){ 

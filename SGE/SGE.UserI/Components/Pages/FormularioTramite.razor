@@ -37,7 +37,7 @@
 
 
 @code{
- [Parameter] public Usuario User { get; set; }
+ [Parameter] public Usuario? User { get; set; }
  [Parameter] public EventCallback OnExpedienteAltaExitosa { get; set; }
  private Tramite tramite = new Tramite();
  private DialogoAlerta dialogoAlerta = new DialogoAlerta();
@@ -58,6 +58,7 @@
     private async Task Alta(){
         try
         {
+            if(User == null) throw new ValidacionException ("Usuario no registrado");
             tramite.IdUsuario = User.Id;
             tramite.FechaHoraUltimaModificacion = DateTime.Now;
             alta.Ejecutar(tramite, User);

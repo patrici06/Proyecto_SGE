@@ -35,7 +35,7 @@
 
 
 @code{
- [Parameter] public Usuario User { get; set; }
+ [Parameter] public Usuario? User { get; set; }
  [Parameter] public EventCallback OnExpedienteAltaExitosa { get; set; }
  private Expediente expediente = new Expediente();
  private EstadoExpediente estadoElegido;
@@ -56,12 +56,14 @@
     private async Task Alta(EstadoExpediente estadoElegido){
         try
         {
+            if (User != null){
             expediente.Estado = estadoElegido;
             expediente.IdUsuarioModificacion = User.Id;
             expediente.FechaModificacion = DateTime.Now;
             altaExpediente.Ejecutar(expediente, User);
             expediente = new Expediente();
             await OnExpedienteAltaExitosa.InvokeAsync();
+            }
             this.Ocultar();
         }
         catch(Exception e)

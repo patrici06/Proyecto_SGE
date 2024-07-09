@@ -44,7 +44,7 @@
 }
 
 @code{
-    [Parameter] public Usuario User {get; set;}
+    [Parameter] public Usuario? User {get; set;}
     [Parameter] public EventCallback OnExpedienteAltaExitosa { get; set; }
     private int idTramite; 
     private bool visible = false;
@@ -69,12 +69,13 @@
         visible2 = false;
         StateHasChanged();
     }
-    private async Task Buscar(){
+    private  void Buscar(){
         try
         {
             tramite = consultaTramite.Ejecutar(idTramite);
             visible = false; 
             visible2 = true;
+
         }
         catch(Exception e)
         {
@@ -85,7 +86,7 @@
     private async Task Modificar(){
         try
         {   
-
+            if(User == null )throw new ValidacionException("Usuario no registrado");
             casoModificacion.Ejecutar(tramite, User);
             this.Ocultar();
             await OnExpedienteAltaExitosa.InvokeAsync(); 

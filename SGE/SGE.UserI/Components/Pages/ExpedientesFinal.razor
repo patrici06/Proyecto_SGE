@@ -48,7 +48,7 @@ else
     private DialogoAlerta dialogoAlerta = new DialogoAlerta();
     private DialogoConfirmacion dialogoConfirmacion = new DialogoConfirmacion();
     private TablaExpedientes tablaExpedientes = new TablaExpedientes(); 
-    private List<Expediente> expedientes = new List<Expediente>();
+    private List<Expediente>? expedientes = new List<Expediente>();
     private FormularioExpediente formularioExpediente = new FormularioExpediente();
     private FormularioModificacionExpediente formularioModificacionExpediente = new FormularioModificacionExpediente();
     private VentanaBajaExpediente ventanaBajaExpediente = new VentanaBajaExpediente();
@@ -64,9 +64,11 @@ else
 
     private void AltaExpediente(){
         try{
+            if(logeado.Usuario != null){
             if(!autorizador.TienePermiso(logeado.Usuario, Permiso.ExpedienteAlta)) throw new AutorizacionException("No Posee Permiso");
             formularioExpediente.Mostrar();
             confirmacion = "Alta Exitosa";
+            }
         }
         catch (Exception e)
         {
@@ -79,9 +81,11 @@ else
     {
         try
         {
+        if(logeado.Usuario != null){
             if(!autorizador.TienePermiso(logeado.Usuario, Permiso.ExpedienteModificacion)) throw new AutorizacionException("No Posee Permiso");
             formularioModificacionExpediente.Mostrar();
             confirmacion = "Modificación Exitosa";
+        }
         }
         catch (Exception e)
         {
@@ -94,10 +98,12 @@ else
     {
         try
         {
+            if(logeado.Usuario != null){
             if(!autorizador.TienePermiso(logeado.Usuario, Permiso.ExpedienteBaja)) throw new AutorizacionException("No Posee Permiso");
             ventanaBajaExpediente.Mostrar();
             StateHasChanged();
             confirmacion = "Baja Exitosa";
+            }
         }
         catch (Exception e)
         {
@@ -111,7 +117,7 @@ else
         try
         {
             expedientes = consultaExpedientes.Ejecutar();
-            if(!expedientes.Any()) throw new RepositorioException("No hay Expedientes");
+            if(expedientes == null || !expedientes.Any()) throw new RepositorioException("No hay Expedientes");
             tablaExpedientes.Mostrar();
         }
         catch (Exception e)

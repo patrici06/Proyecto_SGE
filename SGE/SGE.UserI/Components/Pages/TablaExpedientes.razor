@@ -20,6 +20,7 @@
             </tr>
         </thead>
         <tbody>
+        @if(Lista != null){
             @foreach (var e in Lista)
             {
                 <tr>
@@ -43,6 +44,7 @@
                 </tr>
                 <FormularioModificacionExpediente2 @ref="formularioModificacionExpediente2" User="User" ExpedienteMod="@ExpedienteMod" ModExitosa="CambiarEstado"></FormularioModificacionExpediente2>
             }
+        }
         </tbody>
     </table>
     <br>
@@ -52,11 +54,11 @@
 }
 
 @code {
-    [Parameter] public List<Expediente> Lista { get; set; }
-    [Parameter] public Usuario User { get; set; }
+    [Parameter] public List<Expediente>? Lista { get; set; }
+    [Parameter] public Usuario? User { get; set; }
     private DialogoAlerta dialogoAlerta = new DialogoAlerta();
     private String alerta = "";
-    private Expediente ExpedienteMod;
+    private Expediente? ExpedienteMod;
     private List<Tramite> tramites = new List<Tramite>();
     private FormularioModificacionExpediente2 formularioModificacionExpediente2 = new FormularioModificacionExpediente2();
     private TramitesAsociados tramitesAsociados = new TramitesAsociados();
@@ -82,10 +84,12 @@
     {
         try
         {
+            if(Lista!= null && User!= null){
             bajaExpediente.Ejecutar(expediente.Id, User);
             Lista.Remove(expediente);
             StateHasChanged();
             Ocultar();
+            }
         }
         catch (Exception exc)
         {
@@ -98,6 +102,7 @@
     {
         try
         {
+            if(e == null || e.Tramites == null)throw new RepositorioException("Este Expediente no Tiene ningún Tramite"); 
             if(!e.Tramites.Any()) throw new RepositorioException("Este Expediente no Tiene ningún Tramite");
             else tramites = e.Tramites;
             tramitesAsociados.Mostrar();
@@ -119,7 +124,6 @@
                 ExpedienteMod = casoBuscarID.Ejecutar(e.Id);
                 if(ExpedienteMod == null) throw new RepositorioException("Expediente no Disponible");
                 else {
-                    formularioModificacionExpediente2.ExpedienteMod = ExpedienteMod;
                     formularioModificacionExpediente2.Mostrar();
                 }
             }

@@ -25,7 +25,7 @@
 
 
 @code{
- [Parameter] public Usuario User { get; set; }
+ [Parameter] public Usuario? User { get; set; }
  private DialogoAlerta dialogoAlerta = new DialogoAlerta();
  private String alerta = "";
  [Parameter] public EventCallback OnExpedienteAltaExitosa { get; set; }
@@ -66,8 +66,10 @@
     private async Task Baja(int idExpediente){
         try
         {
+            if(User != null){
             bajaExpediente.Ejecutar(idExpediente, User);
             await OnExpedienteAltaExitosa.InvokeAsync();
+            }
         }
         catch(Exception e)
         {

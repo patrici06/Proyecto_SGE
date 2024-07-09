@@ -38,15 +38,23 @@ public void ElimiarRegistro(Tramite tramite)
     _context.SaveChanges();
 }
 
-    public void ModificarRegistro(Tramite tramite, int idUsuario)
+public void ModificarRegistro(Tramite tramite, int idUsuario)
+{
+    Tramite? aux = _context.Tramites.SingleOrDefault(t => t.Id == tramite.Id);
+    if (aux == null)
     {
-            Tramite? aux = _context.Tramites.SingleOrDefault(t => t.Id == tramite.Id);
-            aux.IdUsuario = idUsuario;
-            aux.FechaHoraUltimaModificacion = DateTime.Now; 
-            aux.ExpedienteId = tramite.ExpedienteId;
-            aux.EstadoTramite = tramite.EstadoTramite; 
-            aux.Contenido =  tramite.Contenido;
-            _context.Tramites.Update(aux); 
-            _context.SaveChanges();
+        throw new RepositorioException($"No se encuentra Tramite {tramite.Id}");
     }
+    else
+    {
+        aux.IdUsuario = idUsuario; // No más warnings
+        aux.FechaHoraUltimaModificacion = DateTime.Now;
+        aux.ExpedienteId = tramite.ExpedienteId;
+        aux.EstadoTramite = tramite.EstadoTramite;
+        aux.Contenido = tramite.Contenido;
+        
+        _context.Tramites.Update(aux);
+        _context.SaveChanges();
+    }
+}
 }
